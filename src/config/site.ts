@@ -68,12 +68,12 @@ export const SITE_CONFIG = {
         "Priority email & direct X support",
       ],
       ctaText: "Get Pro Yearly",
-      ctaUrl: "#pricing",
+      ctaUrl: "https://checkout.dodopayments.com/buy/pdt_0NnK2o8UfL8CrB7m0gijI?quantity=1",
     },
     proLifetime: {
       id: "pro-lifetime",
       name: "Pro Lifetime",
-      price: "$49.44",
+      price: "$49.99",
       originalPrice: "$99.99",
       cadence: "one-time payment (5 Macs)",
       description: "Pay once, own forever. Full access for up to 5 Mac devices.",
@@ -91,7 +91,7 @@ export const SITE_CONFIG = {
         "Direct 1-on-1 support via X & Email",
       ],
       ctaText: "Get Lifetime Access",
-      ctaUrl: "#pricing",
+      ctaUrl: "https://checkout.dodopayments.com/buy/pdt_0NnK3BLNEUP1MFmMyR0oD?quantity=1",
     },
   },
 };

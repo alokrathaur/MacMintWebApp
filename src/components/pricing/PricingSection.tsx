@@ -4,9 +4,10 @@ import { SITE_CONFIG } from "@/config/site";
 
 interface PricingSectionProps {
   onNavigate?: (path: string) => void;
+  isDedicatedPage?: boolean;
 }
 
-export const PricingSection: React.FC<PricingSectionProps> = ({ onNavigate }) => {
+export const PricingSection: React.FC<PricingSectionProps> = ({ onNavigate, isDedicatedPage = false }) => {
   const { free, proYearly, proLifetime } = SITE_CONFIG.pricing;
 
   const handleDownload = () => {
@@ -36,41 +37,41 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onNavigate }) =>
   ];
 
   return (
-    <section id="pricing" className="py-20 md:py-28 bg-surface-light dark:bg-surface-dark transition-colors">
+    <section id="pricing" className={`${isDedicatedPage ? "pt-10 pb-16 md:pt-14 md:pb-20" : "py-16 md:py-24"} bg-surface-light dark:bg-surface-dark transition-colors`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-mint-50 dark:bg-surface-darkCard border border-mint-200 dark:border-mint-800/60 text-mint-700 dark:text-mint-300 text-xs font-semibold uppercase tracking-wider mb-3">
+        <div className={`text-center max-w-3xl mx-auto ${isDedicatedPage ? "mb-10 sm:mb-12" : "mb-14 sm:mb-16"}`}>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-mint-50 dark:bg-surface-darkCard border border-mint-200 dark:border-mint-800/60 text-mint-700 dark:text-mint-300 text-xs font-semibold uppercase tracking-wider mb-2.5">
             <span>TRANSPARENT PRICING</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-slate-950 dark:text-white">
             Simple, honest pricing.
           </h2>
-          <p className="text-lg text-slate-600 dark:text-slate-400 mt-4 leading-relaxed font-normal">
+          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-400 mt-3 leading-relaxed font-normal">
             Start free with essential scanning and storage visualization. Upgrade to Pro for developer tools, deep container removal, and lifetime updates.
           </p>
         </div>
 
         {/* Pricing Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20 items-stretch">
+        <div id="pricing-cards" className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-16 items-stretch scroll-mt-20">
           
           {/* FREE PLAN */}
-          <div className="p-8 rounded-3xl bg-white dark:bg-surface-darkSurface border border-slate-200/80 dark:border-slate-800 shadow-sm flex flex-col justify-between">
+          <div className="p-6 sm:p-7 rounded-3xl bg-white dark:bg-surface-darkSurface border border-slate-200/80 dark:border-slate-800 shadow-sm flex flex-col justify-between">
             <div>
-              <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center justify-between mb-3">
                 <h3 className="text-lg font-bold text-slate-900 dark:text-white">{free.name}</h3>
               </div>
-              <p className="text-xs text-slate-500 dark:text-slate-400 min-h-[36px]">{free.description}</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400 min-h-[32px]">{free.description}</p>
               
-              <div className="my-6">
+              <div className="my-5">
                 <span className="text-4xl sm:text-5xl font-extrabold text-slate-900 dark:text-white font-mono tracking-tight">
                   {free.price}
                 </span>
                 <span className="text-xs text-slate-500 font-medium ml-2">{free.cadence}</span>
               </div>
 
-              <div className="space-y-3 pt-2">
+              <div className="space-y-2.5 pt-1">
                 {free.features.map((feat, idx) => (
                   <div key={idx} className="flex items-start gap-2.5 text-xs text-slate-700 dark:text-slate-300">
                     <Check className="w-4 h-4 text-mint-600 dark:text-mint-400 shrink-0 mt-0.5" />
@@ -80,7 +81,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onNavigate }) =>
               </div>
             </div>
 
-            <div className="pt-8">
+            <div className="pt-6">
               <button
                 onClick={handleDownload}
                 className="w-full inline-flex items-center justify-center gap-2 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-surface-darkCard dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-semibold text-sm transition active:scale-[0.98]"
@@ -92,19 +93,19 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onNavigate }) =>
           </div>
 
           {/* PRO YEARLY PLAN */}
-          <div className="p-8 rounded-3xl bg-white dark:bg-surface-darkSurface border border-slate-200/80 dark:border-slate-800 shadow-sm flex flex-col justify-between relative">
+          <div className="p-6 sm:p-7 rounded-3xl bg-white dark:bg-surface-darkSurface border border-slate-200/80 dark:border-slate-800 shadow-sm flex flex-col justify-between relative">
             {proYearly.badge && (
               <span className="absolute -top-3 left-1/2 -translate-x-1/2 text-[10px] font-bold px-3 py-1 rounded-full bg-teal-100 text-teal-800 dark:bg-teal-900 dark:text-teal-200 uppercase tracking-wider">
                 {proYearly.badge}
               </span>
             )}
             <div>
-              <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center justify-between mb-3">
                 <h3 className="text-lg font-bold text-slate-900 dark:text-white">{proYearly.name}</h3>
               </div>
-              <p className="text-xs text-slate-500 dark:text-slate-400 min-h-[36px]">{proYearly.description}</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400 min-h-[32px]">{proYearly.description}</p>
 
-              <div className="my-6 flex items-baseline flex-wrap gap-2.5">
+              <div className="my-5 flex items-baseline flex-wrap gap-2.5">
                 <span className="text-4xl sm:text-5xl font-extrabold text-slate-900 dark:text-white font-mono tracking-tight">
                   {proYearly.price}
                 </span>
@@ -114,7 +115,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onNavigate }) =>
                 <span className="text-xs text-slate-500 font-medium block sm:inline">{proYearly.cadence}</span>
               </div>
 
-              <div className="space-y-3 pt-2">
+              <div className="space-y-2.5 pt-1">
                 {proYearly.features.map((feat, idx) => (
                   <div key={idx} className="flex items-start gap-2.5 text-xs text-slate-700 dark:text-slate-300">
                     <Check className="w-4 h-4 text-mint-600 dark:text-mint-400 shrink-0 mt-0.5" />
@@ -124,31 +125,33 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onNavigate }) =>
               </div>
             </div>
 
-            <div className="pt-8">
-              <button
-                onClick={handleDownload}
-                className="w-full inline-flex items-center justify-center gap-2 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-slate-100 dark:hover:bg-white text-white dark:text-slate-950 font-semibold text-sm transition active:scale-[0.98]"
+            <div className="pt-6">
+              <a
+                href={proYearly.ctaUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full inline-flex items-center justify-center gap-2 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-slate-100 dark:hover:bg-white text-white dark:text-slate-950 font-semibold text-sm transition active:scale-[0.98] shadow-sm hover:shadow"
               >
                 <span>{proYearly.ctaText}</span>
                 <ArrowRight className="w-4 h-4" />
-              </button>
+              </a>
             </div>
           </div>
 
           {/* PRO LIFETIME (HIGHLIGHTED) */}
-          <div className="p-8 rounded-3xl bg-white dark:bg-surface-darkSurface border-2 border-mint-500/80 shadow-xl shadow-mint-700/10 flex flex-col justify-between relative">
+          <div className="p-6 sm:p-7 rounded-3xl bg-white dark:bg-surface-darkSurface border-2 border-mint-500/80 shadow-xl shadow-mint-700/10 flex flex-col justify-between relative">
             <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 text-[10px] font-bold px-3 py-1 rounded-full bg-mint-600 text-white uppercase tracking-wider flex items-center gap-1 shadow-md">
               <Sparkles className="w-3 h-3" />
               {proLifetime.badge}
             </span>
 
             <div>
-              <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center justify-between mb-3">
                 <h3 className="text-lg font-bold text-slate-900 dark:text-white">{proLifetime.name}</h3>
               </div>
-              <p className="text-xs text-slate-500 dark:text-slate-400 min-h-[36px]">{proLifetime.description}</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400 min-h-[32px]">{proLifetime.description}</p>
 
-              <div className="my-6 flex items-baseline flex-wrap gap-2.5">
+              <div className="my-5 flex items-baseline flex-wrap gap-2.5">
                 <span className="text-4xl sm:text-5xl font-extrabold text-mint-700 dark:text-mint-400 font-mono tracking-tight">
                   {proLifetime.price}
                 </span>
@@ -158,7 +161,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onNavigate }) =>
                 <span className="text-xs text-slate-500 font-medium block sm:inline">{proLifetime.cadence}</span>
               </div>
 
-              <div className="space-y-3 pt-2">
+              <div className="space-y-2.5 pt-1">
                 {proLifetime.features.map((feat, idx) => (
                   <div key={idx} className="flex items-start gap-2.5 text-xs text-slate-800 dark:text-slate-200 font-medium">
                     <Check className="w-4 h-4 text-mint-600 dark:text-mint-400 shrink-0 mt-0.5" />
@@ -168,14 +171,16 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onNavigate }) =>
               </div>
             </div>
 
-            <div className="pt-8">
-              <button
-                onClick={handleDownload}
-                className="w-full inline-flex items-center justify-center gap-2 py-3 rounded-xl bg-mint-600 hover:bg-mint-700 text-white font-semibold text-sm shadow-lg shadow-mint-700/20 transition active:scale-[0.98]"
+            <div className="pt-6">
+              <a
+                href={proLifetime.ctaUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full inline-flex items-center justify-center gap-2 py-3 rounded-xl bg-mint-600 hover:bg-mint-700 text-white font-semibold text-sm shadow-lg shadow-mint-700/20 transition active:scale-[0.98] hover:shadow-mint-700/30"
               >
                 <span>{proLifetime.ctaText}</span>
                 <ArrowRight className="w-4 h-4" />
-              </button>
+              </a>
             </div>
           </div>
 
