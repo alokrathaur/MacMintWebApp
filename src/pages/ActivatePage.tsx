@@ -9,7 +9,9 @@ import {
   Download, 
   ArrowRight, 
   HelpCircle,
-  CheckCircle2
+  CheckCircle2,
+  AlertTriangle,
+  XCircle
 } from "lucide-react";
 import { SITE_CONFIG } from "@/config/site";
 
@@ -22,6 +24,7 @@ export const ActivatePage: React.FC<ActivatePageProps> = ({ onNavigate }) => {
   const [activeToken, setActiveToken] = useState<string>("");
   const [copied, setCopied] = useState<boolean>(false);
   const [hasAttemptedAutoLaunch, setHasAttemptedAutoLaunch] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   // Extract token from URL query parameters (supports search, hash, or GitHub SPA redirect)
   useEffect(() => {
@@ -84,6 +87,16 @@ export const ActivatePage: React.FC<ActivatePageProps> = ({ onNavigate }) => {
     e.preventDefault();
     if (!tokenInput.trim()) return;
     const clean = tokenInput.trim();
+    const isTokenValid = (
+      clean.toUpperCase().startsWith("MINT-PRO-LIFETIME-") ||
+      clean.toUpperCase().startsWith("MINT-PRO-YEARLY-") ||
+      (clean.toUpperCase().startsWith("MINT-PRO-") && clean.length >= 18)
+    );
+    if (!isTokenValid) {
+      setErrorMessage(`"${clean}" is not a recognized MacMint Pro license token. Tokens start with MINT-PRO-LIFETIME- or MINT-PRO-YEARLY-. Please check your confirmation email from Dodo Payments.`);
+      return;
+    }
+    setErrorMessage(null);
     setActiveToken(clean);
     triggerDeepLink(clean);
     setHasAttemptedAutoLaunch(true);
@@ -105,14 +118,21 @@ export const ActivatePage: React.FC<ActivatePageProps> = ({ onNavigate }) => {
 
   const isLifetime = activeToken.toUpperCase().includes("LIFETIME");
   const isYearly = activeToken.toUpperCase().includes("YEARLY");
+  
+  // Format check: must start with MINT-PRO- and contain valid key components
+  const isValidFormat = (
+    activeToken.toUpperCase().startsWith("MINT-PRO-LIFETIME-") ||
+    activeToken.toUpperCase().startsWith("MINT-PRO-YEARLY-") ||
+    (activeToken.toUpperCase().startsWith("MINT-PRO-") && activeToken.length >= 18)
+  );
 
   const planName = isLifetime
     ? "MacMint Pro Lifetime (5 Macs)"
     : isYearly
     ? "MacMint Pro Yearly (1 Mac)"
-    : activeToken
+    : isValidFormat
     ? "MacMint Pro License"
-    : null;
+    : "Invalid License Token";
 
   return (
     <section className="py-16 md:py-24 bg-surface-light dark:bg-surface-dark transition-colors min-h-[85vh] flex flex-col justify-center">
@@ -134,8 +154,8 @@ export const ActivatePage: React.FC<ActivatePageProps> = ({ onNavigate }) => {
 
         {/* Main Card */}
         <div className="p-6 sm:p-10 rounded-3xl bg-white dark:bg-surface-darkSurface border border-slate-200/80 dark:border-slate-800 shadow-xl shadow-mint-900/5 mb-10">
-          {activeToken ? (
-            /* ACTIVE TOKEN DETECTED */
+          {activeToken && isValidFormat ? (
+            /* VALID ACTIVE TOKEN DETECTED */
             <div className="space-y-8">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 rounded-2xl bg-mint-50/70 dark:bg-mint-950/30 border border-mint-200/80 dark:border-mint-800/60">
                 <div className="flex items-center gap-3.5">
@@ -251,6 +271,7 @@ export const ActivatePage: React.FC<ActivatePageProps> = ({ onNavigate }) => {
                   onClick={() => {
                     setActiveToken("");
                     setTokenInput("");
+                    setErrorMessage(null);
                   }}
                   className="text-xs font-semibold text-slate-500 dark:text-slate-400 hover:text-mint-600 transition"
                 >
@@ -259,9 +280,45 @@ export const ActivatePage: React.FC<ActivatePageProps> = ({ onNavigate }) => {
               </div>
 
             </div>
+          ) : activeToken && !isValidFormat ? (
+            /* INVALID TOKEN CARD */
+            <div className="space-y-6">
+              <div className="p-5 rounded-2xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900/60 flex items-start gap-3.5">
+                <XCircle className="w-5 h-5 text-rose-600 dark:text-rose-400 shrink-0 mt-0.5" />
+                <div className="space-y-1.5">
+                  <div className="text-sm font-bold text-rose-900 dark:text-rose-200">
+                    Unrecognized License Token
+                  </div>
+                  <div className="text-xs text-rose-700 dark:text-rose-300 leading-relaxed">
+                    The code <code className="px-1.5 py-0.5 rounded bg-rose-100 dark:bg-rose-900/80 font-mono text-xs font-bold text-rose-800 dark:text-rose-200">{activeToken}</code> is not a valid MacMint Pro license token.
+                  </div>
+                  <p className="text-xs text-rose-600 dark:text-rose-400 mt-2">
+                    Valid tokens begin with <code className="font-mono font-bold">MINT-PRO-LIFETIME-</code> or <code className="font-mono font-bold">MINT-PRO-YEARLY-</code>. Please check your purchase confirmation email from Dodo Payments.
+                  </p>
+                </div>
+              </div>
+
+              <button
+                onClick={() => {
+                  setActiveToken("");
+                  setTokenInput("");
+                  setErrorMessage(null);
+                }}
+                className="w-full inline-flex items-center justify-center gap-2 py-3 px-5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-surface-darkCard dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-semibold text-xs transition"
+              >
+                ← Enter License Code Manually
+              </button>
+            </div>
           ) : (
             /* MANUAL TOKEN ENTRY */
             <div className="space-y-6">
+              {errorMessage && (
+                <div className="p-4 rounded-2xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900/60 flex items-start gap-3 text-xs text-rose-700 dark:text-rose-300">
+                  <XCircle className="w-4 h-4 text-rose-600 dark:text-rose-400 shrink-0 mt-0.5" />
+                  <span>{errorMessage}</span>
+                </div>
+              )}
+
               <form onSubmit={handleManualActivate} className="space-y-5">
                 <div>
                   <label 
