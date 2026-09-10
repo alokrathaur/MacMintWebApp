@@ -1,5 +1,5 @@
 import React from "react";
-import { Mail, HelpCircle, ShieldCheck, Download, BookOpen, ExternalLink, ArrowRight } from "lucide-react";
+import { Mail, HelpCircle, ShieldCheck, Download, BookOpen, ExternalLink, ArrowRight, Key } from "lucide-react";
 import { XIcon } from "@/components/ui/Icons";
 import { SITE_CONFIG } from "@/config/site";
 
@@ -84,6 +84,28 @@ export const SupportPage: React.FC<SupportPageProps> = ({ onNavigate }) => {
                     <span>Message</span>
                     <ExternalLink className="w-3 h-3" />
                   </a>
+                </div>
+
+                {/* License Activation */}
+                <div className="p-4 rounded-2xl bg-surface-soft dark:bg-surface-darkCard border border-slate-200/60 dark:border-slate-800/80 flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2.5 rounded-xl bg-mint-50 dark:bg-surface-darkSurface border border-mint-200/60 dark:border-mint-800/60 text-mint-700 dark:text-mint-400">
+                      <Key className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <div className="text-xs font-bold text-slate-900 dark:text-white">License Activation</div>
+                      <div className="text-xs text-slate-500">1-click activation or token entry</div>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => {
+                      onNavigate("/activate");
+                      window.scrollTo({ top: 0, behavior: "smooth" });
+                    }}
+                    className="px-3 py-1.5 rounded-xl bg-mint-600 hover:bg-mint-700 text-white font-semibold text-xs transition"
+                  >
+                    Activate
+                  </button>
                 </div>
               </div>
             </div>

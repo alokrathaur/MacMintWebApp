@@ -12,6 +12,7 @@ import { DownloadPage } from "./pages/DownloadPage";
 import { AboutPage } from "./pages/AboutPage";
 import { PrivacyPage } from "./pages/PrivacyPage";
 import { TermsPage } from "./pages/TermsPage";
+import { ActivatePage } from "./pages/ActivatePage";
 
 export const App: React.FC = () => {
   // Theme state: defaults to light-first
@@ -103,6 +104,9 @@ export const App: React.FC = () => {
     }
     if (currentPath === "/terms") {
       return <TermsPage />;
+    }
+    if (currentPath === "/activate" || currentPath.startsWith("/activate?") || currentPath.startsWith("/activate/")) {
+      return <ActivatePage onNavigate={navigate} />;
     }
     // Fallback to Home
     return <HomePage onNavigate={navigate} />;

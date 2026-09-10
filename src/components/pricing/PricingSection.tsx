@@ -181,6 +181,27 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onNavigate }) =>
 
         </div>
 
+        {/* Already Purchased / Activation Callout */}
+        <div className="text-center mb-16 -mt-8">
+          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+            Already purchased a license?{" "}
+            <button
+              onClick={() => {
+                if (onNavigate) {
+                  onNavigate("/activate");
+                } else {
+                  window.location.hash = "#/activate";
+                }
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
+              className="font-semibold text-mint-700 dark:text-mint-400 hover:underline inline-flex items-center gap-1"
+            >
+              <span>Activate your MacMint app here</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
+          </p>
+        </div>
+
         {/* COMPARISON TABLE */}
         <div className="rounded-3xl bg-surface-soft/80 dark:bg-surface-darkSurface/60 border border-slate-200/80 dark:border-slate-800 p-6 sm:p-10 overflow-hidden">
           <div className="mb-6">

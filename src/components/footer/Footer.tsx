@@ -102,6 +102,15 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               </li>
               <li>
                 <a
+                  href="/activate"
+                  onClick={(e) => handleLinkClick(e, "/activate")}
+                  className="hover:text-mint-600 dark:hover:text-mint-400 transition font-medium text-mint-700 dark:text-mint-400"
+                >
+                  Activate License
+                </a>
+              </li>
+              <li>
+                <a
                   href="/about"
                   onClick={(e) => handleLinkClick(e, "/about")}
                   className="hover:text-mint-600 dark:hover:text-mint-400 transition"

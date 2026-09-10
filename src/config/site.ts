@@ -21,6 +21,8 @@ export const SITE_CONFIG = {
   appVersion: "1.0.0",
   minMacOSVersion: "macOS 14.0 (Sonoma) or later",
   downloadUrl: "/download",
+  activateUrl: "/activate",
+  siteUrl: "https://getmacmint.store",
   supportEmail: "legendprixai@gmail.com",
   xUrl: "https://x.com/alok8feb",
   companyName: "LegendPrix AI",
