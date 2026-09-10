@@ -65,7 +65,7 @@ export const HeroLogo3D: React.FC<HeroLogo3DProps> = ({ onCleanStateChange }) =>
 
     // Load REAL High-Resolution Logo from root / assets
     const textureLoader = new THREE.TextureLoader();
-    const logoTexture = textureLoader.load("./assets/logo.png", (tex) => {
+    const logoTexture = textureLoader.load("./assets/insideLogo.png", (tex) => {
       tex.colorSpace = THREE.SRGBColorSpace;
       tex.generateMipmaps = true;
       tex.minFilter = THREE.LinearMipmapLinearFilter;
@@ -74,71 +74,31 @@ export const HeroLogo3D: React.FC<HeroLogo3DProps> = ({ onCleanStateChange }) =>
       logoMaterial.needsUpdate = true;
     });
 
-    // Create Squircle 3D geometry with rounded corners
-    const shape = new THREE.Shape();
-    const size = 2.2;
-    const radius = 0.52;
-    const half = size / 2;
-
-    shape.moveTo(-half + radius, -half);
-    shape.lineTo(half - radius, -half);
-    shape.quadraticCurveTo(half, -half, half, -half + radius);
-    shape.lineTo(half, half - radius);
-    shape.quadraticCurveTo(half, half, half - radius, half);
-    shape.lineTo(-half + radius, half);
-    shape.quadraticCurveTo(-half, half, -half, half - radius);
-    shape.lineTo(-half, -half + radius);
-    shape.quadraticCurveTo(-half, -half, -half + radius, -half);
-
-    const extrudeSettings: THREE.ExtrudeGeometryOptions = {
-      depth: 0.12,
-      bevelEnabled: true,
-      bevelSegments: 5,
-      steps: 1,
-      bevelSize: 0.04,
-      bevelThickness: 0.04,
-    };
-
-    const geometry = new THREE.ExtrudeGeometry(shape, extrudeSettings);
-    geometry.center();
-
-    // PROPERLY NORMALIZE UV COORDINATES so logo.png covers the ENTIRE front face perfectly
-    geometry.computeBoundingBox();
-    const bb = geometry.boundingBox!;
-    const minX = bb.min.x;
-    const maxX = bb.max.x;
-    const minY = bb.min.y;
-    const maxY = bb.max.y;
-    const w = maxX - minX;
-    const h = maxY - minY;
-
-    const pos = geometry.attributes.position;
-    const uvs = geometry.attributes.uv;
-    for (let i = 0; i < pos.count; i++) {
-      const u = (pos.getX(i) - minX) / w;
-      const v = (pos.getY(i) - minY) / h;
-      uvs.setXY(i, u, v);
-    }
-    uvs.needsUpdate = true;
-
-    // Materials: Front Face uses full high-res logo, sides use sleek MacMint emerald
-    const logoMaterial = new THREE.MeshPhysicalMaterial({
+    // 3D Front Plane with authentic 3D insideLogo texture
+    const logoGeometry = new THREE.PlaneGeometry(2.6, 2.6);
+    const logoMaterial = new THREE.MeshBasicMaterial({
       map: logoTexture,
-      roughness: 0.18,
-      metalness: 0.05,
-      clearcoat: 0.8,
-      clearcoatRoughness: 0.1,
-      reflectivity: 0.8,
+      transparent: true,
+      alphaTest: 0.02,
+      depthWrite: true,
+      side: THREE.FrontSide,
     });
-
-    const sideMaterial = new THREE.MeshStandardMaterial({
-      color: 0x087f73,
-      roughness: 0.35,
-      metalness: 0.3,
-    });
-
-    const logoMesh = new THREE.Mesh(geometry, [logoMaterial, sideMaterial]);
+    const logoMesh = new THREE.Mesh(logoGeometry, logoMaterial);
+    logoMesh.position.set(0, 0, 0);
     mainGroup.add(logoMesh);
+
+    // Soft depth shadow silhouette slightly behind the logo for genuine 3D separation
+    const shadowGeom = new THREE.PlaneGeometry(2.55, 2.55);
+    const shadowMat = new THREE.MeshBasicMaterial({
+      map: logoTexture,
+      transparent: true,
+      color: 0x011f1a,
+      opacity: 0.28,
+      depthWrite: false,
+    });
+    const shadowMesh = new THREE.Mesh(shadowGeom, shadowMat);
+    shadowMesh.position.set(0.04, -0.05, -0.05);
+    mainGroup.add(shadowMesh);
 
     // Digital Clutter Elements
     const clutterCount = 18;
@@ -195,7 +155,7 @@ export const HeroLogo3D: React.FC<HeroLogo3DProps> = ({ onCleanStateChange }) =>
       side: THREE.DoubleSide,
     });
     const sweepMesh = new THREE.Mesh(sweepGeom, sweepMat);
-    sweepMesh.position.z = 0.14;
+    sweepMesh.position.z = 0.06;
     mainGroup.add(sweepMesh);
 
     // Mouse Parallax (limited to subtle 5-8 degrees)
@@ -228,8 +188,10 @@ export const HeroLogo3D: React.FC<HeroLogo3DProps> = ({ onCleanStateChange }) =>
       const delta = clock.getDelta();
       const time = clock.getElapsedTime();
 
-      // Gentle floating / breathing
-      logoMesh.position.y = Math.sin(time * 1.4) * 0.05;
+      // Gentle floating / breathing in sync
+      const breath = Math.sin(time * 1.4) * 0.05;
+      logoMesh.position.y = breath;
+      shadowMesh.position.y = -0.05 + breath;
 
       // Cursor tilt interpolation
       mainGroup.rotation.x += (targetRotX - mainGroup.rotation.x) * 0.05;
@@ -310,11 +272,17 @@ export const HeroLogo3D: React.FC<HeroLogo3DProps> = ({ onCleanStateChange }) =>
       if (renderer.domElement && container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
       }
-      geometry.dispose();
+      logoGeometry.dispose();
       logoMaterial.dispose();
-      sideMaterial.dispose();
+      shadowGeom.dispose();
+      shadowMat.dispose();
+      logoTexture.dispose();
       sweepGeom.dispose();
       sweepMat.dispose();
+      clutterMeshes.forEach((c) => {
+        c.mesh.geometry.dispose();
+        (c.mesh.material as THREE.Material).dispose();
+      });
       renderer.dispose();
     };
   }, []);
@@ -330,11 +298,11 @@ export const HeroLogo3D: React.FC<HeroLogo3DProps> = ({ onCleanStateChange }) =>
       {/* Fallback Static Presentation */}
       {!hasWebGL && (
         <div className="relative z-10 flex flex-col items-center justify-center transition-transform duration-500 hover:scale-[1.03]">
-          <div className="w-52 h-52 md:w-60 md:h-60 rounded-[38px] shadow-2xl shadow-mint-700/20 overflow-hidden border border-mint-200/50 bg-white">
+          <div className="w-52 h-52 md:w-60 md:h-60 flex items-center justify-center">
             <img
-              src="./assets/logo.png"
+              src="./assets/insideLogo.png"
               alt="MacMint Official Logo"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain drop-shadow-2xl"
             />
           </div>
         </div>
