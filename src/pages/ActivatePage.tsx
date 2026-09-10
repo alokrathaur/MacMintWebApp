@@ -87,7 +87,7 @@ export const ActivatePage: React.FC<ActivatePageProps> = ({ onNavigate }) => {
       const clean = query.trim();
       setTokenInput(clean);
       setIsLoading(true);
-      fetch(`https://macmint-api.cotton-light.workers.dev/api/license/lookup?query=${encodeURIComponent(clean)}`)
+      fetch(`${SITE_CONFIG.apiUrl}/api/license/lookup?query=${encodeURIComponent(clean)}`)
         .then((r) => r.json())
         .then((data) => {
           if (data.success && data.token) {
@@ -133,7 +133,7 @@ export const ActivatePage: React.FC<ActivatePageProps> = ({ onNavigate }) => {
     setErrorMessage(null);
 
     try {
-      const res = await fetch(`https://macmint-api.cotton-light.workers.dev/api/license/lookup?query=${encodeURIComponent(clean)}`);
+      const res = await fetch(`${SITE_CONFIG.apiUrl}/api/license/lookup?query=${encodeURIComponent(clean)}`);
       const data = await res.json();
 
       if (res.ok && data.success && data.token) {

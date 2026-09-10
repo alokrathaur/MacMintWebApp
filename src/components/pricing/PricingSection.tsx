@@ -27,7 +27,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onNavigate, isDe
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 2500);
 
-      const res = await fetch("https://macmint-api.cotton-light.workers.dev/api/checkout/session", {
+      const res = await fetch(`${SITE_CONFIG.apiUrl}/api/checkout/session`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ plan, return_url: "https://getmacmint.store/activate" }),
