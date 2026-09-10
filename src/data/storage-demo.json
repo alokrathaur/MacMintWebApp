@@ -1,0 +1,105 @@
+{
+  "name": "Macintosh HD",
+  "size": 153600000000,
+  "formatted": "153.6 GB",
+  "color": "#087F73",
+  "children": [
+    {
+      "name": "Users",
+      "size": 115000000000,
+      "formatted": "115.0 GB",
+      "color": "#23B99C",
+      "children": [
+        {
+          "name": "Developer",
+          "size": 42600000000,
+          "formatted": "42.6 GB",
+          "color": "#4FD1B5",
+          "children": [
+            { "name": "Xcode Data", "size": 24800000000, "formatted": "24.8 GB", "color": "#7CE5C9" },
+            { "name": "node_modules", "size": 9400000000, "formatted": "9.4 GB", "color": "#4FD1B5" },
+            { "name": "DerivedData", "size": 5200000000, "formatted": "5.2 GB", "color": "#23B99C" },
+            { "name": "Docker VM", "size": 3200000000, "formatted": "3.2 GB", "color": "#087F73" }
+          ]
+        },
+        {
+          "name": "Documents",
+          "size": 28400000000,
+          "formatted": "28.4 GB",
+          "color": "#7CE5C9",
+          "children": [
+            { "name": "WorkSpace", "size": 14200000000, "formatted": "14.2 GB", "color": "#B8F2DF" },
+            { "name": "Archives", "size": 8600000000, "formatted": "8.6 GB", "color": "#7CE5C9" },
+            { "name": "Projects", "size": 5600000000, "formatted": "5.6 GB", "color": "#4FD1B5" }
+          ]
+        },
+        {
+          "name": "Downloads",
+          "size": 22800000000,
+          "formatted": "22.8 GB",
+          "color": "#087F73",
+          "children": [
+            { "name": "Disk Images & DMGs", "size": 12400000000, "formatted": "12.4 GB", "color": "#064F49" },
+            { "name": "Media Exports", "size": 6200000000, "formatted": "6.2 GB", "color": "#087F73" },
+            { "name": "Old Archives", "size": 4200000000, "formatted": "4.2 GB", "color": "#23B99C" }
+          ]
+        },
+        {
+          "name": "User Library",
+          "size": 21200000000,
+          "formatted": "21.2 GB",
+          "color": "#23B99C",
+          "children": [
+            { "name": "App Caches", "size": 11800000000, "formatted": "11.8 GB", "color": "#4FD1B5" },
+            { "name": "Application Support", "size": 6400000000, "formatted": "6.4 GB", "color": "#7CE5C9" },
+            { "name": "Group Containers", "size": 3000000000, "formatted": "3.0 GB", "color": "#B8F2DF" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Applications",
+      "size": 22900000000,
+      "formatted": "22.9 GB",
+      "color": "#4FD1B5",
+      "children": [
+        { "name": "Xcode.app", "size": 11400000000, "formatted": "11.4 GB", "color": "#7CE5C9" },
+        { "name": "VS Code.app", "size": 2800000000, "formatted": "2.8 GB", "color": "#4FD1B5" },
+        { "name": "Chrome.app", "size": 1900000000, "formatted": "1.9 GB", "color": "#23B99C" },
+        { "name": "Slack.app", "size": 1400000000, "formatted": "1.4 GB", "color": "#087F73" },
+        { "name": "Other Utilities", "size": 5400000000, "formatted": "5.4 GB", "color": "#064F49" }
+      ]
+    },
+    {
+      "name": "System Library",
+      "size": 7330000000,
+      "formatted": "7.33 GB",
+      "color": "#087F73",
+      "children": [
+        { "name": "Developer Core", "size": 3200000000, "formatted": "3.2 GB", "color": "#23B99C" },
+        { "name": "System Caches", "size": 2400000000, "formatted": "2.4 GB", "color": "#4FD1B5" },
+        { "name": "Diagnostic Logs", "size": 1730000000, "formatted": "1.73 GB", "color": "#7CE5C9" }
+      ]
+    },
+    {
+      "name": "private & var",
+      "size": 4570000000,
+      "formatted": "4.57 GB",
+      "color": "#23B99C",
+      "children": [
+        { "name": "var / logs", "size": 3800000000, "formatted": "3.8 GB", "color": "#4FD1B5" },
+        { "name": "tmp caches", "size": 770000000, "formatted": "770 MB", "color": "#7CE5C9" }
+      ]
+    },
+    {
+      "name": "usr & opt (Homebrew)",
+      "size": 3780000000,
+      "formatted": "3.78 GB",
+      "color": "#7CE5C9",
+      "children": [
+        { "name": "Homebrew Cellar", "size": 2400000000, "formatted": "2.4 GB", "color": "#4FD1B5" },
+        { "name": "local / bin", "size": 1380000000, "formatted": "1.38 GB", "color": "#23B99C" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>MacMint — Redirecting...</title>
+    <script type="text/javascript">
+      // GitHub Pages SPA redirect
+      var pathSegmentsToKeep = 1; // if hosted at username.github.io/repo/
+      var l = window.location;
+      // If path is e.g. /MacMint/features or /features
+      var segments = l.pathname.split('/').filter(Boolean);
+      var repoName = segments.length > 0 && segments[0] === 'MacMint' ? '/MacMint' : '';
+      var routePath = l.pathname.replace(repoName, '') || '/';
+
+      l.replace(
+        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+        repoName + '/?' + (routePath.slice(1) ? '/' + routePath.slice(1) : '') +
+        (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+        l.hash
+      );
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
