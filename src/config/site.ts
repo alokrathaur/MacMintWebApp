@@ -24,7 +24,7 @@ export const SITE_CONFIG = {
   directDmgUrl: "https://github.com/alokrathaur/MacMintWebApp/releases/download/v1.0.0/MacMint.dmg",
   activateUrl: "/activate",
   siteUrl: "https://getmacmint.store",
-  apiUrl: "https://macmint-api.cotton-light.workers.dev",
+  apiUrl: "https://macmint-api.macmint.workers.dev",
   supportEmail: "legendprixai@gmail.com",
   xUrl: "https://x.com/alok8feb",
   companyName: "LegendPrix AI",
@@ -69,7 +69,7 @@ export const SITE_CONFIG = {
         "Priority email & direct X support",
       ],
       ctaText: "Get Pro Yearly",
-      ctaUrl: "https://macmint-api.cotton-light.workers.dev/api/checkout?plan=yearly",
+      ctaUrl: "https://macmint-api.macmint.workers.dev/api/checkout?plan=yearly",
     },
     proLifetime: {
       id: "pro-lifetime",
@@ -92,7 +92,7 @@ export const SITE_CONFIG = {
         "Direct 1-on-1 support via X & Email",
       ],
       ctaText: "Get Lifetime Access",
-      ctaUrl: "https://macmint-api.cotton-light.workers.dev/api/checkout?plan=lifetime",
+      ctaUrl: "https://macmint-api.macmint.workers.dev/api/checkout?plan=lifetime",
     },
   },
 };
