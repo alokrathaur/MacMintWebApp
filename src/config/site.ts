@@ -68,7 +68,7 @@ export const SITE_CONFIG = {
         "Priority email & direct X support",
       ],
       ctaText: "Get Pro Yearly",
-      ctaUrl: "https://checkout.dodopayments.com/buy/pdt_0NnK2o8UfL8CrB7m0gijI?quantity=1",
+      ctaUrl: "https://macmint-api.cotton-light.workers.dev/api/checkout?plan=yearly",
     },
     proLifetime: {
       id: "pro-lifetime",
@@ -91,7 +91,7 @@ export const SITE_CONFIG = {
         "Direct 1-on-1 support via X & Email",
       ],
       ctaText: "Get Lifetime Access",
-      ctaUrl: "https://checkout.dodopayments.com/buy/pdt_0NnK3BLNEUP1MFmMyR0oD?quantity=1",
+      ctaUrl: "https://macmint-api.cotton-light.workers.dev/api/checkout?plan=lifetime",
     },
   },
 };
