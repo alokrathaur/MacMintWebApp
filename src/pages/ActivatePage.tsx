@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { 
-  Key, 
-  Copy, 
-  Check, 
-  Sparkles, 
-  Laptop, 
-  ShieldCheck, 
-  Download, 
-  ArrowRight, 
+import {
+  Key,
+  Copy,
+  Check,
+  Sparkles,
+  Laptop,
+  ShieldCheck,
+  Download,
+  ArrowRight,
   HelpCircle,
   CheckCircle2,
   AlertTriangle,
@@ -97,7 +97,7 @@ export const ActivatePage: React.FC<ActivatePageProps> = ({ onNavigate }) => {
             setHasAttemptedAutoLaunch(true);
           }
         })
-        .catch(() => {})
+        .catch(() => { })
         .finally(() => setIsLoading(false));
     }
   }, []);
@@ -179,7 +179,7 @@ export const ActivatePage: React.FC<ActivatePageProps> = ({ onNavigate }) => {
 
   const isLifetime = activeToken.toUpperCase().includes("LIFETIME");
   const isYearly = activeToken.toUpperCase().includes("YEARLY");
-  
+
   // Format check: must start with MINT-PRO- and contain valid key components
   const isValidFormat = (
     activeToken.toUpperCase().startsWith("MINT-PRO-LIFETIME-") ||
@@ -190,15 +190,15 @@ export const ActivatePage: React.FC<ActivatePageProps> = ({ onNavigate }) => {
   const planName = isLifetime
     ? "MacMint Pro Lifetime (5 Macs)"
     : isYearly
-    ? "MacMint Pro Yearly (1 Mac)"
-    : isValidFormat
-    ? "MacMint Pro License"
-    : "Invalid License Token";
+      ? "MacMint Pro Yearly (1 Mac)"
+      : isValidFormat
+        ? "MacMint Pro License"
+        : "Invalid License Token";
 
   return (
     <section className="py-16 md:py-24 bg-surface-light dark:bg-surface-dark transition-colors min-h-[85vh] flex flex-col justify-center">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        
+
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-12">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-mint-50 dark:bg-surface-darkCard border border-mint-200 dark:border-mint-800/60 text-mint-700 dark:text-mint-300 text-xs font-semibold uppercase tracking-wider mb-4 shadow-sm">
@@ -281,7 +281,7 @@ export const ActivatePage: React.FC<ActivatePageProps> = ({ onNavigate }) => {
                 </button>
 
                 <p className="text-center text-xs text-slate-500 dark:text-slate-400">
-                  {hasAttemptedAutoLaunch 
+                  {hasAttemptedAutoLaunch
                     ? "If MacMint did not launch automatically, click the button above or follow the manual steps below."
                     : "Launching MacMint application..."}
                 </p>
@@ -382,7 +382,7 @@ export const ActivatePage: React.FC<ActivatePageProps> = ({ onNavigate }) => {
 
               <form onSubmit={handleManualActivate} className="space-y-5">
                 <div>
-                  <label 
+                  <label
                     htmlFor="tokenInput"
                     className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-2"
                   >
@@ -393,7 +393,7 @@ export const ActivatePage: React.FC<ActivatePageProps> = ({ onNavigate }) => {
                     type="text"
                     value={tokenInput}
                     onChange={(e) => setTokenInput(e.target.value)}
-                    placeholder="e.g. alok08feb@gmail.com, pay_0NnKG..., or MINT-PRO-YEARLY-..."
+                    placeholder="e.g. email@gmail.com, pay_0NnKG..., or MINT-PRO-YEARLY-..."
                     className="w-full px-4 py-3.5 rounded-2xl bg-slate-50 dark:bg-surface-darkCard border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white font-mono text-sm focus:outline-none focus:ring-2 focus:ring-mint-500/50 transition"
                   />
                   <p className="text-xs text-slate-500 dark:text-slate-400 mt-2">
