@@ -19,6 +19,35 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onNavigate, isDe
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const handleCheckoutClick = async (e: React.MouseEvent, plan: "yearly" | "lifetime", fallbackUrl: string) => {
+    if (e.metaKey || e.ctrlKey || e.button === 1) return;
+    e.preventDefault();
+
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 2500);
+
+      const res = await fetch("https://api.getmacmint.store/api/checkout/session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ plan, return_url: "https://getmacmint.store/activate" }),
+        signal: controller.signal,
+      });
+      clearTimeout(timeoutId);
+
+      if (res.ok) {
+        const data = await res.json();
+        if (data.checkout_url) {
+          window.location.href = data.checkout_url;
+          return;
+        }
+      }
+    } catch {
+      // Fallback to static Dodo buy link
+    }
+    window.location.href = fallbackUrl;
+  };
+
   const comparisonFeatures: Array<{ name: string; free: boolean | string; yearly: boolean | string; lifetime: boolean | string }> = [
     { name: "Device Activation Limit", free: "1 Mac (Trial)", yearly: "1 Mac", lifetime: "Up to 5 Macs" },
     { name: "Disk Space Sunburst Map & Capacity Analysis", free: true, yearly: true, lifetime: true },
@@ -128,6 +157,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onNavigate, isDe
             <div className="pt-6">
               <a
                 href={proYearly.ctaUrl}
+                onClick={(e) => handleCheckoutClick(e, "yearly", proYearly.ctaUrl)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full inline-flex items-center justify-center gap-2 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-slate-100 dark:hover:bg-white text-white dark:text-slate-950 font-semibold text-sm transition active:scale-[0.98] shadow-sm hover:shadow"
@@ -174,6 +204,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onNavigate, isDe
             <div className="pt-6">
               <a
                 href={proLifetime.ctaUrl}
+                onClick={(e) => handleCheckoutClick(e, "lifetime", proLifetime.ctaUrl)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full inline-flex items-center justify-center gap-2 py-3 rounded-xl bg-mint-600 hover:bg-mint-700 text-white font-semibold text-sm shadow-lg shadow-mint-700/20 transition active:scale-[0.98] hover:shadow-mint-700/30"
