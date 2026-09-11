@@ -34,11 +34,11 @@ export const DownloadPage: React.FC = () => {
         <div className="text-center max-w-2xl mx-auto mb-14">
           <div className="w-16 h-16 mx-auto rounded-2xl overflow-hidden shadow-lg border border-mint-300/60 bg-mint-500 mb-5">
             <img
-              src="./assets/logo.png"
+              src="/assets/logo.png"
               alt="MacMint Logo"
               className="w-full h-full object-cover"
               onError={(e) => {
-                (e.target as HTMLImageElement).src = "./assets/macmint_logo.png";
+                (e.target as HTMLImageElement).src = "/assets/macmint_logo.png";
               }}
             />
           </div>

@@ -65,7 +65,7 @@ export const HeroLogo3D: React.FC<HeroLogo3DProps> = ({ onCleanStateChange }) =>
 
     // Load REAL High-Resolution Logo from root / assets
     const textureLoader = new THREE.TextureLoader();
-    const logoTexture = textureLoader.load("./assets/insideLogo.png", (tex) => {
+    const logoTexture = textureLoader.load("/assets/insideLogo.png", (tex) => {
       tex.colorSpace = THREE.SRGBColorSpace;
       tex.generateMipmaps = true;
       tex.minFilter = THREE.LinearMipmapLinearFilter;
@@ -300,7 +300,7 @@ export const HeroLogo3D: React.FC<HeroLogo3DProps> = ({ onCleanStateChange }) =>
         <div className="relative z-10 flex flex-col items-center justify-center transition-transform duration-500 hover:scale-[1.03]">
           <div className="w-52 h-52 md:w-60 md:h-60 flex items-center justify-center">
             <img
-              src="./assets/insideLogo.png"
+              src="/assets/insideLogo.png"
               alt="MacMint Official Logo"
               className="w-full h-full object-contain drop-shadow-2xl"
             />

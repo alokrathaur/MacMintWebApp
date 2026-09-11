@@ -31,7 +31,7 @@ const features: ShowcaseFeature[] = [
       "Application caches, browser service workers, and trash storage",
       "Per-path exclusion toggle so you always stay in complete control",
     ],
-    screenshot: "./assets/screenshots/01_deep_cleanup.png",
+    screenshot: "/assets/screenshots/01_deep_cleanup.png",
     badge: "Auto-Scanned node_modules",
   },
   {
@@ -46,7 +46,7 @@ const features: ShowcaseFeature[] = [
       "Requires Full Disk Access for transparent, authorized access",
       "Never touches keychain credentials, bookmarks, or personal documents",
     ],
-    screenshot: "./assets/screenshots/02_system_data.png",
+    screenshot: "/assets/screenshots/02_system_data.png",
     badge: "Container Hunter",
     reverse: true,
   },
@@ -62,7 +62,7 @@ const features: ShowcaseFeature[] = [
       "Integrated macOS Quick Look preview (Space bar) and Reveal in Finder",
       "Clear safety labels with 'Review recommended' protections",
     ],
-    screenshot: "./assets/screenshots/03_large_files.png",
+    screenshot: "/assets/screenshots/03_large_files.png",
     badge: "Quick Look Support",
   },
   {
@@ -77,7 +77,7 @@ const features: ShowcaseFeature[] = [
       "Side-by-side path comparisons and Quick Look preview",
       "No guessing, no risk of corrupting unique files",
     ],
-    screenshot: "./assets/screenshots/04_duplicate_files.png",
+    screenshot: "/assets/screenshots/04_duplicate_files.png",
     badge: "SHA-256 Verified",
     reverse: true,
   },
@@ -93,7 +93,7 @@ const features: ShowcaseFeature[] = [
       "Safely disables associated background agents and helpers",
       "Displays individual associated files before you confirm removal",
     ],
-    screenshot: "./assets/screenshots/06_app_uninstaller.png",
+    screenshot: "/assets/screenshots/06_app_uninstaller.png",
     badge: "Zero Leftovers",
   },
   {
@@ -108,7 +108,7 @@ const features: ShowcaseFeature[] = [
       "Re-index sluggish Spotlight search databases with mdutil",
       "Control user and system LaunchAgents without touching Terminal",
     ],
-    screenshot: "./assets/screenshots/08_system_optimization.png",
+    screenshot: "/assets/screenshots/08_system_optimization.png",
     badge: "One-Click Maintenance",
     reverse: true,
   },
@@ -116,16 +116,16 @@ const features: ShowcaseFeature[] = [
 
 // All available screenshots for full lightbox gallery navigation
 const allGalleryScreenshots = [
-  { src: "./assets/screenshots/01_deep_cleanup.png", title: "Deep Cleanup (node_modules expanded)", badge: "Project Artifacts" },
-  { src: "./assets/screenshots/02_system_data.png", title: "System Data Reclaim", badge: "Container Hunter" },
-  { src: "./assets/screenshots/03_large_files.png", title: "Large & Forgotten Files", badge: "Quick Look" },
-  { src: "./assets/screenshots/04_duplicate_files.png", title: "Duplicate Files Finder", badge: "SHA-256" },
-  { src: "./assets/screenshots/05_disk_space.png", title: "Disk Space Analysis (Sunburst Map)", badge: "Interactive Radial" },
-  { src: "./assets/screenshots/06_app_uninstaller.png", title: "App Uninstaller & Leftovers", badge: "Zero Leftovers" },
-  { src: "./assets/screenshots/07_startup_items.png", title: "Startup Items & LaunchAgents", badge: "Boot Optimization" },
-  { src: "./assets/screenshots/08_system_optimization.png", title: "System Optimizations & Maintenance", badge: "One-Click" },
-  { src: "./assets/screenshots/09_operation_history.png", title: "Operation History & Audit Log", badge: "Local Audit" },
-  { src: "./assets/screenshots/10_settings.png", title: "Settings & Custom Exclusions", badge: "Configurable" },
+  { src: "/assets/screenshots/01_deep_cleanup.png", title: "Deep Cleanup (node_modules expanded)", badge: "Project Artifacts" },
+  { src: "/assets/screenshots/02_system_data.png", title: "System Data Reclaim", badge: "Container Hunter" },
+  { src: "/assets/screenshots/03_large_files.png", title: "Large & Forgotten Files", badge: "Quick Look" },
+  { src: "/assets/screenshots/04_duplicate_files.png", title: "Duplicate Files Finder", badge: "SHA-256" },
+  { src: "/assets/screenshots/05_disk_space.png", title: "Disk Space Analysis (Sunburst Map)", badge: "Interactive Radial" },
+  { src: "/assets/screenshots/06_app_uninstaller.png", title: "App Uninstaller & Leftovers", badge: "Zero Leftovers" },
+  { src: "/assets/screenshots/07_startup_items.png", title: "Startup Items & LaunchAgents", badge: "Boot Optimization" },
+  { src: "/assets/screenshots/08_system_optimization.png", title: "System Optimizations & Maintenance", badge: "One-Click" },
+  { src: "/assets/screenshots/09_operation_history.png", title: "Operation History & Audit Log", badge: "Local Audit" },
+  { src: "/assets/screenshots/10_settings.png", title: "Settings & Custom Exclusions", badge: "Configurable" },
 ];
 
 export const ProductShowcase: React.FC = () => {

@@ -24,7 +24,7 @@ export const GUIDES: Record<string, GuideItem> = {
     readTime: "4 min read",
     summary:
       "Learn how to accurately analyze your Mac storage, understand the difference between APFS purgeable space and actual free space, and explore directories using a visual Sunburst Map.",
-    screenshot: "./assets/screenshots/05_disk_space.png",
+    screenshot: "/assets/screenshots/05_disk_space.png",
     toc: [
       "1. Check native macOS Storage settings",
       "2. Understand APFS Purgeable vs Free space",
@@ -72,7 +72,7 @@ export const GUIDES: Record<string, GuideItem> = {
     readTime: "5 min read",
     summary:
       "A complete guide to clearing user caches, application caches, browser data, and developer junk without breaking running apps or losing personal data.",
-    screenshot: "./assets/screenshots/01_deep_cleanup.png",
+    screenshot: "/assets/screenshots/01_deep_cleanup.png",
     toc: [
       "1. The three types of Mac caches",
       "2. Why manual cache deletion is risky",
@@ -120,7 +120,7 @@ export const GUIDES: Record<string, GuideItem> = {
     readTime: "3 min read",
     summary:
       "Uncover multi-gigabyte ISOs, obsolete installer packages, video exports, and forgotten archives consuming valuable SSD space.",
-    screenshot: "./assets/screenshots/03_large_files.png",
+    screenshot: "/assets/screenshots/03_large_files.png",
     toc: [
       "1. Why large files hide on your Mac",
       "2. Using MacMint Large Files Explorer",
@@ -167,7 +167,7 @@ export const GUIDES: Record<string, GuideItem> = {
     readTime: "4 min read",
     summary:
       "Learn how to find and clean exact duplicate downloads, redundant photo copies, and repeated documents using SHA-256 cryptographic verification.",
-    screenshot: "./assets/screenshots/04_duplicate_files.png",
+    screenshot: "/assets/screenshots/04_duplicate_files.png",
     toc: [
       "1. How duplicate files build up over time",
       "2. Why name matching alone is dangerous",
@@ -214,7 +214,7 @@ export const GUIDES: Record<string, GuideItem> = {
     readTime: "4 min read",
     summary:
       "Dragging apps to the Trash leaves behind hidden containers, caches, preference plists, and crash logs. Learn how to remove apps completely.",
-    screenshot: "./assets/screenshots/06_app_uninstaller.png",
+    screenshot: "/assets/screenshots/06_app_uninstaller.png",
     toc: [
       "1. The myth of dragging apps to Trash",
       "2. Where Mac apps hide their leftover files",
@@ -261,7 +261,7 @@ export const GUIDES: Record<string, GuideItem> = {
     readTime: "5 min read",
     summary:
       "A developer's guide to reclaiming 30GB to 80GB of disk space from Xcode DerivedData, legacy iOS simulator runtimes, archives, and Swift package caches.",
-    screenshot: "./assets/screenshots/01_deep_cleanup.png",
+    screenshot: "/assets/screenshots/01_deep_cleanup.png",
     toc: [
       "1. Why Xcode consumes massive storage",
       "2. Clearing DerivedData safely",
@@ -307,7 +307,7 @@ export const GUIDES: Record<string, GuideItem> = {
     readTime: "5 min read",
     summary:
       "Understand what macOS includes in the mysterious System Data storage category and how to safely reclaim dozens of gigabytes.",
-    screenshot: "./assets/screenshots/02_system_data.png",
+    screenshot: "/assets/screenshots/02_system_data.png",
     toc: [
       "1. What is macOS 'System Data'?",
       "2. Why sandboxed containers inflate System Data",

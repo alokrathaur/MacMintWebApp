@@ -64,10 +64,16 @@ export const GuidesPage: React.FC<GuidesPageProps> = ({ onNavigate }) => {
                 {/* Screenshot Header */}
                 <div className="h-48 overflow-hidden bg-surface-dark relative border-b border-slate-100 dark:border-slate-800">
                   <img
-                    src={guide.screenshot}
+                    src={guide.screenshot.startsWith("./") ? guide.screenshot.slice(1) : guide.screenshot}
                     alt={guide.title}
                     className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                     loading="lazy"
+                    onError={(e) => {
+                      const target = e.currentTarget;
+                      if (target.src.includes("/guides/assets/")) {
+                        target.src = target.src.replace("/guides/assets/", "/assets/");
+                      }
+                    }}
                   />
                   <span className="absolute top-3 left-3 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider bg-white/90 dark:bg-surface-darkSurface/90 text-mint-700 dark:text-mint-300 backdrop-blur-md shadow-sm border border-slate-200/60 dark:border-slate-700">
                     {guide.category}

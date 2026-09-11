@@ -69,11 +69,11 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate, isDark,
         >
           <div className="w-8 h-8 rounded-xl overflow-hidden border border-mint-300/60 shadow-sm group-hover:scale-105 transition-transform bg-mint-500">
             <img
-              src="./assets/logo.png"
+              src="/assets/logo.png"
               alt="MacMint"
               className="w-full h-full object-cover"
               onError={(e) => {
-                (e.target as HTMLImageElement).src = "./assets/macmint_logo.png";
+                (e.target as HTMLImageElement).src = "/assets/macmint_logo.png";
               }}
             />
           </div>

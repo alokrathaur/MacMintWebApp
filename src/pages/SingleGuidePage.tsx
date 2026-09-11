@@ -68,9 +68,15 @@ export const SingleGuidePage: React.FC<SingleGuidePageProps> = ({ slug, onNaviga
         {/* Featured Screenshot */}
         <div className="mb-12 rounded-3xl overflow-hidden border border-slate-200/80 dark:border-slate-800 shadow-xl bg-surface-dark">
           <img
-            src={guide.screenshot}
+            src={guide.screenshot.startsWith("./") ? guide.screenshot.slice(1) : guide.screenshot}
             alt={guide.title}
             className="w-full h-auto object-cover"
+            onError={(e) => {
+              const target = e.currentTarget;
+              if (target.src.includes("/guides/assets/")) {
+                target.src = target.src.replace("/guides/assets/", "/assets/");
+              }
+            }}
           />
         </div>
 
