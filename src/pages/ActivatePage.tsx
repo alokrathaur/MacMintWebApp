@@ -117,6 +117,7 @@ export const ActivatePage: React.FC<ActivatePageProps> = ({ onNavigate }) => {
     const isDirectToken = (
       clean.toUpperCase().startsWith("MINT-PRO-LIFETIME-") ||
       clean.toUpperCase().startsWith("MINT-PRO-YEARLY-") ||
+      clean.toUpperCase().startsWith("MINT-PRO-MONTHLY-") ||
       (clean.toUpperCase().startsWith("MINT-PRO-") && clean.length >= 18)
     );
 
@@ -147,17 +148,7 @@ export const ActivatePage: React.FC<ActivatePageProps> = ({ onNavigate }) => {
       }
     } catch (err: any) {
       console.error("Lookup error:", err);
-      // Hardcoded offline fallback for alok08feb@gmail.com
-      if (clean.toLowerCase() === "alok08feb@gmail.com") {
-        const fallbackToken = "MINT-PRO-YEARLY-7198EF2642D0C0D8";
-        setActiveToken(fallbackToken);
-        setTokenInput(fallbackToken);
-        setErrorMessage(null);
-        triggerDeepLink(fallbackToken);
-        setHasAttemptedAutoLaunch(true);
-      } else {
-        setErrorMessage(`Could not verify purchase for "${clean}". Please check your internet connection or confirmation email from Dodo Payments.`);
-      }
+      setErrorMessage(`Could not verify purchase for "${clean}". Please check your internet connection or confirmation email from Dodo Payments.`);
     } finally {
       setIsLoading(false);
     }
@@ -179,11 +170,13 @@ export const ActivatePage: React.FC<ActivatePageProps> = ({ onNavigate }) => {
 
   const isLifetime = activeToken.toUpperCase().includes("LIFETIME");
   const isYearly = activeToken.toUpperCase().includes("YEARLY");
+  const isMonthly = activeToken.toUpperCase().includes("MONTHLY");
 
   // Format check: must start with MINT-PRO- and contain valid key components
   const isValidFormat = (
     activeToken.toUpperCase().startsWith("MINT-PRO-LIFETIME-") ||
     activeToken.toUpperCase().startsWith("MINT-PRO-YEARLY-") ||
+    activeToken.toUpperCase().startsWith("MINT-PRO-MONTHLY-") ||
     (activeToken.toUpperCase().startsWith("MINT-PRO-") && activeToken.length >= 18)
   );
 
@@ -191,9 +184,11 @@ export const ActivatePage: React.FC<ActivatePageProps> = ({ onNavigate }) => {
     ? "MacMint Pro Lifetime (5 Macs)"
     : isYearly
       ? "MacMint Pro Yearly (1 Mac)"
-      : isValidFormat
-        ? "MacMint Pro License"
-        : "Invalid License Token";
+      : isMonthly
+        ? "MacMint Pro Monthly (1 Mac)"
+        : isValidFormat
+          ? "MacMint Pro License"
+          : "Invalid License Token";
 
   return (
     <section className="py-16 md:py-24 bg-surface-light dark:bg-surface-dark transition-colors min-h-[85vh] flex flex-col justify-center">
