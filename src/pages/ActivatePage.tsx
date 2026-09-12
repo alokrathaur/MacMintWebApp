@@ -22,10 +22,42 @@ interface ActivatePageProps {
 export const ActivatePage: React.FC<ActivatePageProps> = ({ onNavigate }) => {
   const [tokenInput, setTokenInput] = useState<string>("");
   const [activeToken, setActiveToken] = useState<string>("");
+  const [customerEmail, setCustomerEmail] = useState<string>("");
+  const [detectedPlan, setDetectedPlan] = useState<string>("");
   const [copied, setCopied] = useState<boolean>(false);
   const [hasAttemptedAutoLaunch, setHasAttemptedAutoLaunch] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const triggerDeepLink = (tokenToUse: string, emailToUse?: string, planToUse?: string) => {
+    if (!tokenToUse) return;
+    const cleanToken = tokenToUse.trim();
+    let deepLinkUrl = `macmint://activate?token=${encodeURIComponent(cleanToken)}`;
+    if (emailToUse && emailToUse.trim()) {
+      deepLinkUrl += `&email=${encodeURIComponent(emailToUse.trim())}`;
+    }
+    if (planToUse && planToUse.trim()) {
+      deepLinkUrl += `&plan=${encodeURIComponent(planToUse.trim())}`;
+    }
+
+    // 1. Launch via hidden iframe (avoids blank pages or browser popup restrictions)
+    try {
+      const iframe = document.createElement("iframe");
+      iframe.style.display = "none";
+      iframe.src = deepLinkUrl;
+      document.body.appendChild(iframe);
+      setTimeout(() => {
+        try {
+          document.body.removeChild(iframe);
+        } catch {}
+      }, 2500);
+    } catch {}
+
+    // 2. Direct location navigation trigger
+    try {
+      window.location.href = deepLinkUrl;
+    } catch {}
+  };
 
   // Extract token or email/payment_id from URL query parameters
   useEffect(() => {
@@ -62,6 +94,10 @@ export const ActivatePage: React.FC<ActivatePageProps> = ({ onNavigate }) => {
       return null;
     };
 
+    const searchParams = new URLSearchParams(window.location.search);
+    const emailParam = searchParams.get("email") || searchParams.get("customer_email");
+    const payParam = searchParams.get("payment_id") || searchParams.get("pay_id") || searchParams.get("subscription_id");
+
     const detected = parseTokenFromUrl();
     if (detected) {
       const clean = detected.trim();
@@ -71,9 +107,13 @@ export const ActivatePage: React.FC<ActivatePageProps> = ({ onNavigate }) => {
         .then((r) => r.json())
         .then((data) => {
           if (data.success && data.token) {
+            const resolvedEmail = data.customerEmail || emailParam || "";
+            const resolvedPlan = data.plan || "";
             setActiveToken(data.token);
             setTokenInput(data.token);
-            triggerDeepLink(data.token);
+            if (resolvedEmail) setCustomerEmail(resolvedEmail);
+            if (resolvedPlan) setDetectedPlan(resolvedPlan);
+            triggerDeepLink(data.token, resolvedEmail, resolvedPlan);
             setHasAttemptedAutoLaunch(true);
           } else {
             setErrorMessage(data.message || "Your MacMint Pro subscription is cancelled or expired. Please subscribe to reactivate your Pro access.");
@@ -82,7 +122,7 @@ export const ActivatePage: React.FC<ActivatePageProps> = ({ onNavigate }) => {
         .catch(() => {
           if (clean.toUpperCase().startsWith("MINT-PRO-LIFETIME-")) {
             setActiveToken(clean);
-            triggerDeepLink(clean);
+            triggerDeepLink(clean, emailParam || undefined, "lifetime");
             setHasAttemptedAutoLaunch(true);
           }
         })
@@ -91,9 +131,6 @@ export const ActivatePage: React.FC<ActivatePageProps> = ({ onNavigate }) => {
     }
 
     // Also check if user was redirected with email or payment_id from Dodo
-    const searchParams = new URLSearchParams(window.location.search);
-    const emailParam = searchParams.get("email") || searchParams.get("customer_email");
-    const payParam = searchParams.get("payment_id") || searchParams.get("pay_id") || searchParams.get("subscription_id");
     const query = emailParam || payParam;
 
     if (!detected && query) {
@@ -104,9 +141,13 @@ export const ActivatePage: React.FC<ActivatePageProps> = ({ onNavigate }) => {
         .then((r) => r.json())
         .then((data) => {
           if (data.success && data.token) {
+            const resolvedEmail = data.customerEmail || emailParam || "";
+            const resolvedPlan = data.plan || "";
             setActiveToken(data.token);
             setTokenInput(data.token);
-            triggerDeepLink(data.token);
+            if (resolvedEmail) setCustomerEmail(resolvedEmail);
+            if (resolvedPlan) setDetectedPlan(resolvedPlan);
+            triggerDeepLink(data.token, resolvedEmail, resolvedPlan);
             setHasAttemptedAutoLaunch(true);
           } else {
             setErrorMessage(data.message || "Your MacMint Pro subscription is cancelled or expired. Please subscribe to reactivate your Pro access.");
@@ -116,12 +157,6 @@ export const ActivatePage: React.FC<ActivatePageProps> = ({ onNavigate }) => {
         .finally(() => setIsLoading(false));
     }
   }, []);
-
-  const triggerDeepLink = (tokenToUse: string) => {
-    if (!tokenToUse) return;
-    const deepLinkUrl = `macmint://activate?token=${encodeURIComponent(tokenToUse.trim())}`;
-    window.location.href = deepLinkUrl;
-  };
 
   const handleManualActivate = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -137,10 +172,14 @@ export const ActivatePage: React.FC<ActivatePageProps> = ({ onNavigate }) => {
       const data = await res.json();
 
       if (res.ok && data.success && data.token) {
+        const resolvedEmail = data.customerEmail || (clean.includes("@") ? clean : "");
+        const resolvedPlan = data.plan || "";
         setActiveToken(data.token);
         setTokenInput(data.token);
+        if (resolvedEmail) setCustomerEmail(resolvedEmail);
+        if (resolvedPlan) setDetectedPlan(resolvedPlan);
         setErrorMessage(null);
-        triggerDeepLink(data.token);
+        triggerDeepLink(data.token, resolvedEmail, resolvedPlan);
         setHasAttemptedAutoLaunch(true);
       } else {
         setErrorMessage(data.message || `No active MacMint Pro purchase found for "${clean}". If you just completed payment, please wait a moment and try again, or check your confirmation email from Dodo Payments.`);
@@ -149,7 +188,7 @@ export const ActivatePage: React.FC<ActivatePageProps> = ({ onNavigate }) => {
       // Fallback only allowed for permanent Lifetime purchases
       if (clean.toUpperCase().startsWith("MINT-PRO-LIFETIME-")) {
         setActiveToken(clean);
-        triggerDeepLink(clean);
+        triggerDeepLink(clean, undefined, "lifetime");
         setHasAttemptedAutoLaunch(true);
       } else {
         console.error("Lookup error:", err);
@@ -273,7 +312,7 @@ export const ActivatePage: React.FC<ActivatePageProps> = ({ onNavigate }) => {
               {/* Primary Action Button */}
               <div className="space-y-3 pt-2">
                 <button
-                  onClick={() => triggerDeepLink(activeToken)}
+                  onClick={() => triggerDeepLink(activeToken, customerEmail, detectedPlan)}
                   className="w-full inline-flex items-center justify-center gap-3 py-4 px-6 rounded-2xl bg-mint-600 hover:bg-mint-700 text-white font-bold text-base shadow-lg shadow-mint-700/25 transition active:scale-[0.99]"
                 >
                   <Sparkles className="w-5 h-5" />
