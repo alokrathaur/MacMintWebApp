@@ -141,15 +141,19 @@ export const DownloadPage: React.FC = () => {
           </div>
 
           <div className="p-6 rounded-2xl bg-white dark:bg-surface-darkSurface border border-slate-200/80 dark:border-slate-800 space-y-3">
-            <h4 className="text-sm font-bold text-slate-900 dark:text-white">Release Notes v1.0.0</h4>
+            <h4 className="text-sm font-bold text-slate-900 dark:text-white">Release Notes v1.0.1</h4>
             <ul className="space-y-2 text-xs text-slate-600 dark:text-slate-400">
               <li className="flex items-center gap-2">
                 <span className="text-mint-600 font-bold">•</span>
-                <span>Interactive Sunburst Map with multi-ring storage exploration</span>
+                <span>Single-window architecture with seamless web-activation deep-link routing</span>
               </li>
               <li className="flex items-center gap-2">
                 <span className="text-mint-600 font-bold">•</span>
-                <span>Node.js dependencies (node_modules) auto-discovery in Deep Clean</span>
+                <span>Authoritative live subscription verification & comprehensive deactivation cache purge</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="text-mint-600 font-bold">•</span>
+                <span>Pro feature unlock buttons route directly to in-app Settings without extra popups</span>
               </li>
               <li className="flex items-center gap-2">
                 <span className="text-mint-600 font-bold">•</span>
