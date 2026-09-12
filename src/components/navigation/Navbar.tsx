@@ -27,7 +27,6 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate, isDark,
     { name: "Features", path: "/features" },
     { name: "Smart Space", path: "/#smart-space" },
     { name: "Pricing", path: "/pricing" },
-    { name: "Guides", path: "/guides" },
     { name: "Support", path: "/support" },
   ];
 
