@@ -255,10 +255,10 @@ export const AppDemoPlayer: React.FC<AppDemoPlayerProps> = ({
   const progressPercent = duration > 0 ? (currentTime / duration) * 100 : 0;
 
   return (
-    <section id="demo-player" className="scroll-mt-16 sm:scroll-mt-20 py-16 md:py-24 bg-surface-light dark:bg-surface-dark transition-colors border-t border-slate-200/60 dark:border-slate-800/60">
+    <section className="py-12 md:py-16 bg-surface-light dark:bg-surface-dark transition-colors border-t border-slate-200/60 dark:border-slate-800/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-10">
+        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-mint-50 dark:bg-surface-darkCard border border-mint-200 dark:border-mint-800/60 text-mint-700 dark:text-mint-300 text-xs font-semibold uppercase tracking-wider mb-3">
             <Sparkles className="w-3.5 h-3.5 text-mint-600 dark:text-mint-400" />
             <span>DIRECT APP DEMO · LIVE SCREEN RECORDINGS</span>
@@ -266,135 +266,139 @@ export const AppDemoPlayer: React.FC<AppDemoPlayerProps> = ({
           <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-slate-950 dark:text-white">
             See MacMint in action.
           </h2>
-          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-400 mt-4 leading-relaxed font-normal">
+          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-400 mt-3 leading-relaxed font-normal">
             Direct screen recordings of MacMint running on macOS Sequoia. No mockups, no simulated animations — see the exact speed and clean native workflow.
           </p>
         </div>
 
-        {/* 4 Interactive Video Tabs */}
-        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-8">
-          {demoVideos.map((video) => {
-            const Icon = video.icon;
-            const isActive = video.id === activeTabId;
-            return (
-              <button
-                key={video.id}
-                onClick={() => handleTabChange(video.id)}
-                className={`group relative flex items-center gap-2.5 px-4 py-3 rounded-xl font-medium text-sm transition-all duration-200 cursor-pointer ${
-                  isActive
-                    ? "bg-slate-900 dark:bg-mint-500 text-white shadow-lg shadow-mint-500/10 dark:shadow-mint-500/20 scale-[1.02]"
-                    : "bg-slate-100 dark:bg-surface-darkCard text-slate-700 dark:text-slate-300 hover:bg-slate-200/80 dark:hover:bg-slate-800 border border-transparent hover:border-slate-300 dark:hover:border-slate-700"
-                }`}
-              >
-                <div
-                  className={`w-7 h-7 rounded-lg flex items-center justify-center transition-colors ${
+        {/* Scroll Target Container: Displays 4 options on top + full video player */}
+        <div id="demo-player" className="scroll-mt-20 sm:scroll-mt-24">
+          {/* 4 Interactive Video Tabs */}
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-4 sm:mb-5">
+            {demoVideos.map((video) => {
+              const Icon = video.icon;
+              const isActive = video.id === activeTabId;
+              return (
+                <button
+                  key={video.id}
+                  onClick={() => handleTabChange(video.id)}
+                  className={`group relative flex items-center gap-2 sm:gap-2.5 px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl font-medium text-xs sm:text-sm transition-all duration-200 cursor-pointer ${
                     isActive
-                      ? "bg-white/20 text-white"
-                      : "bg-white dark:bg-surface-dark text-slate-600 dark:text-slate-400 group-hover:text-mint-600 dark:group-hover:text-mint-400"
+                      ? "bg-slate-900 dark:bg-mint-500 text-white shadow-lg shadow-mint-500/10 dark:shadow-mint-500/20 scale-[1.02]"
+                      : "bg-slate-100 dark:bg-surface-darkCard text-slate-700 dark:text-slate-300 hover:bg-slate-200/80 dark:hover:bg-slate-800 border border-transparent hover:border-slate-300 dark:hover:border-slate-700"
                   }`}
                 >
-                  <Icon className="w-4 h-4" />
-                </div>
-                <div className="text-left">
-                  <div className="font-semibold text-xs sm:text-sm leading-tight flex items-center gap-1.5">
-                    {video.shortTitle}
-                  </div>
                   <div
-                    className={`text-[11px] leading-none mt-0.5 ${
+                    className={`w-6 h-6 sm:w-7 sm:h-7 rounded-lg flex items-center justify-center transition-colors ${
                       isActive
-                        ? "text-white/80"
-                        : "text-slate-500 dark:text-slate-400"
+                        ? "bg-white/20 text-white"
+                        : "bg-white dark:bg-surface-dark text-slate-600 dark:text-slate-400 group-hover:text-mint-600 dark:group-hover:text-mint-400"
                     }`}
                   >
-                    {video.duration}
+                    <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                   </div>
-                </div>
+                  <div className="text-left">
+                    <div className="font-semibold text-xs sm:text-sm leading-tight flex items-center gap-1.5">
+                      {video.shortTitle}
+                    </div>
+                    <div
+                      className={`text-[10px] sm:text-[11px] leading-none mt-0.5 ${
+                        isActive
+                          ? "text-white/80"
+                          : "text-slate-500 dark:text-slate-400"
+                      }`}
+                    >
+                      {video.duration}
+                    </div>
+                  </div>
 
-                {isActive && (
-                  <span className="hidden sm:inline-flex items-center ml-1 px-1.5 py-0.5 rounded text-[10px] font-bold bg-white/20 text-white">
-                    Playing
-                  </span>
-                )}
-              </button>
-            );
-          })}
-        </div>
-
-        {/* macOS Window Video Frame Container */}
-        <div
-          ref={containerRef}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => {
-            setIsHovered(false);
-            if (isPlaying) setShowControls(false);
-          }}
-          onMouseMove={handleMouseMove}
-          className={`relative max-w-5xl mx-auto rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-950 shadow-2xl shadow-slate-900/20 transition-all ${
-            isFullscreen ? "rounded-none max-w-none h-screen flex flex-col" : ""
-          }`}
-        >
-          {/* macOS Titlebar */}
-          <div className="flex items-center justify-between px-4 py-3 bg-slate-900/95 backdrop-blur-md border-b border-slate-800/80 select-none z-20">
-            {/* Traffic Light Buttons */}
-            <div className="flex items-center gap-2">
-              <span className="w-3 h-3 rounded-full bg-[#FF5F56] border border-[#E0443E]/50 inline-block shadow-sm" />
-              <span className="w-3 h-3 rounded-full bg-[#FFBD2E] border border-[#DEA123]/50 inline-block shadow-sm" />
-              <span className="w-3 h-3 rounded-full bg-[#27C93F] border border-[#1AAB29]/50 inline-block shadow-sm" />
-            </div>
-
-            {/* Window Title & Live Status */}
-            <div className="flex items-center gap-2 text-xs font-medium text-slate-300">
-              <span className="w-2 h-2 rounded-full bg-mint-400 animate-pulse" />
-              <span>MacMint · {activeVideo.title}</span>
-              <span className="text-slate-500 hidden sm:inline">
-                ({formatTime(currentTime)} / {formatTime(duration || 0)})
-              </span>
-            </div>
-
-            {/* Top Right Mini Actions */}
-            <div className="flex items-center gap-1.5 text-slate-400">
-              <button
-                onClick={cycleSpeed}
-                title="Playback Speed"
-                className="px-2 py-0.5 rounded text-[11px] font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors"
-              >
-                {playbackRate}x
-              </button>
-              <button
-                onClick={toggleFullscreen}
-                title={isFullscreen ? "Exit Fullscreen" : "Fullscreen"}
-                className="p-1 rounded hover:bg-slate-800 text-slate-300 hover:text-white transition-colors"
-              >
-                {isFullscreen ? (
-                  <Minimize className="w-3.5 h-3.5" />
-                ) : (
-                  <Maximize className="w-3.5 h-3.5" />
-                )}
-              </button>
-            </div>
+                  {isActive && (
+                    <span className="hidden sm:inline-flex items-center ml-1 px-1.5 py-0.5 rounded text-[10px] font-bold bg-white/20 text-white">
+                      Playing
+                    </span>
+                  )}
+                </button>
+              );
+            })}
           </div>
 
-          {/* Video Player Canvas */}
+          {/* macOS Window Video Frame Container */}
           <div
-            className={`relative w-full bg-black flex items-center justify-center cursor-pointer group select-none ${
-              isFullscreen ? "flex-grow overflow-hidden" : "aspect-[1952/1510] max-h-[640px]"
+            ref={containerRef}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => {
+              setIsHovered(false);
+              if (isPlaying) setShowControls(false);
+            }}
+            onMouseMove={handleMouseMove}
+            className={`relative max-w-4xl xl:max-w-5xl mx-auto rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-950 shadow-2xl shadow-slate-900/20 transition-all ${
+              isFullscreen ? "rounded-none max-w-none h-screen flex flex-col" : ""
             }`}
-            onClick={togglePlay}
           >
-            <video
-              ref={videoRef}
-              key={activeVideo.videoSrc}
-              src={activeVideo.videoSrc}
-              poster={activeVideo.poster}
-              preload="metadata"
-              playsInline
-              webkit-playsinline="true"
-              muted
-              onTimeUpdate={handleTimeUpdate}
-              onLoadedMetadata={handleLoadedMetadata}
-              onEnded={() => setIsPlaying(false)}
-              className="w-full h-full object-contain"
-            />
+            {/* macOS Titlebar */}
+            <div className="flex items-center justify-between px-4 py-2.5 sm:py-3 bg-slate-900/95 backdrop-blur-md border-b border-slate-800/80 select-none z-20">
+              {/* Traffic Light Buttons */}
+              <div className="flex items-center gap-2">
+                <span className="w-3 h-3 rounded-full bg-[#FF5F56] border border-[#E0443E]/50 inline-block shadow-sm" />
+                <span className="w-3 h-3 rounded-full bg-[#FFBD2E] border border-[#DEA123]/50 inline-block shadow-sm" />
+                <span className="w-3 h-3 rounded-full bg-[#27C93F] border border-[#1AAB29]/50 inline-block shadow-sm" />
+              </div>
+
+              {/* Window Title & Live Status */}
+              <div className="flex items-center gap-2 text-xs font-medium text-slate-300">
+                <span className="w-2 h-2 rounded-full bg-mint-400 animate-pulse" />
+                <span>MacMint · {activeVideo.title}</span>
+                <span className="text-slate-500 hidden sm:inline">
+                  ({formatTime(currentTime)} / {formatTime(duration || 0)})
+                </span>
+              </div>
+
+              {/* Top Right Mini Actions */}
+              <div className="flex items-center gap-1.5 text-slate-400">
+                <button
+                  onClick={cycleSpeed}
+                  title="Playback Speed"
+                  className="px-2 py-0.5 rounded text-[11px] font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors"
+                >
+                  {playbackRate}x
+                </button>
+                <button
+                  onClick={toggleFullscreen}
+                  title={isFullscreen ? "Exit Fullscreen" : "Fullscreen"}
+                  className="p-1 rounded hover:bg-slate-800 text-slate-300 hover:text-white transition-colors"
+                >
+                  {isFullscreen ? (
+                    <Minimize className="w-3.5 h-3.5" />
+                  ) : (
+                    <Maximize className="w-3.5 h-3.5" />
+                  )}
+                </button>
+              </div>
+            </div>
+
+            {/* Video Player Canvas - Constrained to fit visible screen with options above */}
+            <div
+              className={`relative w-full bg-black flex items-center justify-center cursor-pointer group select-none ${
+                isFullscreen
+                  ? "flex-grow overflow-hidden"
+                  : "aspect-[1952/1510] max-h-[calc(100vh-220px)] min-h-[300px]"
+              }`}
+              onClick={togglePlay}
+            >
+              <video
+                ref={videoRef}
+                key={activeVideo.videoSrc}
+                src={activeVideo.videoSrc}
+                poster={activeVideo.poster}
+                preload="metadata"
+                playsInline
+                webkit-playsinline="true"
+                muted
+                onTimeUpdate={handleTimeUpdate}
+                onLoadedMetadata={handleLoadedMetadata}
+                onEnded={() => setIsPlaying(false)}
+                className="w-full h-full object-contain max-h-[calc(100vh-220px)]"
+              />
 
             {/* Big Central Play Button Overlay (when paused) */}
             {!isPlaying && (
@@ -488,6 +492,7 @@ export const AppDemoPlayer: React.FC<AppDemoPlayerProps> = ({
             </div>
           </div>
         </div>
+      </div>
 
         {/* Feature Detail Callout Below the Player */}
         <div className="mt-8 max-w-4xl mx-auto p-6 rounded-2xl bg-white dark:bg-surface-darkCard border border-slate-200/80 dark:border-slate-800/80 shadow-sm transition-colors">
