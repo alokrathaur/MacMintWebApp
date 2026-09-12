@@ -76,7 +76,7 @@ export const SITE_CONFIG = {
       name: "Pro Yearly",
       price: "$2.08",
       originalPrice: "$4.16",
-      cadence: "/ mo (billed $24.99 annually)",
+      cadence: "/ month (billed $24.99 annually)",
       description: "Complete maintenance for 1 Mac. Save 58% over monthly.",
       badge: "Save 58% • 1 Mac",
       features: [
