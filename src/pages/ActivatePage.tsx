@@ -65,16 +65,29 @@ export const ActivatePage: React.FC<ActivatePageProps> = ({ onNavigate }) => {
     const detected = parseTokenFromUrl();
     if (detected) {
       const clean = detected.trim();
-      setActiveToken(clean);
       setTokenInput(clean);
-
-      // Attempt auto-launch once after a brief delay so page renders
-      const timer = setTimeout(() => {
-        triggerDeepLink(clean);
-        setHasAttemptedAutoLaunch(true);
-      }, 500);
-
-      return () => clearTimeout(timer);
+      setIsLoading(true);
+      fetch(`${SITE_CONFIG.apiUrl}/api/license/lookup?query=${encodeURIComponent(clean)}`)
+        .then((r) => r.json())
+        .then((data) => {
+          if (data.success && data.token) {
+            setActiveToken(data.token);
+            setTokenInput(data.token);
+            triggerDeepLink(data.token);
+            setHasAttemptedAutoLaunch(true);
+          } else {
+            setErrorMessage(data.message || "Your MacMint Pro subscription is cancelled or expired. Please subscribe to reactivate your Pro access.");
+          }
+        })
+        .catch(() => {
+          if (clean.toUpperCase().startsWith("MINT-PRO-LIFETIME-")) {
+            setActiveToken(clean);
+            triggerDeepLink(clean);
+            setHasAttemptedAutoLaunch(true);
+          }
+        })
+        .finally(() => setIsLoading(false));
+      return;
     }
 
     // Also check if user was redirected with email or payment_id from Dodo
@@ -95,6 +108,8 @@ export const ActivatePage: React.FC<ActivatePageProps> = ({ onNavigate }) => {
             setTokenInput(data.token);
             triggerDeepLink(data.token);
             setHasAttemptedAutoLaunch(true);
+          } else {
+            setErrorMessage(data.message || "Your MacMint Pro subscription is cancelled or expired. Please subscribe to reactivate your Pro access.");
           }
         })
         .catch(() => { })
@@ -113,23 +128,7 @@ export const ActivatePage: React.FC<ActivatePageProps> = ({ onNavigate }) => {
     if (!tokenInput.trim()) return;
     const clean = tokenInput.trim();
 
-    // 1. Direct Token format
-    const isDirectToken = (
-      clean.toUpperCase().startsWith("MINT-PRO-LIFETIME-") ||
-      clean.toUpperCase().startsWith("MINT-PRO-YEARLY-") ||
-      clean.toUpperCase().startsWith("MINT-PRO-MONTHLY-") ||
-      (clean.toUpperCase().startsWith("MINT-PRO-") && clean.length >= 18)
-    );
-
-    if (isDirectToken) {
-      setErrorMessage(null);
-      setActiveToken(clean);
-      triggerDeepLink(clean);
-      setHasAttemptedAutoLaunch(true);
-      return;
-    }
-
-    // 2. Email or Payment ID Lookup via MacMint Serverless API
+    // Verify online via Dodo Payments API endpoint
     setIsLoading(true);
     setErrorMessage(null);
 
@@ -147,8 +146,15 @@ export const ActivatePage: React.FC<ActivatePageProps> = ({ onNavigate }) => {
         setErrorMessage(data.message || `No active MacMint Pro purchase found for "${clean}". If you just completed payment, please wait a moment and try again, or check your confirmation email from Dodo Payments.`);
       }
     } catch (err: any) {
-      console.error("Lookup error:", err);
-      setErrorMessage(`Could not verify purchase for "${clean}". Please check your internet connection or confirmation email from Dodo Payments.`);
+      // Fallback only allowed for permanent Lifetime purchases
+      if (clean.toUpperCase().startsWith("MINT-PRO-LIFETIME-")) {
+        setActiveToken(clean);
+        triggerDeepLink(clean);
+        setHasAttemptedAutoLaunch(true);
+      } else {
+        console.error("Lookup error:", err);
+        setErrorMessage(`Could not verify subscription for "${clean}" with Dodo Payments. Please check your internet connection.`);
+      }
     } finally {
       setIsLoading(false);
     }
@@ -369,9 +375,20 @@ export const ActivatePage: React.FC<ActivatePageProps> = ({ onNavigate }) => {
             /* MANUAL TOKEN ENTRY */
             <div className="space-y-6">
               {errorMessage && (
-                <div className="p-4 rounded-2xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900/60 flex items-start gap-3 text-xs text-rose-700 dark:text-rose-300">
-                  <XCircle className="w-4 h-4 text-rose-600 dark:text-rose-400 shrink-0 mt-0.5" />
-                  <span>{errorMessage}</span>
+                <div className="p-4 rounded-2xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900/60 flex flex-col gap-2.5 text-xs text-rose-700 dark:text-rose-300">
+                  <div className="flex items-start gap-3">
+                    <XCircle className="w-4 h-4 text-rose-600 dark:text-rose-400 shrink-0 mt-0.5" />
+                    <span>{errorMessage}</span>
+                  </div>
+                  {errorMessage.toLowerCase().includes("cancel") && (
+                    <a
+                      href="/#pricing"
+                      className="inline-flex items-center justify-center gap-1.5 py-2 px-4 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-semibold text-xs shadow transition mt-1 w-fit"
+                    >
+                      <span>Reactivate / Subscribe to Pro</span>
+                      <span>→</span>
+                    </a>
+                  )}
                 </div>
               )}
 
