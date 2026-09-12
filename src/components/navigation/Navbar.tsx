@@ -23,6 +23,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate, isDark,
 
   const navLinks = [
     { name: "Overview", path: "/" },
+    { name: "Video Demos", path: "/#demo-player" },
     { name: "Features", path: "/features" },
     { name: "Smart Space", path: "/#smart-space" },
     { name: "Pricing", path: "/pricing" },
@@ -35,15 +36,22 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate, isDark,
     setMobileMenuOpen(false);
 
     if (path.startsWith("/#")) {
+      const id = path.replace("/#", "");
+      const scrollToTarget = () => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+          if (id === "demo-player") {
+            window.dispatchEvent(new CustomEvent("play-demo-video"));
+          }
+        }
+      };
+
       if (currentPath !== "/") {
         onNavigate("/");
-        setTimeout(() => {
-          const id = path.replace("/#", "");
-          document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-        }, 100);
+        setTimeout(scrollToTarget, 150);
       } else {
-        const id = path.replace("/#", "");
-        document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+        scrollToTarget();
       }
     } else {
       onNavigate(path);
@@ -83,7 +91,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate, isDark,
         </a>
 
         {/* Desktop Nav Links */}
-        <nav className="hidden md:flex items-center gap-7">
+        <nav className="hidden md:flex items-center gap-4 lg:gap-6 xl:gap-7">
           {navLinks.map((link) => {
             const isActive = currentPath === link.path;
             return (

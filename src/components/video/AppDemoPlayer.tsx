@@ -26,7 +26,7 @@ export interface DemoVideoItem {
   icon: React.ComponentType<{ className?: string }>;
 }
 
-export const demoVideos: DemoVideoItem[] = [
+const demoVideos: DemoVideoItem[] = [
   {
     id: "deep-clean",
     title: "Deep Cleanup & Project Artifacts",
@@ -221,6 +221,17 @@ export const AppDemoPlayer: React.FC<AppDemoPlayerProps> = ({
     };
   }, []);
 
+  // Listen for top navigation trigger to start video playback
+  useEffect(() => {
+    const handlePlayEvent = () => {
+      if (videoRef.current) {
+        videoRef.current.play().then(() => setIsPlaying(true)).catch(() => {});
+      }
+    };
+    window.addEventListener("play-demo-video", handlePlayEvent);
+    return () => window.removeEventListener("play-demo-video", handlePlayEvent);
+  }, []);
+
   // Auto-hide controls during playback
   const handleMouseMove = () => {
     setShowControls(true);
@@ -244,7 +255,7 @@ export const AppDemoPlayer: React.FC<AppDemoPlayerProps> = ({
   const progressPercent = duration > 0 ? (currentTime / duration) * 100 : 0;
 
   return (
-    <section id="demo-player" className="py-16 md:py-24 bg-surface-light dark:bg-surface-dark transition-colors border-t border-slate-200/60 dark:border-slate-800/60">
+    <section id="demo-player" className="scroll-mt-16 sm:scroll-mt-20 py-16 md:py-24 bg-surface-light dark:bg-surface-dark transition-colors border-t border-slate-200/60 dark:border-slate-800/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-10">

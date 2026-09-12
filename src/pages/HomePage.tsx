@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Hero } from "@/components/hero/Hero";
 import { ProductOverview } from "@/components/features/ProductOverview";
 import { AppDemoPlayer } from "@/components/video/AppDemoPlayer";
@@ -15,6 +15,15 @@ interface HomePageProps {
 }
 
 export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
+  useEffect(() => {
+    if (window.location.hash) {
+      const id = window.location.hash.replace("#", "");
+      setTimeout(() => {
+        document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 120);
+    }
+  }, []);
+
   return (
     <div className="space-y-4">
       {/* 01 & 02: HERO & TRUST STRIP */}
@@ -27,10 +36,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       <AppDemoPlayer />
 
       {/* 04 & 05: SMART SPACE & INTERACTIVE SUNBURST (Flagship Storage Feature) */}
-      <section id="smart-space" className="py-20 md:py-28 bg-surface-light dark:bg-surface-dark transition-colors border-t border-slate-200/60 dark:border-slate-800/60">
+      <section className="py-20 md:py-28 bg-surface-light dark:bg-surface-dark transition-colors border-t border-slate-200/60 dark:border-slate-800/60">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="text-center max-w-3xl mx-auto mb-14">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-mint-50 dark:bg-surface-darkCard border border-mint-200 dark:border-mint-800/60 text-mint-700 dark:text-mint-300 text-xs font-semibold uppercase tracking-wider mb-3">
               <span>SMART SPACE · RADIAL EXPLORATION</span>
             </div>
@@ -42,8 +51,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             </p>
           </div>
 
-          {/* Interactive Sunburst Map */}
-          <SunburstMap />
+          {/* Interactive Sunburst Map - scroll target directly lands with visualizer full in view */}
+          <div id="smart-space" className="scroll-mt-20 sm:scroll-mt-24">
+            <SunburstMap />
+          </div>
 
           {/* Smart Recommendations */}
           <SmartRecommendations />
