@@ -105,6 +105,27 @@ const demoVideos: DemoVideoItem[] = [
   },
 ];
 
+const HASH_TO_VIDEO_MAP: Record<string, string> = {
+  "demo-deep-clean": "deep-clean",
+  "demo-clean": "deep-clean",
+  "deep-clean": "deep-clean",
+  "demo-disk-space": "disk-space",
+  "disk-space": "disk-space",
+  "demo-uninstaller": "uninstall-apps",
+  "demo-uninstall-apps": "uninstall-apps",
+  "uninstall-apps": "uninstall-apps",
+  "demo-optimizer": "system-optimizer",
+  "demo-system-optimizer": "system-optimizer",
+  "system-optimizer": "system-optimizer",
+};
+
+const VIDEO_TO_HASH_MAP: Record<string, string> = {
+  "deep-clean": "demo-deep-clean",
+  "disk-space": "demo-disk-space",
+  "uninstall-apps": "demo-uninstaller",
+  "system-optimizer": "demo-optimizer",
+};
+
 interface AppDemoPlayerProps {
   onNavigate?: (path: string) => void;
   initialVideoId?: string;
@@ -113,7 +134,15 @@ interface AppDemoPlayerProps {
 export const AppDemoPlayer: React.FC<AppDemoPlayerProps> = ({
   initialVideoId = "deep-clean",
 }) => {
-  const [activeTabId, setActiveTabId] = useState<string>(initialVideoId);
+  const [activeTabId, setActiveTabId] = useState<string>(() => {
+    if (typeof window !== "undefined" && window.location.hash) {
+      const raw = window.location.hash.replace(/^#\/?/, "");
+      if (HASH_TO_VIDEO_MAP[raw]) {
+        return HASH_TO_VIDEO_MAP[raw];
+      }
+    }
+    return initialVideoId;
+  });
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [currentTime, setCurrentTime] = useState<number>(0);
   const [duration, setDuration] = useState<number>(0);
@@ -135,6 +164,11 @@ export const AppDemoPlayer: React.FC<AppDemoPlayerProps> = ({
     setActiveTabId(videoId);
     setIsPlaying(false);
     setCurrentTime(0);
+
+    // Sync URL hash for easy sharing
+    if (VIDEO_TO_HASH_MAP[videoId]) {
+      window.history.replaceState(null, "", `#${VIDEO_TO_HASH_MAP[videoId]}`);
+    }
 
     if (videoRef.current) {
       videoRef.current.currentTime = 0;
@@ -232,6 +266,42 @@ export const AppDemoPlayer: React.FC<AppDemoPlayerProps> = ({
     return () => window.removeEventListener("play-demo-video", handlePlayEvent);
   }, []);
 
+  // Handle URL deep-linking for #demo-deep-clean, #demo-disk-space, #demo-uninstaller, #demo-optimizer
+  useEffect(() => {
+    const handleHash = () => {
+      if (typeof window === "undefined") return;
+      const raw = window.location.hash.replace(/^#\/?/, "");
+      if (!raw) return;
+
+      const targetId = HASH_TO_VIDEO_MAP[raw];
+      if (targetId) {
+        setActiveTabId(targetId);
+        setTimeout(() => {
+          document.getElementById("demo-player")?.scrollIntoView({ behavior: "smooth", block: "start" });
+          if (videoRef.current) {
+            videoRef.current.currentTime = 0;
+            videoRef.current.play().then(() => setIsPlaying(true)).catch(() => {});
+          }
+        }, 150);
+      } else if (raw === "demo-player") {
+        setTimeout(() => {
+          document.getElementById("demo-player")?.scrollIntoView({ behavior: "smooth", block: "start" });
+          if (videoRef.current) {
+            videoRef.current.currentTime = 0;
+            videoRef.current.play().then(() => setIsPlaying(true)).catch(() => {});
+          }
+        }, 150);
+      }
+    };
+
+    if (window.location.hash) {
+      handleHash();
+    }
+
+    window.addEventListener("hashchange", handleHash);
+    return () => window.removeEventListener("hashchange", handleHash);
+  }, []);
+
   // Auto-hide controls during playback
   const handleMouseMove = () => {
     setShowControls(true);
@@ -272,7 +342,13 @@ export const AppDemoPlayer: React.FC<AppDemoPlayerProps> = ({
         </div>
 
         {/* Scroll Target Container: Displays 4 options on top + full video player */}
-        <div id="demo-player" className="scroll-mt-20 sm:scroll-mt-24">
+        <div id="demo-player" className="scroll-mt-20 sm:scroll-mt-24 relative">
+          {/* Invisible Anchor Targets for Direct URL Deep-linking */}
+          <span id="demo-deep-clean" className="absolute -top-24 opacity-0 pointer-events-none" />
+          <span id="demo-disk-space" className="absolute -top-24 opacity-0 pointer-events-none" />
+          <span id="demo-uninstaller" className="absolute -top-24 opacity-0 pointer-events-none" />
+          <span id="demo-optimizer" className="absolute -top-24 opacity-0 pointer-events-none" />
+
           {/* 4 Interactive Video Tabs */}
           <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-4 sm:mb-5">
             {demoVideos.map((video) => {
