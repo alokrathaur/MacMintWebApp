@@ -19,6 +19,12 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onNavigate, isDe
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const productMap: Record<"monthly" | "yearly" | "lifetime", string> = {
+    monthly: "pdt_0NnRf8hAStsGlqIvFMWBu",
+    yearly: "pdt_0NnK2o8UfL8CrB7m0gijI",
+    lifetime: "pdt_0NnK3BLNEUP1MFmMyR0oD",
+  };
+
   const handleCheckoutClick = async (e: React.MouseEvent, plan: "monthly" | "yearly" | "lifetime", fallbackUrl: string) => {
     if (e.metaKey || e.ctrlKey || e.button === 1) return;
     e.preventDefault();
@@ -30,7 +36,11 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onNavigate, isDe
       const res = await fetch(`${SITE_CONFIG.apiUrl}/api/checkout/session`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ plan, return_url: "https://getmacmint.store/activate" }),
+        body: JSON.stringify({
+          plan,
+          product_id: productMap[plan],
+          return_url: "https://getmacmint.store/activate",
+        }),
         signal: controller.signal,
       });
       clearTimeout(timeoutId);
@@ -43,7 +53,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onNavigate, isDe
         }
       }
     } catch {
-      // Fallback to static Dodo buy link
+      // Fallback to static direct Dodo buy link
     }
     window.location.href = fallbackUrl;
   };
