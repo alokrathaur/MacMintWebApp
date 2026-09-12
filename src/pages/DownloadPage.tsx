@@ -81,7 +81,7 @@ export const DownloadPage: React.FC = () => {
               <div className="flex flex-col items-center gap-2">
                 <button
                   type="button"
-                  onClick={() => alert("MacMint v1.0.0 official build packaging is being finalized. Direct download link will be available here shortly!")}
+                  onClick={() => alert("MacMint v1.0.1 official build packaging is being finalized. Direct download link will be available here shortly!")}
                   className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-mint-600 hover:bg-mint-700 text-white font-semibold text-base shadow-xl shadow-mint-700/20 transition-all active:scale-[0.98]"
                 >
                   <Download className="w-5 h-5" />
