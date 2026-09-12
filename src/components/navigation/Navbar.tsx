@@ -121,21 +121,21 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate, isDark,
             {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
           </button>
 
-          {/* Activate License Button */}
+          {/* Activate License Button (Icon Only) */}
           <button
             onClick={() => {
               onNavigate("/activate");
               window.scrollTo({ top: 0, behavior: "smooth" });
             }}
-            className={`inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl border text-xs sm:text-sm font-semibold transition active:scale-95 ${
+            className={`p-2 rounded-xl border transition active:scale-95 ${
               currentPath === "/activate" || currentPath.startsWith("/activate?")
                 ? "bg-mint-50 dark:bg-mint-950/50 border-mint-500/60 text-mint-700 dark:text-mint-300 shadow-sm"
-                : "bg-slate-100/90 hover:bg-slate-200/90 dark:bg-surface-darkCard dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-200/80 dark:border-slate-750"
+                : "bg-slate-100/90 hover:bg-slate-200/90 dark:bg-surface-darkCard dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-200/80 dark:border-slate-800"
             }`}
             title="Activate License"
+            aria-label="Activate License"
           >
-            <Key className="w-3.5 h-3.5 text-mint-600 dark:text-mint-400" />
-            <span>Activate</span>
+            <Key className="w-4 h-4 text-mint-600 dark:text-mint-400" />
           </button>
 
           {/* Download Button */}
