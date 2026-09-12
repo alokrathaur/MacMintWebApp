@@ -5,6 +5,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Maximize2,
+  Play,
 } from "lucide-react";
 
 interface ShowcaseFeature {
@@ -16,6 +17,11 @@ interface ShowcaseFeature {
   screenshot: string;
   badge: string;
   reverse?: boolean;
+  video?: {
+    src: string;
+    title: string;
+    duration: string;
+  };
 }
 
 const features: ShowcaseFeature[] = [
@@ -33,6 +39,11 @@ const features: ShowcaseFeature[] = [
     ],
     screenshot: "/assets/screenshots/01_deep_cleanup.png",
     badge: "Auto-Scanned node_modules",
+    video: {
+      src: "/assets/videos/deep_clean.mp4",
+      title: "Deep Cleanup Demo",
+      duration: "1:38",
+    },
   },
   {
     id: "system-data",
@@ -95,6 +106,11 @@ const features: ShowcaseFeature[] = [
     ],
     screenshot: "/assets/screenshots/06_app_uninstaller.png",
     badge: "Zero Leftovers",
+    video: {
+      src: "/assets/videos/uninstall_apps.mp4",
+      title: "App Uninstaller Demo",
+      duration: "1:00",
+    },
   },
   {
     id: "optimizations",
@@ -111,6 +127,11 @@ const features: ShowcaseFeature[] = [
     screenshot: "/assets/screenshots/08_system_optimization.png",
     badge: "One-Click Maintenance",
     reverse: true,
+    video: {
+      src: "/assets/videos/system_optimizer.mp4",
+      title: "System Optimizer Demo",
+      duration: "0:59",
+    },
   },
 ];
 
@@ -131,6 +152,12 @@ const allGalleryScreenshots = [
 export const ProductShowcase: React.FC = () => {
   // Lightbox modal state
   const [activeLightboxIndex, setActiveLightboxIndex] = useState<number | null>(null);
+  // Video modal state
+  const [activeVideoModal, setActiveVideoModal] = useState<{
+    src: string;
+    title: string;
+    duration: string;
+  } | null>(null);
 
   const openLightbox = (screenshotSrc: string) => {
     const idx = allGalleryScreenshots.findIndex((s) => s.src === screenshotSrc);
@@ -155,18 +182,21 @@ export const ProductShowcase: React.FC = () => {
     }
   };
 
-  // Keyboard navigation for Lightbox
+  // Keyboard navigation for Lightbox & Video Modal
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        closeLightbox();
+        setActiveVideoModal(null);
+      }
       if (activeLightboxIndex === null) return;
-      if (e.key === "Escape") closeLightbox();
       if (e.key === "ArrowRight") nextLightbox();
       if (e.key === "ArrowLeft") prevLightbox();
     };
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [activeLightboxIndex]);
+  }, [activeLightboxIndex, activeVideoModal]);
 
   return (
     <section className="py-20 md:py-28 bg-surface-light dark:bg-surface-dark transition-colors">
@@ -205,6 +235,18 @@ export const ProductShowcase: React.FC = () => {
                   </li>
                 ))}
               </ul>
+
+              {feat.video && (
+                <div className="pt-2">
+                  <button
+                    onClick={() => setActiveVideoModal(feat.video!)}
+                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 dark:bg-mint-500 text-white text-xs sm:text-sm font-semibold hover:bg-slate-800 dark:hover:bg-mint-400 transition-all shadow-md shadow-mint-500/10 hover:scale-[1.02] cursor-pointer"
+                  >
+                    <Play className="w-3.5 h-3.5 fill-current" />
+                    <span>Watch Live Demo ({feat.video.duration})</span>
+                  </button>
+                </div>
+              )}
             </div>
 
             {/* Clickable Screenshot Display Column */}
@@ -239,6 +281,20 @@ export const ProductShowcase: React.FC = () => {
                 <div className="absolute top-4 right-4 z-10 px-3 py-1 rounded-full bg-white/90 dark:bg-surface-darkSurface/90 border border-slate-200/80 dark:border-slate-700 shadow-md backdrop-blur-md text-xs font-semibold text-slate-800 dark:text-slate-200">
                   {feat.badge}
                 </div>
+
+                {/* Optional Play Demo Overlay Pill */}
+                {feat.video && (
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setActiveVideoModal(feat.video!);
+                    }}
+                    className="absolute bottom-4 left-4 z-10 px-3 py-1.5 rounded-xl bg-slate-900/90 hover:bg-mint-600 text-white backdrop-blur-md text-xs font-semibold flex items-center gap-2 transition-all shadow-lg border border-white/20 hover:scale-105 cursor-pointer"
+                  >
+                    <Play className="w-3.5 h-3.5 fill-white" />
+                    <span>Watch Demo ({feat.video.duration})</span>
+                  </button>
+                )}
               </div>
             </div>
 
@@ -326,6 +382,54 @@ export const ProductShowcase: React.FC = () => {
             <span className="hidden sm:inline text-white/60">
               Use ← / → keys to navigate, Esc to close
             </span>
+          </div>
+        </div>
+      )}
+
+      {/* DIRECT VIDEO PLAYER LIGHTBOX MODAL */}
+      {activeVideoModal && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md p-4 sm:p-8 animate-fade-in"
+          onClick={() => setActiveVideoModal(null)}
+        >
+          <div
+            className="relative max-w-5xl w-full bg-slate-950 rounded-2xl overflow-hidden border border-slate-800 shadow-2xl animate-fade-in"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* macOS Window Titlebar */}
+            <div className="flex items-center justify-between px-4 py-3 bg-slate-900/95 border-b border-slate-800 select-none">
+              <div className="flex items-center gap-2">
+                <span className="w-3 h-3 rounded-full bg-[#FF5F56] border border-[#E0443E]/50 inline-block" />
+                <span className="w-3 h-3 rounded-full bg-[#FFBD2E] border border-[#DEA123]/50 inline-block" />
+                <span className="w-3 h-3 rounded-full bg-[#27C93F] border border-[#1AAB29]/50 inline-block" />
+                <span className="ml-2 text-xs font-semibold text-slate-300 flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-mint-400 animate-pulse" />
+                  MacMint · {activeVideoModal.title}
+                  <span className="text-slate-500 font-normal">({activeVideoModal.duration})</span>
+                </span>
+              </div>
+              <button
+                onClick={() => setActiveVideoModal(null)}
+                aria-label="Close video player"
+                className="p-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Direct HTML5 Video Player */}
+            <div className="relative aspect-[1952/1510] max-h-[75vh] w-full bg-black flex items-center justify-center">
+              <video
+                key={activeVideoModal.src}
+                src={activeVideoModal.src}
+                controls
+                autoPlay
+                playsInline
+                className="w-full h-full object-contain"
+              />
+            </div>
           </div>
         </div>
       )}

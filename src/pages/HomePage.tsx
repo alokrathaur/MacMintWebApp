@@ -1,6 +1,7 @@
 import React from "react";
 import { Hero } from "@/components/hero/Hero";
 import { ProductOverview } from "@/components/features/ProductOverview";
+import { AppDemoPlayer } from "@/components/video/AppDemoPlayer";
 import { SunburstMap } from "@/components/sunburst/SunburstMap";
 import { SmartRecommendations } from "@/components/storage/SmartRecommendations";
 import { ProductShowcase } from "@/components/features/ProductShowcase";
@@ -21,6 +22,9 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
 
       {/* 03: PRODUCT OVERVIEW (Bento Grid) */}
       <ProductOverview />
+
+      {/* 03.5: DIRECT APP DEMO VIDEOS (Live recordings of 4 features) */}
+      <AppDemoPlayer />
 
       {/* 04 & 05: SMART SPACE & INTERACTIVE SUNBURST (Flagship Storage Feature) */}
       <section id="smart-space" className="py-20 md:py-28 bg-surface-light dark:bg-surface-dark transition-colors border-t border-slate-200/60 dark:border-slate-800/60">
