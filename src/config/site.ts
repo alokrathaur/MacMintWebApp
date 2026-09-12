@@ -53,8 +53,8 @@ export const SITE_CONFIG = {
     proMonthly: {
       id: "pro-monthly",
       name: "Pro Monthly",
-      price: "$3",
-      originalPrice: "$6",
+      price: "$2.99",
+      originalPrice: "$5.99",
       cadence: "/ month (1 Mac)",
       description: "Flexible monthly maintenance. Cancel anytime.",
       badge: "50% OFF OFFER",

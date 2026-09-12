@@ -298,7 +298,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onNavigate, isDe
                 <tr className="border-b border-slate-200/80 dark:border-slate-800 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                   <th className="pb-4">Capability</th>
                   <th className="pb-4 text-center">7-Day Free Trial</th>
-                  <th className="pb-4 text-center">Pro Monthly ($3/mo)</th>
+                  <th className="pb-4 text-center">Pro Monthly ($2.99/mo)</th>
                   <th className="pb-4 text-center">Pro Yearly ($2.08/mo)</th>
                   <th className="pb-4 text-center text-mint-600 dark:text-mint-400">Pro Lifetime (5 Macs)</th>
                 </tr>
