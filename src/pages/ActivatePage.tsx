@@ -130,8 +130,8 @@ export const ActivatePage: React.FC<ActivatePageProps> = ({ onNavigate }) => {
       return;
     }
 
-    // Also check if user was redirected with email or payment_id from Dodo
-    const query = emailParam || payParam;
+    // Also check if user was redirected with payment_id, subscription_id or email from Dodo
+    const query = payParam || emailParam;
 
     if (!detected && query) {
       const clean = query.trim();
