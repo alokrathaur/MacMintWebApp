@@ -69,7 +69,7 @@ export const SITE_CONFIG = {
         "Priority email & direct X support",
       ],
       ctaText: "Get Pro Monthly",
-      ctaUrl: "https://checkout.dodopayments.com/buy/pdt_0NnRf8hAStsGlqIvFMWBu?quantity=1&redirect_url=https%3A%2F%2Fgetmacmint.store%2Factivate",
+      ctaUrl: "https://macmint-api.macmint.workers.dev/api/checkout?plan=monthly&product_id=pdt_0NnRf8hAStsGlqIvFMWBu",
     },
     proYearly: {
       id: "pro-yearly",
@@ -90,7 +90,7 @@ export const SITE_CONFIG = {
         "Priority email & direct X support",
       ],
       ctaText: "Get Pro Yearly",
-      ctaUrl: "https://checkout.dodopayments.com/buy/pdt_0NnK2o8UfL8CrB7m0gijI?quantity=1&redirect_url=https%3A%2F%2Fgetmacmint.store%2Factivate",
+      ctaUrl: "https://macmint-api.macmint.workers.dev/api/checkout?plan=yearly&product_id=pdt_0NnK2o8UfL8CrB7m0gijI",
     },
     proLifetime: {
       id: "pro-lifetime",
@@ -113,7 +113,7 @@ export const SITE_CONFIG = {
         "Direct 1-on-1 support via X & Email",
       ],
       ctaText: "Get Lifetime Access",
-      ctaUrl: "https://checkout.dodopayments.com/buy/pdt_0NnK3BLNEUP1MFmMyR0oD?quantity=1&redirect_url=https%3A%2F%2Fgetmacmint.store%2Factivate",
+      ctaUrl: "https://macmint-api.macmint.workers.dev/api/checkout?plan=lifetime&product_id=pdt_0NnK3BLNEUP1MFmMyR0oD",
     },
   },
 };
