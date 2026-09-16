@@ -27,6 +27,9 @@ const PERIODS: { value: "last24h" | "last7d" | "last30d" | "yearly" | "all"; lab
 function formatReclaimedBytes(bytes: number): string {
   if (!bytes || bytes <= 0) return "0 GB";
   const gb = bytes / 1073741824;
+  if (gb >= 500) {
+    return `${(gb / 1000).toFixed(2)} TB`;
+  }
   if (gb >= 1000) {
     return `${(gb / 1024).toFixed(2)} TB`;
   }
@@ -35,6 +38,20 @@ function formatReclaimedBytes(bytes: number): string {
     return `${mb.toFixed(0)} MB`;
   }
   return `${gb.toFixed(2)} GB`;
+}
+
+function formatStorageScannedSaved(bytes: number): { value: string; unit: string } {
+  if (!bytes || bytes <= 0) return { value: "0.00", unit: "GB" };
+  const gb = bytes / 1073741824;
+  if (gb >= 500) {
+    const tb = gb / 1000;
+    return { value: tb.toFixed(2), unit: "TB" };
+  }
+  if (gb < 1) {
+    const mb = bytes / 1048576;
+    return { value: mb.toFixed(0), unit: "MB" };
+  }
+  return { value: gb.toFixed(2), unit: "GB" };
 }
 
 export const StatsPage: React.FC = () => {
@@ -250,12 +267,12 @@ export const StatsPage: React.FC = () => {
           sublabel="high intent traffic"
         />
         <StatCard
-          label="Space Reclaimed"
-          value={formatReclaimedBytes(stats.headline.totalReclaimedBytes || stats.headline.estReclaimedGb * 1073741824)}
+          label="Scanned & Saved"
+          value={formatReclaimedBytes((stats.headline.totalScannedBytes || 0) + (stats.headline.totalReclaimedBytes || 0))}
           sublabel={
-            stats.headline.cleanupsCount && stats.headline.cleanupsCount > 0
-              ? `${stats.headline.cleanupsCount.toLocaleString()} cleanups on Macs`
-              : "real cleanup volume across Macs"
+            ((stats.headline.scansCount || 0) + (stats.headline.cleanupsCount || 0)) > 0
+              ? `${((stats.headline.scansCount || 0) + (stats.headline.cleanupsCount || 0)).toLocaleString()} Mac operations`
+              : "real telemetry from Macs"
           }
         />
       </div>
@@ -289,18 +306,19 @@ export const StatsPage: React.FC = () => {
         </div>
 
         <div className="rounded-2xl border border-slate-200/90 dark:border-mint-900/30 bg-white/80 dark:bg-surface-darkCard/80 backdrop-blur-sm p-5 flex items-center gap-4">
-          <div className="size-12 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-500/20 flex items-center justify-center text-emerald-600 dark:text-emerald-400 shrink-0">
-            <HardDrive className="size-6" />
+          <div className="size-14 rounded-2xl bg-emerald-500/10 dark:bg-emerald-500/20 border border-emerald-500/25 flex items-center justify-center text-emerald-600 dark:text-emerald-400 shrink-0">
+            <HardDrive className="size-7" />
           </div>
           <div>
             <div className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
-              Storage Scanned & Saved
+              STORAGE SCANNED & SAVED
             </div>
-            <div className="text-2xl font-black text-slate-900 dark:text-white tabular-nums font-mono mt-0.5">
-              {formatReclaimedBytes(stats.headline.totalReclaimedBytes || stats.headline.estReclaimedGb * 1073741824)}
+            <div className="text-3xl font-black text-slate-900 dark:text-white tabular-nums font-mono mt-0.5 tracking-tight flex items-baseline gap-2">
+              <span>{formatStorageScannedSaved((stats.headline.totalScannedBytes || 0) + (stats.headline.totalReclaimedBytes || 0)).value}</span>
+              <span className="text-2xl font-bold">{formatStorageScannedSaved((stats.headline.totalScannedBytes || 0) + (stats.headline.totalReclaimedBytes || 0)).unit}</span>
             </div>
-            <div className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-              Real cleanup volume reported by native Mac apps
+            <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+              Orphaned caches, DerivedData & junk
             </div>
           </div>
         </div>
@@ -352,7 +370,15 @@ export const StatsPage: React.FC = () => {
           {stats.recentEvents.map((evt) => (
             <li key={evt.id} className="py-2.5 flex items-center justify-between text-xs sm:text-sm">
               <div className="flex items-center gap-2.5 truncate pr-2">
-                <span className="size-2 rounded-full bg-mint-500 shrink-0" />
+                <span
+                  className={`size-2 rounded-full shrink-0 ${
+                    evt.type === "scan"
+                      ? "bg-sky-500"
+                      : evt.type === "cleanup"
+                      ? "bg-emerald-500"
+                      : "bg-mint-500"
+                  }`}
+                />
                 <span className="text-slate-800 dark:text-slate-200 font-medium truncate">
                   {evt.label}
                 </span>

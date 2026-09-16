@@ -16,6 +16,9 @@ export interface StatsData {
     pageviews: number;
     downloads: number;
     avgDurationSeconds: number;
+    estScannedGb?: number;
+    totalScannedBytes?: number;
+    scansCount?: number;
     estReclaimedGb: number;
     totalReclaimedBytes?: number;
     cleanupsCount?: number;
@@ -37,7 +40,7 @@ export interface StatsData {
   };
   recentEvents: {
     id: string;
-    type: "pageview" | "download" | "session";
+    type: "pageview" | "download" | "session" | "cleanup" | "scan";
     label: string;
     timeAgo: string;
     countryCode: string;
@@ -287,6 +290,9 @@ class AnalyticsService {
             pageviews: raw.headline?.pageviews || 0,
             downloads: raw.headline?.downloads || 0,
             avgDurationSeconds: raw.headline?.avgDurationSeconds || 168,
+            estScannedGb: raw.headline?.estScannedGb || 0,
+            totalScannedBytes: raw.headline?.totalScannedBytes || 0,
+            scansCount: raw.headline?.scansCount || 0,
             estReclaimedGb: raw.headline?.estReclaimedGb || 0,
             totalReclaimedBytes: raw.headline?.totalReclaimedBytes || 0,
             cleanupsCount: raw.headline?.cleanupsCount || 0,
@@ -406,7 +412,12 @@ class AnalyticsService {
         pageviews: 0,
         downloads: 0,
         avgDurationSeconds: 0,
+        estScannedGb: 0,
+        totalScannedBytes: 0,
+        scansCount: 0,
         estReclaimedGb: 0,
+        totalReclaimedBytes: 0,
+        cleanupsCount: 0,
       },
       timeSeries: this.padTimeSeries(period, granularity, []),
       breakdowns: {
