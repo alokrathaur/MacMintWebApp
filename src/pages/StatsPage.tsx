@@ -48,16 +48,16 @@ export const StatsPage: React.FC = () => {
 
   const [autoRefresh, setAutoRefresh] = useState<boolean>(true);
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
-  const [stats, setStats] = useState<StatsData>(() => analytics.getStats(period, granularity));
+  const [stats, setStats] = useState<StatsData | null>(null);
   const [lastUpdated, setLastUpdated] = useState<Date>(new Date());
 
-  // Load and refresh stats
-  const refreshStats = () => {
+  // Load and refresh stats asynchronously from Cloudflare D1
+  const refreshStats = async () => {
     setIsRefreshing(true);
-    const data = analytics.getStats(period, granularity);
+    const data = await analytics.fetchStats(period, granularity);
     setStats(data);
     setLastUpdated(new Date());
-    setTimeout(() => setIsRefreshing(false), 300);
+    setIsRefreshing(false);
   };
 
   // When period changes, set logical granularity default
@@ -108,6 +108,24 @@ export const StatsPage: React.FC = () => {
     }, 12000);
     return () => clearInterval(timer);
   }, [autoRefresh, period, granularity]);
+
+  if (!stats) {
+    return (
+      <div className="min-h-[70vh] flex flex-col items-center justify-center p-8">
+        <div className="flex flex-col items-center gap-4 text-center">
+          <Activity className="size-10 text-mint-500 animate-spin" />
+          <div className="space-y-1">
+            <h2 className="text-lg font-bold text-slate-800 dark:text-slate-200">
+              Connecting to Cloudflare D1
+            </h2>
+            <p className="text-xs text-slate-500 dark:text-slate-400">
+              Loading live telemetry from edge database...
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   const conversionRate =
     stats.headline.uniqueVisitors > 0

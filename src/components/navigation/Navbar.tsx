@@ -28,6 +28,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPath, onNavigate, isDark,
     { name: "Smart Space", path: "/#smart-space" },
     { name: "Pricing", path: "/pricing" },
     { name: "Support", path: "/support" },
+    { name: "Stats", path: "/stats" },
   ];
 
   const handleLinkClick = (e: React.MouseEvent, path: string) => {
