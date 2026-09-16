@@ -28,12 +28,16 @@ export const VersionHistoryPage: React.FC<VersionHistoryPageProps> = ({ onNaviga
       badge: "Latest and Stable Release",
       badgeType: "latest",
       date: "September 16, 2026",
-      title: "macOS 27 Full Disk Access Support & Orphaned Xcode / Simulator Cleaners",
-      summary: "This update introduces complete compatibility with macOS 27 and macOS 15 Sequoia Full Disk Access detection, reactive permission syncing, and extensive cleaners for leftover Xcode caches, simulator runtimes, and developer frameworks.",
+      title: "macOS 27 Full Disk Access Support, Finder Batch Deletion & Orphaned Xcode / Simulator Cleaners",
+      summary: "This update introduces complete compatibility with macOS 27 and macOS 15 Sequoia Full Disk Access detection, reactive permission syncing, Finder batch operations for deleting Xcode simulator files and leftover residues after Xcode uninstall, and extensive developer cache cleaners.",
       downloadAvailable: true,
       downloadUrl: "/MacMint.dmg",
       downloadFileName: "MacMint.dmg",
       features: [
+        {
+          title: "Finder Batch Deletion for Xcode Simulator & Uninstalled Leftovers",
+          desc: "Implemented a unified Finder batch operation via Apple Events for privileged developer paths. Safely and completely removes multi-gigabyte Xcode simulator runtimes, device caches, and orphaned residues left after Xcode uninstallation in a single, prompt-free operation."
+        },
         {
           title: "Multi-Probe Full Disk Access Engine (macOS 27 & Earlier)",
           desc: "Implemented a non-blocking multi-layered probe checking ~/Library/Safari, sandboxed containers (~/Library/Containers/com.apple.stocks, ~/Library/Containers/com.apple.Home), ~/Library/Mail, ~/Library/Messages, System TCC, and Time Machine preferences. Works seamlessly across macOS 14 Sonoma, macOS 15 Sequoia, and macOS 27 without kernel hangs."
@@ -65,6 +69,10 @@ export const VersionHistoryPage: React.FC<VersionHistoryPageProps> = ({ onNaviga
       ],
       fixes: [
         {
+          title: "Fixed Xcode Simulator & Leftover File Deletion via Finder Batch Operation",
+          desc: "Resolved issue where root-owned simulator runtimes (/Library/Developer/CoreSimulator) and residual files after Xcode deletion/uninstallation returned EPERM ('Operation not permitted') during terminal rm commands due to Cryptex system protections. Deletion now routes through a unified Finder batch Apple Event operation in a single call, ensuring complete removal of simulator data and Xcode leftovers without repeated prompts or permission failures."
+        },
+        {
           title: "Strict Privacy Scoping in macOS System Settings > Files & Folders",
           desc: "Purged all container and group container filesystem probes (~/Library/Containers and ~/Library/Group Containers) so macOS Privacy & Security only ever requests access to Desktop, Documents, and Downloads."
         },
@@ -75,10 +83,6 @@ export const VersionHistoryPage: React.FC<VersionHistoryPageProps> = ({ onNaviga
         {
           title: "Fixed Persistent 'Full Disk Access is off' Banner on macOS 27",
           desc: "Diagnosed root cause where Support.swift probed deprecated ~/Library/Application Support/com.apple.TCC/TCC.db (which no longer exists in modern macOS, returning ENOENT). Replaced with robust active probes so granted FDA status is immediately recognized."
-        },
-        {
-          title: "Fixed 'Operation not permitted' on CoreSimulator / dyld Cache Removal",
-          desc: "Resolved issue where deleting simulator dyld caches returned EPERM even with administrative privileges by aligning with TCC sandbox boundaries and providing graceful recursive cleanup of unlocked sibling files."
         },
         {
           title: "Fixed MainActor Concurrency Warnings in CleanerModel",
