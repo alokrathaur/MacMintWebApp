@@ -14,6 +14,7 @@ import { PrivacyPage } from "./pages/PrivacyPage";
 import { TermsPage } from "./pages/TermsPage";
 import { ActivatePage } from "./pages/ActivatePage";
 import { StatsPage } from "./pages/StatsPage";
+import { VersionHistoryPage } from "./pages/VersionHistoryPage";
 import { PresenceBeacon } from "./components/analytics/PresenceBeacon";
 
 export const App: React.FC = () => {
@@ -117,6 +118,9 @@ export const App: React.FC = () => {
     }
     if (currentPath === "/stats" || currentPath.startsWith("/stats?") || currentPath.startsWith("/stats/")) {
       return <StatsPage />;
+    }
+    if (currentPath === "/version-history" || currentPath === "/versions" || currentPath === "/changelog") {
+      return <VersionHistoryPage onNavigate={navigate} />;
     }
     // Fallback to Home
     return <HomePage onNavigate={navigate} />;

@@ -102,6 +102,16 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               </li>
               <li>
                 <a
+                  href="/version-history"
+                  onClick={(e) => handleLinkClick(e, "/version-history")}
+                  className="hover:text-mint-600 dark:hover:text-mint-400 transition flex items-center gap-1.5"
+                >
+                  <span>Version History</span>
+                  <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-mint-500/10 text-mint-600 dark:text-mint-400 border border-mint-500/20 font-mono">v1.0.2</span>
+                </a>
+              </li>
+              <li>
+                <a
                   href="/activate"
                   onClick={(e) => handleLinkClick(e, "/activate")}
                   className="hover:text-mint-600 dark:hover:text-mint-400 transition font-medium text-mint-700 dark:text-mint-400"
@@ -278,7 +288,15 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             © {currentYear} {SITE_CONFIG.productName}. All rights reserved.
           </div>
 
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-4 sm:gap-6 flex-wrap">
+            <a
+              href="/version-history"
+              onClick={(e) => handleLinkClick(e, "/version-history")}
+              className="hover:text-mint-600 dark:hover:text-mint-400 transition font-medium"
+            >
+              Version History (v1.0.2)
+            </a>
+            <span>•</span>
             <span>Made for macOS 14 and later.</span>
             <span>•</span>
             <a

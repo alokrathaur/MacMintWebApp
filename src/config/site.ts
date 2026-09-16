@@ -22,6 +22,7 @@ export const SITE_CONFIG = {
   minMacOSVersion: "macOS 14.0 (Sonoma) or later",
   downloadUrl: "https://github.com/alokrathaur/MacMintWebApp/releases/download/v1.0.2/MacMint.dmg",
   directDmgUrl: "/MacMint.dmg",
+  versionHistoryUrl: "/version-history",
   activateUrl: "/activate",
   siteUrl: "https://getmacmint.store",
   apiUrl: "https://macmint-api.macmint.workers.dev",
