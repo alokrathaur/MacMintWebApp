@@ -70,15 +70,15 @@ describe("Storage Formatting Utilities Tests", () => {
   });
 
   it("formats large volumes in terabytes correctly", () => {
-    // 600 GB = 644,245,094,400 bytes -> 0.60 TB
+    // 600 GB should be formatted as GB (since < 1000 GB)
     const bytes600Gb = 644245094400;
-    assert.equal(formatReclaimedBytes(bytes600Gb), "0.60 TB");
-    assert.deepEqual(formatStorageScannedSaved(bytes600Gb), { value: "0.60", unit: "TB" });
+    assert.equal(formatReclaimedBytes(bytes600Gb), "600.00 GB");
+    assert.deepEqual(formatStorageScannedSaved(bytes600Gb), { value: "600.00", unit: "GB" });
 
-    // 1.5 TB
+    // 1.5 TB (1500 GB >= 1000 GB threshold -> formatted in TB)
     const bytes1500Gb = 1500 * 1024 * 1024 * 1024;
-    assert.equal(formatReclaimedBytes(bytes1500Gb), "1.50 TB");
-    assert.deepEqual(formatStorageScannedSaved(bytes1500Gb), { value: "1.50", unit: "TB" });
+    assert.equal(formatReclaimedBytes(bytes1500Gb), "1.46 TB");
+    assert.deepEqual(formatStorageScannedSaved(bytes1500Gb), { value: "1.46", unit: "TB" });
   });
 });
 

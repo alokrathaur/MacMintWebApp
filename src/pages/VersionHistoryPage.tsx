@@ -85,6 +85,10 @@ export const VersionHistoryPage: React.FC<VersionHistoryPageProps> = ({ onNaviga
           desc: "Diagnosed root cause where Support.swift probed deprecated ~/Library/Application Support/com.apple.TCC/TCC.db (which no longer exists in modern macOS, returning ENOENT). Replaced with robust active probes so granted FDA status is immediately recognized."
         },
         {
+          title: "Cumulative Scan Metric & Telemetry Tracking",
+          desc: "Fixed an issue in CleanerModel where scanned byte totals and inspected file counts were being overwritten per sub-item instead of accumulated across the scan, restoring accurate real-time scan metrics and telemetry statistics across all cleanup categories."
+        },
+        {
           title: "Fixed MainActor Concurrency Warnings in CleanerModel",
           desc: "Ensured notification observers dispatch permission state changes asynchronously on @MainActor, resolving Swift 6 concurrency warnings."
         }
