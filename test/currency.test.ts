@@ -13,10 +13,10 @@ describe("Geo-Local Currency Pricing Tests", () => {
     assert.equal(curr.code, "INR");
     assert.equal(curr.symbol, "₹");
     assert.equal(curr.flag, "🇮🇳");
-    assert.equal(curr.monthly.price, "₹249");
-    assert.equal(curr.yearly.price, "₹166");
-    assert.equal(curr.yearly.billedAnnual, "₹1,999");
-    assert.equal(curr.lifetime.price, "₹3,999");
+    assert.equal(curr.monthly.price, "₹298.34");
+    assert.equal(curr.yearly.price, "₹207.79");
+    assert.equal(curr.yearly.billedAnnual, "₹2,493.50");
+    assert.equal(curr.lifetime.price, "₹4,988.00");
   });
 
   it("resolves US Dollars ($) for United States (US)", () => {
