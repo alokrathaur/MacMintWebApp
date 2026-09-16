@@ -56,39 +56,25 @@ export const DownloadPage: React.FC = () => {
           </p>
 
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-            {SITE_CONFIG.downloadUrl.startsWith("http") ? (
-              <>
-                <a
-                  href={SITE_CONFIG.downloadUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-mint-600 hover:bg-mint-700 text-white font-semibold text-base shadow-xl shadow-mint-700/20 transition-all active:scale-[0.98]"
-                >
-                  <Download className="w-5 h-5" />
-                  <span>Download MacMint v{SITE_CONFIG.appVersion} (.dmg)</span>
-                </a>
-                <a
-                  href={SITE_CONFIG.directDmgUrl}
-                  download="MacMint.dmg"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-white dark:bg-surface-darkSurface hover:bg-slate-50 dark:hover:bg-surface-darkCard text-slate-800 dark:text-slate-200 font-semibold text-base border border-slate-200/80 dark:border-slate-800 shadow-sm transition-all active:scale-[0.98]"
-                  title="Direct DMG download mirror"
-                >
-                  <Download className="w-4 h-4 text-mint-600 dark:text-mint-400" />
-                  <span>Direct Mirror</span>
-                </a>
-              </>
-            ) : (
-              <div className="flex flex-col items-center gap-2">
-                <button
-                  type="button"
-                  onClick={() => alert("MacMint v1.0.1 official build packaging is being finalized. Direct download link will be available here shortly!")}
-                  className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-mint-600 hover:bg-mint-700 text-white font-semibold text-base shadow-xl shadow-mint-700/20 transition-all active:scale-[0.98]"
-                >
-                  <Download className="w-5 h-5" />
-                  <span>Download MacMint v{SITE_CONFIG.appVersion} (Coming Soon)</span>
-                </button>
-                <span className="text-xs text-mint-700 dark:text-mint-400 font-medium">Direct download link will be added here shortly</span>
-              </div>
+            <a
+              href={SITE_CONFIG.directDmgUrl}
+              download="MacMint.dmg"
+              className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-mint-600 hover:bg-mint-700 text-white font-semibold text-base shadow-xl shadow-mint-700/20 transition-all active:scale-[0.98]"
+            >
+              <Download className="w-5 h-5" />
+              <span>Download MacMint v{SITE_CONFIG.appVersion} (.dmg)</span>
+            </a>
+            {SITE_CONFIG.downloadUrl.startsWith("http") && (
+              <a
+                href={SITE_CONFIG.downloadUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-white dark:bg-surface-darkSurface hover:bg-slate-50 dark:hover:bg-surface-darkCard text-slate-800 dark:text-slate-200 font-semibold text-base border border-slate-200/80 dark:border-slate-800 shadow-sm transition-all active:scale-[0.98]"
+                title="GitHub Releases download mirror"
+              >
+                <Download className="w-4 h-4 text-mint-600 dark:text-mint-400" />
+                <span>GitHub Mirror</span>
+              </a>
             )}
           </div>
 

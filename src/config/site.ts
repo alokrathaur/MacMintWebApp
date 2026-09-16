@@ -48,7 +48,7 @@ export const SITE_CONFIG = {
         "Zero tracking, 100% on-device",
       ],
       ctaText: "Download Free",
-      ctaUrl: "https://github.com/alokrathaur/MacMintWebApp/releases/download/v1.0.1/MacMint.dmg",
+      ctaUrl: "/MacMint.dmg",
     },
     proMonthly: {
       id: "pro-monthly",
