@@ -239,11 +239,11 @@ export const StatsPage: React.FC = () => {
           sublabel="high intent traffic"
         />
         <StatCard
-          label="Scanned & Saved"
-          value={formatReclaimedBytes((stats.headline.totalScannedBytes || 0) + (stats.headline.totalReclaimedBytes || 0))}
+          label="Storage Reclaimed"
+          value={formatReclaimedBytes(stats.headline.totalReclaimedBytes || 0)}
           sublabel={
-            ((stats.headline.scansCount || 0) + (stats.headline.cleanupsCount || 0)) > 0
-              ? `${((stats.headline.scansCount || 0) + (stats.headline.cleanupsCount || 0)).toLocaleString()} Mac operations`
+            (stats.headline.cleanupsCount || 0) > 0
+              ? `${(stats.headline.cleanupsCount || 0).toLocaleString()} cleanups`
               : "real telemetry from Macs"
           }
         />
@@ -283,14 +283,14 @@ export const StatsPage: React.FC = () => {
           </div>
           <div>
             <div className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
-              STORAGE SCANNED & SAVED
+              STORAGE RECLAIMED
             </div>
             <div className="text-3xl font-black text-slate-900 dark:text-white tabular-nums font-mono mt-0.5 tracking-tight flex items-baseline gap-2">
-              <span>{formatStorageScannedSaved((stats.headline.totalScannedBytes || 0) + (stats.headline.totalReclaimedBytes || 0)).value}</span>
-              <span className="text-2xl font-bold">{formatStorageScannedSaved((stats.headline.totalScannedBytes || 0) + (stats.headline.totalReclaimedBytes || 0)).unit}</span>
+              <span>{formatStorageScannedSaved(stats.headline.totalReclaimedBytes || 0).value}</span>
+              <span className="text-2xl font-bold">{formatStorageScannedSaved(stats.headline.totalReclaimedBytes || 0).unit}</span>
             </div>
             <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-              Orphaned caches, DerivedData & junk
+              Out of {formatReclaimedBytes(stats.headline.totalScannedBytes || 0)} scanned across {(stats.headline.scansCount || 0).toLocaleString()} scans
             </div>
           </div>
         </div>
