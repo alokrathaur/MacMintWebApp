@@ -17,6 +17,8 @@ export interface StatsData {
     downloads: number;
     avgDurationSeconds: number;
     estReclaimedGb: number;
+    totalReclaimedBytes?: number;
+    cleanupsCount?: number;
   };
   timeSeries: {
     bucket: string;
@@ -286,6 +288,8 @@ class AnalyticsService {
             downloads: raw.headline?.downloads || 0,
             avgDurationSeconds: raw.headline?.avgDurationSeconds || 168,
             estReclaimedGb: raw.headline?.estReclaimedGb || 0,
+            totalReclaimedBytes: raw.headline?.totalReclaimedBytes || 0,
+            cleanupsCount: raw.headline?.cleanupsCount || 0,
           },
           timeSeries: paddedTimeSeries,
           breakdowns: {

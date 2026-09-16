@@ -24,6 +24,19 @@ const PERIODS: { value: "last24h" | "last7d" | "last30d" | "yearly" | "all"; lab
   { value: "all", label: "All time" },
 ];
 
+function formatReclaimedBytes(bytes: number): string {
+  if (!bytes || bytes <= 0) return "0 GB";
+  const gb = bytes / 1073741824;
+  if (gb >= 1000) {
+    return `${(gb / 1024).toFixed(2)} TB`;
+  }
+  if (gb < 1) {
+    const mb = bytes / 1048576;
+    return `${mb.toFixed(0)} MB`;
+  }
+  return `${gb.toFixed(2)} GB`;
+}
+
 export const StatsPage: React.FC = () => {
   // Sync URL search params
   const [period, setPeriod] = useState<"last24h" | "last7d" | "last30d" | "yearly" | "all">(() => {
@@ -238,8 +251,12 @@ export const StatsPage: React.FC = () => {
         />
         <StatCard
           label="Space Reclaimed"
-          value={`${stats.headline.estReclaimedGb} GB`}
-          sublabel="estimated cleanup volume"
+          value={formatReclaimedBytes(stats.headline.totalReclaimedBytes || stats.headline.estReclaimedGb * 1073741824)}
+          sublabel={
+            stats.headline.cleanupsCount && stats.headline.cleanupsCount > 0
+              ? `${stats.headline.cleanupsCount.toLocaleString()} cleanups on Macs`
+              : "real cleanup volume across Macs"
+          }
         />
       </div>
 
@@ -280,10 +297,10 @@ export const StatsPage: React.FC = () => {
               Storage Scanned & Saved
             </div>
             <div className="text-2xl font-black text-slate-900 dark:text-white tabular-nums font-mono mt-0.5">
-              {(stats.headline.estReclaimedGb / 1024).toFixed(2)} TB
+              {formatReclaimedBytes(stats.headline.totalReclaimedBytes || stats.headline.estReclaimedGb * 1073741824)}
             </div>
             <div className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-              Orphaned caches, DerivedData & junk
+              Real cleanup volume reported by native Mac apps
             </div>
           </div>
         </div>
