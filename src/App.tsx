@@ -13,6 +13,8 @@ import { AboutPage } from "./pages/AboutPage";
 import { PrivacyPage } from "./pages/PrivacyPage";
 import { TermsPage } from "./pages/TermsPage";
 import { ActivatePage } from "./pages/ActivatePage";
+import { StatsPage } from "./pages/StatsPage";
+import { PresenceBeacon } from "./components/analytics/PresenceBeacon";
 
 export const App: React.FC = () => {
   // Theme state: defaults to light-first
@@ -29,6 +31,11 @@ export const App: React.FC = () => {
     const redirectPath = params.get("p");
     if (redirectPath) {
       return redirectPath;
+    }
+    // GitHub Pages query redirect format: /?/stats
+    if (window.location.search.startsWith("?/")) {
+      const decoded = window.location.search.slice(2).split("&")[0];
+      if (decoded) return "/" + decoded.replace(/^\//, "");
     }
     // Check hash-based deep linking
     if (window.location.hash.startsWith("#/")) {
@@ -108,12 +115,17 @@ export const App: React.FC = () => {
     if (currentPath === "/activate" || currentPath.startsWith("/activate?") || currentPath.startsWith("/activate/")) {
       return <ActivatePage onNavigate={navigate} />;
     }
+    if (currentPath === "/stats" || currentPath.startsWith("/stats?") || currentPath.startsWith("/stats/")) {
+      return <StatsPage />;
+    }
     // Fallback to Home
     return <HomePage onNavigate={navigate} />;
   };
 
   return (
     <div className="min-h-screen flex flex-col bg-surface-light dark:bg-surface-dark text-slate-900 dark:text-slate-100 transition-colors duration-200">
+      <PresenceBeacon currentPath={currentPath} />
+
       <Navbar
         currentPath={currentPath}
         onNavigate={navigate}
