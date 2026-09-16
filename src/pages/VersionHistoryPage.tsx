@@ -25,7 +25,7 @@ export const VersionHistoryPage: React.FC<VersionHistoryPageProps> = ({ onNaviga
   const versions = [
     {
       version: "1.0.2",
-      badge: "Latest Release",
+      badge: "Latest and Stable Release",
       badgeType: "latest",
       date: "September 16, 2026",
       title: "macOS 27 Full Disk Access Support & Orphaned Xcode / Simulator Cleaners",
@@ -78,8 +78,8 @@ export const VersionHistoryPage: React.FC<VersionHistoryPageProps> = ({ onNaviga
     },
     {
       version: "1.0.1",
-      badge: "Stable Release",
-      badgeType: "stable",
+      badge: "",
+      badgeType: "previous",
       date: "September 12, 2026",
       title: "StoreKit 2 Mac App Store Licensing, Live Traffic Analytics & Dark Mode Polish",
       summary: "Introduced native StoreKit 2 subscriptions for the Mac App Store, offline cryptographic license key activation, global live traffic tracking, and refined dark mode aesthetics.",
@@ -178,7 +178,7 @@ export const VersionHistoryPage: React.FC<VersionHistoryPageProps> = ({ onNaviga
               href={`#v${v.version.replace(/\./g, "-")}`}
               className="px-3 py-1 rounded-lg bg-slate-100 dark:bg-surface-darkSurface hover:bg-mint-50 dark:hover:bg-mint-950/30 hover:text-mint-600 dark:hover:text-mint-400 text-slate-700 dark:text-slate-300 transition-colors border border-slate-200/60 dark:border-slate-800"
             >
-              v{v.version} {v.badgeType === "latest" ? "(Latest)" : ""}
+              v{v.version} {v.badgeType === "latest" ? "(Latest & Stable)" : ""}
             </a>
           ))}
         </div>
@@ -216,13 +216,15 @@ export const VersionHistoryPage: React.FC<VersionHistoryPageProps> = ({ onNaviga
                       v{ver.version}
                     </h2>
 
-                    <span className={`text-xs font-bold px-2.5 py-1 rounded-full ${
-                      isLatest
-                        ? "bg-mint-500 text-white shadow-sm shadow-mint-600/30"
-                        : "bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300"
-                    }`}>
-                      {ver.badge}
-                    </span>
+                    {ver.badge && (
+                      <span className={`text-xs font-bold px-2.5 py-1 rounded-full ${
+                        isLatest
+                          ? "bg-mint-500 text-white shadow-sm shadow-mint-600/30"
+                          : "bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300"
+                      }`}>
+                        {ver.badge}
+                      </span>
+                    )}
 
                     <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">
                       • {ver.date}
