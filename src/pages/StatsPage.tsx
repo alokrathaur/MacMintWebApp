@@ -290,7 +290,9 @@ export const StatsPage: React.FC = () => {
               <span className="text-2xl font-bold">{formatStorageScannedSaved(stats.headline.totalReclaimedBytes || 0).unit}</span>
             </div>
             <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-              Out of {formatReclaimedBytes(stats.headline.totalScannedBytes || 0)} scanned across {(stats.headline.scansCount || 0).toLocaleString()} scans
+              {(stats.headline.cleanupsCount || 0) > 0
+                ? `${(stats.headline.cleanupsCount || 0).toLocaleString()} cleanups across all Macs`
+                : "Orphaned caches, DerivedData & junk"}
             </div>
           </div>
         </div>
