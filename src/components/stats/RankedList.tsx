@@ -12,14 +12,100 @@ interface RankedListProps {
   formatValue?: (n: number) => string;
 }
 
+const COUNTRY_NAME_TO_CODE: Record<string, string> = {
+  "united states": "US",
+  "usa": "US",
+  "u.s.": "US",
+  "u.s.a.": "US",
+  "india": "IN",
+  "united kingdom": "GB",
+  "uk": "GB",
+  "great britain": "GB",
+  "germany": "DE",
+  "deutschland": "DE",
+  "canada": "CA",
+  "france": "FR",
+  "japan": "JP",
+  "australia": "AU",
+  "brazil": "BR",
+  "brasil": "BR",
+  "singapore": "SG",
+  "netherlands": "NL",
+  "sweden": "SE",
+  "switzerland": "CH",
+  "south korea": "KR",
+  "korea": "KR",
+  "italy": "IT",
+  "italia": "IT",
+  "spain": "ES",
+  "españa": "ES",
+  "russia": "RU",
+  "china": "CN",
+  "taiwan": "TW",
+  "hong kong": "HK",
+  "mexico": "MX",
+  "poland": "PL",
+  "ukraine": "UA",
+  "indonesia": "ID",
+  "vietnam": "VN",
+  "turkey": "TR",
+  "türkiye": "TR",
+  "israel": "IL",
+  "united arab emirates": "AE",
+  "uae": "AE",
+  "saudi arabia": "SA",
+  "ireland": "IE",
+  "new zealand": "NZ",
+  "norway": "NO",
+  "denmark": "DK",
+  "finland": "FI",
+  "austria": "AT",
+  "belgium": "BE",
+  "portugal": "PT",
+  "czech republic": "CZ",
+  "czechia": "CZ",
+  "greece": "GR",
+  "romania": "RO",
+  "hungary": "HU",
+  "philippines": "PH",
+  "malaysia": "MY",
+  "thailand": "TH",
+  "argentina": "AR",
+  "chile": "CL",
+  "colombia": "CO",
+  "south africa": "ZA",
+  "egypt": "EG",
+  "nigeria": "NG",
+  "kenya": "KE",
+  "pakistan": "PK",
+  "bangladesh": "BD",
+};
+
 // Map 2-letter ISO country code to flag emoji
-function countryCodeToFlag(code?: string): string {
+export function countryCodeToFlag(code?: string): string {
   if (!code || code.length !== 2) return "";
   const codePoints = code
     .toUpperCase()
     .split("")
     .map((char) => 127397 + char.charCodeAt(0));
   return String.fromCodePoint(...codePoints);
+}
+
+export function getCountryFlag(code?: string, label?: string): string {
+  // 1. If label matches a known country name, prioritize it to ensure the flag matches the label
+  if (label) {
+    const normalized = label.trim().toLowerCase();
+    if (COUNTRY_NAME_TO_CODE[normalized]) {
+      return countryCodeToFlag(COUNTRY_NAME_TO_CODE[normalized]);
+    }
+  }
+
+  // 2. Otherwise fallback to code
+  if (code && code.length === 2) {
+    return countryCodeToFlag(code);
+  }
+
+  return "";
 }
 
 export const RankedList: React.FC<RankedListProps> = ({
@@ -48,7 +134,8 @@ export const RankedList: React.FC<RankedListProps> = ({
           {items.slice(0, 8).map((item) => {
             const percentage = total > 0 ? Math.round((item.count / total) * 100) : 0;
             const barWidth = Math.max(3, (item.count / max) * 100);
-            const flag = item.code ? countryCodeToFlag(item.code) : "";
+            const isCountryList = title.toLowerCase().includes("countr");
+            const flag = isCountryList ? getCountryFlag(item.code, item.label) : (item.code ? countryCodeToFlag(item.code) : "");
 
             return (
               <li key={item.label} className="relative group">

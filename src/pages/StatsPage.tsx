@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { analytics, StatsData } from "../services/analytics";
 import { StatCard } from "../components/stats/StatCard";
 import { BarTimeSeries } from "../components/stats/BarTimeSeries";
-import { RankedList } from "../components/stats/RankedList";
+import { RankedList, countryCodeToFlag } from "../components/stats/RankedList";
 import { 
   Activity, 
   RotateCw, 
@@ -379,6 +379,11 @@ export const StatsPage: React.FC = () => {
                       : "bg-mint-500"
                   }`}
                 />
+                {evt.countryCode && (
+                  <span className="shrink-0 text-sm leading-none" title={evt.countryCode}>
+                    {countryCodeToFlag(evt.countryCode)}
+                  </span>
+                )}
                 <span className="text-slate-800 dark:text-slate-200 font-medium truncate">
                   {evt.label}
                 </span>
