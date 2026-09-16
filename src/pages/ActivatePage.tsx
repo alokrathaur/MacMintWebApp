@@ -514,8 +514,8 @@ export const ActivatePage: React.FC<ActivatePageProps> = ({ onNavigate }) => {
               </h4>
             </div>
             <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-              • <strong>Pro Yearly ($24.99)</strong>: Valid for <strong>1 active Mac</strong> at a time.<br />
-              • <strong>Pro Lifetime ($49.99)</strong>: Valid for <strong>up to 5 Macs</strong> simultaneously.<br />
+              • <strong>Pro Yearly</strong>: Valid for <strong>1 active Mac</strong> at a time.<br />
+              • <strong>Pro Lifetime</strong>: Valid for <strong>up to 5 Macs</strong> simultaneously.<br />
               Need to transfer? Deactivate on your old Mac in Settings to free up an activation slot.
             </p>
           </div>

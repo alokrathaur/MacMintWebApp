@@ -1,6 +1,8 @@
 import React from "react";
 import { Check, X, Sparkles, Download, ArrowRight } from "lucide-react";
 import { SITE_CONFIG } from "@/config/site";
+import { useCurrencyPricing } from "@/hooks/useCurrencyPricing";
+import { CurrencySelector } from "./CurrencySelector";
 
 interface PricingSectionProps {
   onNavigate?: (path: string) => void;
@@ -8,7 +10,17 @@ interface PricingSectionProps {
 }
 
 export const PricingSection: React.FC<PricingSectionProps> = ({ onNavigate, isDedicatedPage = false }) => {
-  const { free, proMonthly, proYearly, proLifetime } = SITE_CONFIG.pricing;
+  const {
+    currency,
+    allCurrencies,
+    setCurrency,
+    resetToAuto,
+    isManualOverride,
+    detectedCountry,
+    pricing,
+  } = useCurrencyPricing();
+
+  const { free, proMonthly, proYearly, proLifetime } = pricing;
 
   const handleDownload = () => {
     if (onNavigate) {
@@ -90,6 +102,21 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onNavigate, isDe
           <p className="text-base sm:text-lg text-slate-600 dark:text-slate-400 mt-3 leading-relaxed font-normal">
             Start free with essential scanning and storage visualization. Upgrade to Pro for developer tools, deep container removal, and lifetime updates.
           </p>
+
+          {/* Currency Switcher & Geo Context */}
+          <div className="mt-5 flex flex-wrap items-center justify-center gap-2">
+            <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">
+              Prices displayed in:
+            </span>
+            <CurrencySelector
+              currentCurrency={currency}
+              allCurrencies={allCurrencies}
+              onSelectCurrency={setCurrency}
+              onResetAuto={resetToAuto}
+              isManualOverride={isManualOverride}
+              detectedCountry={detectedCountry}
+            />
+          </div>
         </div>
 
         {/* Pricing Cards: 4 Tiers */}
@@ -308,8 +335,8 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onNavigate, isDe
                 <tr className="border-b border-slate-200/80 dark:border-slate-800 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                   <th className="pb-4">Capability</th>
                   <th className="pb-4 text-center">7-Day Free Trial</th>
-                  <th className="pb-4 text-center">Pro Monthly ($2.99/month)</th>
-                  <th className="pb-4 text-center">Pro Yearly ($2.08/month)</th>
+                  <th className="pb-4 text-center">Pro Monthly ({proMonthly.price}/month)</th>
+                  <th className="pb-4 text-center">Pro Yearly ({proYearly.price}/month)</th>
                   <th className="pb-4 text-center text-mint-600 dark:text-mint-400">Pro Lifetime (5 Macs)</th>
                 </tr>
               </thead>
