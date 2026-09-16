@@ -31,6 +31,8 @@ export const VersionHistoryPage: React.FC<VersionHistoryPageProps> = ({ onNaviga
       title: "macOS 27 Full Disk Access Support & Orphaned Xcode / Simulator Cleaners",
       summary: "This update introduces complete compatibility with macOS 27 and macOS 15 Sequoia Full Disk Access detection, reactive permission syncing, and extensive cleaners for leftover Xcode caches, simulator runtimes, and developer frameworks.",
       downloadAvailable: true,
+      downloadUrl: "/MacMint.dmg",
+      downloadFileName: "MacMint.dmg",
       features: [
         {
           title: "Multi-Probe Full Disk Access Engine (macOS 27 & Earlier)",
@@ -91,7 +93,9 @@ export const VersionHistoryPage: React.FC<VersionHistoryPageProps> = ({ onNaviga
       date: "September 12, 2026",
       title: "StoreKit 2 Mac App Store Licensing, Live Traffic Analytics & Dark Mode Polish",
       summary: "Introduced native StoreKit 2 subscriptions for the Mac App Store, offline cryptographic license key activation, global live traffic tracking, and refined dark mode aesthetics.",
-      downloadAvailable: false,
+      downloadAvailable: true,
+      downloadUrl: "/MacMint-1.0.1.dmg",
+      downloadFileName: "MacMint-1.0.1.dmg",
       features: [
         {
           title: "StoreKit 2 & Offline License System",
@@ -239,14 +243,18 @@ export const VersionHistoryPage: React.FC<VersionHistoryPageProps> = ({ onNaviga
                     </span>
                   </div>
 
-                  {isLatest && ver.downloadAvailable && (
+                  {ver.downloadAvailable && (
                     <a
-                      href={SITE_CONFIG.directDmgUrl}
-                      download="MacMint.dmg"
-                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-mint-600 hover:bg-mint-700 text-white font-semibold text-xs shadow-md shadow-mint-700/20 transition-all active:scale-[0.98] w-fit"
+                      href={ver.downloadUrl || SITE_CONFIG.directDmgUrl}
+                      download={ver.downloadFileName || "MacMint.dmg"}
+                      className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-xl font-semibold text-xs shadow-md transition-all active:scale-[0.98] w-fit ${
+                        isLatest
+                          ? "bg-mint-600 hover:bg-mint-700 text-white shadow-mint-700/20"
+                          : "bg-slate-100 dark:bg-surface-darkSurface hover:bg-slate-200 dark:hover:bg-surface-darkCard text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 shadow-sm"
+                      }`}
                     >
                       <Download className="w-3.5 h-3.5" />
-                      <span>Download .dmg</span>
+                      <span>Download v{ver.version} (.dmg)</span>
                     </a>
                   )}
                 </div>
