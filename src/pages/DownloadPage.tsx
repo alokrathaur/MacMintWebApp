@@ -127,23 +127,23 @@ export const DownloadPage: React.FC = () => {
           </div>
 
           <div className="p-6 rounded-2xl bg-white dark:bg-surface-darkSurface border border-slate-200/80 dark:border-slate-800 space-y-3">
-            <h4 className="text-sm font-bold text-slate-900 dark:text-white">Release Notes v1.0.1</h4>
+            <h4 className="text-sm font-bold text-slate-900 dark:text-white">Release Notes v1.0.2</h4>
             <ul className="space-y-2 text-xs text-slate-600 dark:text-slate-400">
               <li className="flex items-center gap-2">
                 <span className="text-mint-600 font-bold">•</span>
-                <span>Single-window architecture with seamless web-activation deep-link routing</span>
+                <span>Multi-probe macOS 27 and macOS 15 Sequoia Full Disk Access detection</span>
               </li>
               <li className="flex items-center gap-2">
                 <span className="text-mint-600 font-bold">•</span>
-                <span>Authoritative live subscription verification & comprehensive deactivation cache purge</span>
+                <span>Instant reactive permission syncing on app activation without relaunching</span>
               </li>
               <li className="flex items-center gap-2">
                 <span className="text-mint-600 font-bold">•</span>
-                <span>Pro feature unlock buttons route directly to in-app Settings without extra popups</span>
+                <span>Deep cleanup for leftover Xcode caches, simulator runtimes & device frameworks</span>
               </li>
               <li className="flex items-center gap-2">
                 <span className="text-mint-600 font-bold">•</span>
-                <span>Cryptographic SHA-256 duplicate file detection and smart selection</span>
+                <span>App Uninstaller residual detection for uninstalled Xcode developer data</span>
               </li>
             </ul>
           </div>
