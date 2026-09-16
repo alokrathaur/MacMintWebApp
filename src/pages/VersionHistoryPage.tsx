@@ -33,8 +33,6 @@ export const VersionHistoryPage: React.FC<VersionHistoryPageProps> = ({ onNaviga
       downloadAvailable: true,
       downloadUrl: "/MacMint.dmg",
       downloadFileName: "MacMint.dmg",
-      pkgDownloadUrl: "/MacMint.pkg",
-      pkgFileName: "MacMint.pkg",
       features: [
         {
           title: "Finder Batch Deletion for Xcode Simulator & Uninstalled Leftovers",
@@ -252,30 +250,18 @@ export const VersionHistoryPage: React.FC<VersionHistoryPageProps> = ({ onNaviga
                   </div>
 
                   {ver.downloadAvailable && (
-                    <div className="flex flex-wrap items-center gap-2">
-                      <a
-                        href={ver.downloadUrl || SITE_CONFIG.directDmgUrl}
-                        download={ver.downloadFileName || "MacMint.dmg"}
-                        className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-xl font-semibold text-xs shadow-md transition-all active:scale-[0.98] w-fit ${
-                          isLatest
-                            ? "bg-mint-600 hover:bg-mint-700 text-white shadow-mint-700/20"
-                            : "bg-slate-100 dark:bg-surface-darkSurface hover:bg-slate-200 dark:hover:bg-surface-darkCard text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 shadow-sm"
-                        }`}
-                      >
-                        <Download className="w-3.5 h-3.5" />
-                        <span>Download v{ver.version} (.dmg)</span>
-                      </a>
-                      {ver.pkgDownloadUrl && (
-                        <a
-                          href={ver.pkgDownloadUrl}
-                          download={ver.pkgFileName || "MacMint.pkg"}
-                          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl font-semibold text-xs border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 transition-all active:scale-[0.98] w-fit shadow-sm"
-                        >
-                          <Download className="w-3.5 h-3.5 text-mint-600 dark:text-mint-400" />
-                          <span>Installer (.pkg)</span>
-                        </a>
-                      )}
-                    </div>
+                    <a
+                      href={ver.downloadUrl || SITE_CONFIG.directDmgUrl}
+                      download={ver.downloadFileName || "MacMint.dmg"}
+                      className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-xl font-semibold text-xs shadow-md transition-all active:scale-[0.98] w-fit ${
+                        isLatest
+                          ? "bg-mint-600 hover:bg-mint-700 text-white shadow-mint-700/20"
+                          : "bg-slate-100 dark:bg-surface-darkSurface hover:bg-slate-200 dark:hover:bg-surface-darkCard text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 shadow-sm"
+                      }`}
+                    >
+                      <Download className="w-3.5 h-3.5" />
+                      <span>Download v{ver.version} (.dmg)</span>
+                    </a>
                   )}
                 </div>
 
@@ -372,14 +358,6 @@ export const VersionHistoryPage: React.FC<VersionHistoryPageProps> = ({ onNaviga
             >
               <Download className="w-5 h-5" />
               <span>Download MacMint v{SITE_CONFIG.appVersion} (.dmg)</span>
-            </a>
-            <a
-              href={SITE_CONFIG.directPkgUrl}
-              download="MacMint.pkg"
-              className="inline-flex items-center gap-2 px-6 py-4 rounded-xl bg-mint-800/40 hover:bg-mint-800/60 text-white font-semibold text-base transition-all active:scale-[0.98] border border-white/20"
-            >
-              <Download className="w-5 h-5" />
-              <span>Download (.pkg)</span>
             </a>
             <button
               onClick={() => {

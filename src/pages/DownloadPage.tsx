@@ -64,19 +64,9 @@ export const DownloadPage: React.FC = () => {
               <Download className="w-5 h-5" />
               <span>Download MacMint v{SITE_CONFIG.appVersion} (.dmg)</span>
             </a>
-            <a
-              href={SITE_CONFIG.directPkgUrl}
-              download="MacMint.pkg"
-              className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-white dark:bg-surface-darkSurface hover:bg-slate-50 dark:hover:bg-surface-darkCard text-slate-800 dark:text-slate-200 font-semibold text-base border border-slate-200/80 dark:border-slate-800 shadow-sm transition-all active:scale-[0.98]"
-            >
-              <Download className="w-5 h-5 text-mint-600 dark:text-mint-400" />
-              <span>Download (.pkg)</span>
-            </a>
           </div>
 
-          <div className="mt-3 flex items-center justify-center gap-3 text-xs text-slate-500 dark:text-slate-400">
-            <span>Notarized Disk Image (.dmg) & Signed Installer (.pkg)</span>
-            <span>•</span>
+          <div className="mt-3 flex items-center justify-center gap-2 text-xs text-slate-500 dark:text-slate-400">
             <a
               href="/version-history"
               className="text-mint-600 dark:text-mint-400 font-semibold hover:underline"
