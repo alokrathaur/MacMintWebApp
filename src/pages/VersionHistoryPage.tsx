@@ -63,6 +63,14 @@ export const VersionHistoryPage: React.FC<VersionHistoryPageProps> = ({ onNaviga
       ],
       fixes: [
         {
+          title: "Strict Privacy Scoping in macOS System Settings > Files & Folders",
+          desc: "Purged all container and group container filesystem probes (~/Library/Containers and ~/Library/Group Containers) so macOS Privacy & Security only ever requests access to Desktop, Documents, and Downloads."
+        },
+        {
+          title: "Hardened Selection Presets in Deep Cleanup",
+          desc: "Refined 'Select all' preset to strictly target verified low-risk items, preventing unrecommended or caution items from being automatically checked."
+        },
+        {
           title: "Fixed Persistent 'Full Disk Access is off' Banner on macOS 27",
           desc: "Diagnosed root cause where Support.swift probed deprecated ~/Library/Application Support/com.apple.TCC/TCC.db (which no longer exists in modern macOS, returning ENOENT). Replaced with robust active probes so granted FDA status is immediately recognized."
         },
