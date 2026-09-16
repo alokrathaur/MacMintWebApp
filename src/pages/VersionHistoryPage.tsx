@@ -1,13 +1,13 @@
 import React from "react";
-import { 
-  CheckCircle2, 
-  Bug, 
-  Sparkles, 
-  Download, 
-  ShieldCheck, 
-  Terminal, 
-  Cpu, 
-  HardDrive, 
+import {
+  CheckCircle2,
+  Bug,
+  Sparkles,
+  Download,
+  ShieldCheck,
+  Terminal,
+  Cpu,
+  HardDrive,
   ArrowRight,
   ExternalLink,
   Zap,
@@ -34,6 +34,10 @@ export const VersionHistoryPage: React.FC<VersionHistoryPageProps> = ({ onNaviga
       downloadUrl: "/MacMint.dmg",
       downloadFileName: "MacMint.dmg",
       features: [
+        {
+          title: "Global Storage Reclaimed Tracking",
+          desc: "Added global telemetry tracking to measure the total storage reclaimed by MacMint users worldwide. Storage cleanup activity is now aggregated to provide a global view of space reclaimed across Mac devices. No personal files or file contents are collected as part of this tracking."
+        },
         {
           title: "Finder Batch Deletion for Xcode Simulator & Uninstalled Leftovers",
           desc: "Implemented a unified Finder batch operation via Apple Events for privileged developer paths. Safely and completely removes multi-gigabyte Xcode simulator runtimes, device caches, and orphaned residues left after Xcode uninstallation in a single, prompt-free operation."
@@ -178,11 +182,11 @@ export const VersionHistoryPage: React.FC<VersionHistoryPageProps> = ({ onNaviga
           <Clock className="w-3.5 h-3.5" />
           <span>Release Notes & Changelog</span>
         </div>
-        
+
         <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-slate-950 dark:text-white">
           Version History
         </h1>
-        
+
         <p className="mt-4 text-base sm:text-lg text-slate-600 dark:text-slate-400 leading-relaxed font-normal">
           Explore every feature, platform update, performance enhancement, and bug fix introduced across MacMint releases.
         </p>
@@ -211,22 +215,20 @@ export const VersionHistoryPage: React.FC<VersionHistoryPageProps> = ({ onNaviga
           return (
             <div key={ver.version} id={anchorId} className="relative scroll-mt-28">
               {/* Timeline Marker Icon */}
-              <div 
-                className={`absolute -left-[35px] sm:-left-[51px] top-1.5 w-6 h-6 rounded-full flex items-center justify-center ring-4 ${
-                  isLatest 
-                    ? "bg-mint-500 text-white ring-mint-500/20 shadow-lg shadow-mint-500/30" 
+              <div
+                className={`absolute -left-[35px] sm:-left-[51px] top-1.5 w-6 h-6 rounded-full flex items-center justify-center ring-4 ${isLatest
+                    ? "bg-mint-500 text-white ring-mint-500/20 shadow-lg shadow-mint-500/30"
                     : "bg-slate-300 dark:bg-slate-700 text-white ring-slate-100 dark:ring-surface-dark"
-                }`}
+                  }`}
               >
                 {isLatest ? <Zap className="w-3 h-3" /> : <div className="w-2 h-2 rounded-full bg-white" />}
               </div>
 
               {/* Version Card Container */}
-              <div className={`p-6 sm:p-8 rounded-3xl border transition-all duration-200 ${
-                isLatest
+              <div className={`p-6 sm:p-8 rounded-3xl border transition-all duration-200 ${isLatest
                   ? "bg-white dark:bg-surface-darkSurface border-mint-500/30 shadow-xl shadow-mint-500/5 ring-1 ring-mint-500/10"
                   : "bg-surface-soft dark:bg-surface-darkSurface/60 border-slate-200/80 dark:border-slate-800 shadow-sm"
-              }`}>
+                }`}>
                 {/* Version Header Meta */}
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 pb-4 border-b border-slate-200/70 dark:border-slate-800">
                   <div className="flex flex-wrap items-center gap-2.5">
@@ -235,11 +237,10 @@ export const VersionHistoryPage: React.FC<VersionHistoryPageProps> = ({ onNaviga
                     </h2>
 
                     {ver.badge && (
-                      <span className={`text-xs font-bold px-2.5 py-1 rounded-full ${
-                        isLatest
+                      <span className={`text-xs font-bold px-2.5 py-1 rounded-full ${isLatest
                           ? "bg-mint-500 text-white shadow-sm shadow-mint-600/30"
                           : "bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300"
-                      }`}>
+                        }`}>
                         {ver.badge}
                       </span>
                     )}
@@ -253,11 +254,10 @@ export const VersionHistoryPage: React.FC<VersionHistoryPageProps> = ({ onNaviga
                     <a
                       href={ver.downloadUrl || SITE_CONFIG.directDmgUrl}
                       download={ver.downloadFileName || "MacMint.dmg"}
-                      className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-xl font-semibold text-xs shadow-md transition-all active:scale-[0.98] w-fit ${
-                        isLatest
+                      className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-xl font-semibold text-xs shadow-md transition-all active:scale-[0.98] w-fit ${isLatest
                           ? "bg-mint-600 hover:bg-mint-700 text-white shadow-mint-700/20"
                           : "bg-slate-100 dark:bg-surface-darkSurface hover:bg-slate-200 dark:hover:bg-surface-darkCard text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 shadow-sm"
-                      }`}
+                        }`}
                     >
                       <Download className="w-3.5 h-3.5" />
                       <span>Download v{ver.version} (.dmg)</span>
@@ -284,8 +284,8 @@ export const VersionHistoryPage: React.FC<VersionHistoryPageProps> = ({ onNaviga
 
                   <div className="grid grid-cols-1 gap-3">
                     {ver.features.map((feat, fIdx) => (
-                      <div 
-                        key={fIdx} 
+                      <div
+                        key={fIdx}
                         className="p-4 rounded-2xl bg-white/70 dark:bg-surface-darkCard/50 border border-slate-200/60 dark:border-slate-800/80 space-y-1"
                       >
                         <div className="flex items-start gap-2.5">
@@ -314,8 +314,8 @@ export const VersionHistoryPage: React.FC<VersionHistoryPageProps> = ({ onNaviga
 
                     <div className="grid grid-cols-1 gap-3">
                       {ver.fixes.map((fix, fxIdx) => (
-                        <div 
-                          key={fxIdx} 
+                        <div
+                          key={fxIdx}
                           className="p-4 rounded-2xl bg-rose-50/50 dark:bg-rose-950/10 border border-rose-200/60 dark:border-rose-900/30 space-y-1"
                         >
                           <div className="flex items-start gap-2.5">
