@@ -67,15 +67,6 @@ export const DownloadPage: React.FC = () => {
           </div>
 
           <div className="mt-3 flex items-center justify-center gap-2 text-xs text-slate-500 dark:text-slate-400">
-            <span>Older release:</span>
-            <a
-              href={SITE_CONFIG.previousDmgUrl}
-              download="MacMint-1.0.1.dmg"
-              className="text-mint-600 dark:text-mint-400 font-semibold hover:underline"
-            >
-              Download v1.0.1 (.dmg)
-            </a>
-            <span>•</span>
             <a
               href="/version-history"
               className="text-mint-600 dark:text-mint-400 font-semibold hover:underline"

@@ -93,9 +93,7 @@ export const VersionHistoryPage: React.FC<VersionHistoryPageProps> = ({ onNaviga
       date: "September 12, 2026",
       title: "StoreKit 2 Mac App Store Licensing, Live Traffic Analytics & Dark Mode Polish",
       summary: "Introduced native StoreKit 2 subscriptions for the Mac App Store, offline cryptographic license key activation, global live traffic tracking, and refined dark mode aesthetics.",
-      downloadAvailable: true,
-      downloadUrl: "/MacMint-1.0.1.dmg",
-      downloadFileName: "MacMint-1.0.1.dmg",
+      downloadAvailable: false,
       features: [
         {
           title: "StoreKit 2 & Offline License System",
