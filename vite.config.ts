@@ -21,7 +21,6 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          three: ['three'],
           d3: ['d3'],
           icons: ['lucide-react'],
         },

@@ -140,7 +140,7 @@ export const StatsPage: React.FC = () => {
       : "1.0";
 
   return (
-    <div className="min-h-screen py-10 sm:py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <div className="min-h-screen py-10 sm:py-16 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
       {/* Top Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-8 border-b border-slate-200/80 dark:border-mint-900/30">
         <div>

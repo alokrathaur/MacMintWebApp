@@ -22,7 +22,7 @@ export const TermsPage: React.FC = () => {
 
           <h3 className="text-lg font-bold text-slate-900 dark:text-white pt-4">1. License Grant</h3>
           <p>
-            MacMint is licensed, not sold. LegendPrix AI grants you a revocable, non-exclusive, non-transferable personal license to download, install, and execute MacMint on Apple computers owned or controlled by you, subject to the terms of your purchased license tier (Community Free, Pro Yearly, or Pro Lifetime).
+            MacMint is licensed, not sold. LegendPrix AI grants you a revocable, non-exclusive, non-transferable personal license to download, install, and execute MacMint on Apple computers owned or controlled by you, subject to the terms of your purchased license tier (Community Free, or Pro Lifetime).
           </p>
 
           <h3 className="text-lg font-bold text-slate-900 dark:text-white pt-4">2. Safe Use & User Responsibility</h3>

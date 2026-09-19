@@ -21,7 +21,7 @@ export const GuidesPage: React.FC<GuidesPageProps> = ({ onNavigate }) => {
 
   return (
     <section className="py-16 md:py-24 bg-surface-light dark:bg-surface-dark transition-colors">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
@@ -55,7 +55,7 @@ export const GuidesPage: React.FC<GuidesPageProps> = ({ onNavigate }) => {
             <div
               key={guide.slug}
               onClick={() => {
-                onNavigate(`/guides/${guide.slug}`);
+                onNavigate(`/blog/${guide.slug}`);
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }}
               className="group cursor-pointer rounded-3xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-white dark:bg-surface-darkSurface shadow-sm hover:shadow-xl hover:border-mint-300 dark:hover:border-mint-700 transition-all flex flex-col justify-between"

@@ -8,22 +8,24 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Sky/royal blue brand palette (formerly a mint/teal green scale).
+        // Kept the `mint` token name so no component classes need renaming.
         mint: {
-          50: '#F1FAF7',
-          100: '#E2F6F0',
-          200: '#B8F2DF',
-          300: '#7CE5C9',
-          400: '#4FD1B5',
-          500: '#23B99C',
-          600: '#087F73',
-          700: '#066B61',
-          800: '#064F49',
-          900: '#053C37',
+          50: '#EFF6FF',
+          100: '#DCEDFF',
+          200: '#B9DBFF',
+          300: '#8AC4FF',
+          400: '#5AA9F8',
+          500: '#3B92F5',
+          600: '#1D74E0',
+          700: '#0B58BE',
+          800: '#0A4494',
+          900: '#0A3570',
         },
         surface: {
           light: '#FFFFFF',
-          soft: '#F7FAF9',
-          mintSubtle: '#F1FAF7',
+          soft: '#F6F9FF',
+          mintSubtle: '#EFF4FF',
           dark: '#071311',
           darkSurface: '#0D1C19',
           darkCard: '#112521',

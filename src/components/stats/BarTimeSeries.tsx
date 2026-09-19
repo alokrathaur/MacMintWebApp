@@ -124,12 +124,12 @@ export const BarTimeSeries: React.FC<BarTimeSeriesProps> = ({
         >
           <defs>
             <linearGradient id="mintBarGradient" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#23B99C" stopOpacity="0.95" />
-              <stop offset="100%" stopColor="#087F73" stopOpacity="0.65" />
+              <stop offset="0%" stopColor="#3B92F5" stopOpacity="0.95" />
+              <stop offset="100%" stopColor="#1D74E0" stopOpacity="0.65" />
             </linearGradient>
             <linearGradient id="mintHoverGradient" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#4FD1B5" stopOpacity="1" />
-              <stop offset="100%" stopColor="#066B61" stopOpacity="0.9" />
+              <stop offset="0%" stopColor="#5AA9F8" stopOpacity="1" />
+              <stop offset="100%" stopColor="#0B58BE" stopOpacity="0.9" />
             </linearGradient>
           </defs>
 

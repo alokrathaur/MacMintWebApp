@@ -33,7 +33,7 @@ export const TrustAndWorkflow: React.FC = () => {
     <div className="space-y-24 py-16 bg-surface-soft dark:bg-surface-dark transition-colors">
       
       {/* HOW IT WORKS */}
-      <section id="how-it-works" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="how-it-works" className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <span className="text-xs font-semibold uppercase tracking-wider text-mint-700 dark:text-mint-400">
             HOW IT WORKS
@@ -79,7 +79,7 @@ export const TrustAndWorkflow: React.FC = () => {
       </section>
 
       {/* SAFETY & PRIVACY TRUST SECTION */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           
           {/* Safety Card */}

@@ -32,11 +32,11 @@ export const DownloadPage: React.FC = () => {
         
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-14">
-          <div className="w-16 h-16 mx-auto rounded-2xl overflow-hidden shadow-lg border border-mint-300/60 bg-mint-500 mb-5">
+          <div className="w-16 h-16 mx-auto mb-5">
             <img
               src="/assets/logo.png"
               alt="MacMint Logo"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain"
               onError={(e) => {
                 (e.target as HTMLImageElement).src = "/assets/macmint_logo.png";
               }}
@@ -62,7 +62,15 @@ export const DownloadPage: React.FC = () => {
               className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-mint-600 hover:bg-mint-700 text-white font-semibold text-base shadow-xl shadow-mint-700/20 transition-all active:scale-[0.98]"
             >
               <Download className="w-5 h-5" />
-              <span>Download MacMint v{SITE_CONFIG.appVersion} (.dmg)</span>
+              <span>Download MacMint (.dmg)</span>
+            </a>
+            <a
+              href={SITE_CONFIG.directPkgUrl}
+              download="MacMint.pkg"
+              className="inline-flex items-center justify-center gap-2.5 px-6 py-4 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-surface-darkCard dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-semibold text-base border border-slate-200 dark:border-slate-700 transition-all active:scale-[0.98]"
+            >
+              <Download className="w-5 h-5 text-slate-500" />
+              <span>Download Package (.pkg)</span>
             </a>
           </div>
 
@@ -124,23 +132,27 @@ export const DownloadPage: React.FC = () => {
           </div>
 
           <div className="p-6 rounded-2xl bg-white dark:bg-surface-darkSurface border border-slate-200/80 dark:border-slate-800 space-y-3">
-            <h4 className="text-sm font-bold text-slate-900 dark:text-white">Release Notes v1.0.2</h4>
+            <h4 className="text-sm font-bold text-slate-900 dark:text-white">Release Notes v1.0.3</h4>
             <ul className="space-y-2 text-xs text-slate-600 dark:text-slate-400">
               <li className="flex items-center gap-2">
                 <span className="text-mint-600 font-bold">•</span>
-                <span>Multi-probe macOS 27 and macOS 15 Sequoia Full Disk Access detection</span>
+                <span>Expanded Deep Cleanup across 7 categories with 40+ specialized targets</span>
               </li>
               <li className="flex items-center gap-2">
                 <span className="text-mint-600 font-bold">•</span>
-                <span>Instant reactive permission syncing on app activation without relaunching</span>
+                <span>Direct single-click whole disk & external volume scanning (Disk Utility style)</span>
               </li>
               <li className="flex items-center gap-2">
                 <span className="text-mint-600 font-bold">•</span>
-                <span>Deep cleanup for leftover Xcode caches, simulator runtimes & device frameworks</span>
+                <span>Compact responsive cards with top-right watermarks and instant tap-to-review</span>
               </li>
               <li className="flex items-center gap-2">
                 <span className="text-mint-600 font-bold">•</span>
-                <span>App Uninstaller residual detection for uninstalled Xcode developer data</span>
+                <span>Wide subcategories review sidebar with zero text truncation for long target names</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="text-mint-600 font-bold">•</span>
+                <span>Support for Antigravity, Cursor, Expo, Playwright, Claude AI CLI & Hugging Face ML caches</span>
               </li>
             </ul>
           </div>

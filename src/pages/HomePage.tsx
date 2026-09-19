@@ -33,11 +33,19 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       <ProductOverview />
 
       {/* 03.5: DIRECT APP DEMO VIDEOS (Live recordings of 4 features) */}
-      <AppDemoPlayer />
+      {/* Hidden for now (display:none) — code kept in place, not removed */}
+      <div className="hidden">
+        <AppDemoPlayer />
+      </div>
 
-      {/* 04 & 05: SMART SPACE & INTERACTIVE SUNBURST (Flagship Storage Feature) */}
+      {/* 04: REAL PRODUCT SCREENSHOTS (Disk Space, System Health, Deep Cleanup, etc.) */}
+      {/* Given priority placement right after the overview — real screenshots build */}
+      {/* credibility before the deeper interactive demo and pricing sections below. */}
+      <ProductShowcase />
+
+      {/* 05 & 06: SMART SPACE & INTERACTIVE SUNBURST (Flagship Storage Feature) */}
       <section className="py-20 md:py-28 bg-surface-light dark:bg-surface-dark transition-colors border-t border-slate-200/60 dark:border-slate-800/60">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-3xl mx-auto mb-14">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-mint-50 dark:bg-surface-darkCard border border-mint-200 dark:border-mint-800/60 text-mint-700 dark:text-mint-300 text-xs font-semibold uppercase tracking-wider mb-3">
@@ -61,9 +69,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
 
         </div>
       </section>
-
-      {/* 06 to 12: DEEP CLEANUP, SYSTEM DATA, LARGE FILES, DUPLICATES, APP UNINSTALLER, DEV & OPTIMIZATIONS */}
-      <ProductShowcase />
 
       {/* 13, 14, 15: SAFETY, PRIVACY & HOW IT WORKS */}
       <TrustAndWorkflow />

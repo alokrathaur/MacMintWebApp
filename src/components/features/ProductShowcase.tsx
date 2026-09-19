@@ -26,19 +26,55 @@ interface ShowcaseFeature {
 
 const features: ShowcaseFeature[] = [
   {
-    id: "deep-clean",
-    tag: "DEEP CLEANUP & DEVELOPER ARTIFACTS",
-    headline: "Clean what you don't need.",
+    id: "disk-space",
+    tag: "DISK SPACE ANALYSIS",
+    headline: "See your entire disk as one interactive map.",
     description:
-      "Inspect and safely eliminate redundant caches, logs, browser data, and developer build artifacts. MacMint scans your workspaces to discover multi-gigabyte node_modules directories, Swift build targets, and compiler caches with one-click review.",
+      "Switch between a color-coded Treemap and a multi-ring Sunburst to instantly spot which folders are eating your storage — then drill down without ever opening Finder.",
     bullets: [
-      "Node.js dependencies (node_modules) auto-expanded per project folder",
-      "Xcode DerivedData, simulator archives, and Carthage/CocoaPods caches",
-      "Application caches, browser service workers, and trash storage",
-      "Per-path exclusion toggle so you always stay in complete control",
+      "Treemap and Sunburst views — switch instantly",
+      "Live folder sizes down to the file, with one-click drill-down",
+      "One-click Rescan keeps the map in sync with your disk",
+      "Largest Files across the whole volume in one sortable list",
+    ],
+    screenshot: "/assets/screenshots/05_disk_space.png",
+    badge: "Treemap + Sunburst",
+    video: {
+      src: "/assets/videos/disk_space.mp4",
+      title: "Disk Space Analysis Demo",
+      duration: "0:58",
+    },
+  },
+  {
+    id: "system-health",
+    tag: "LIVE SYSTEM HEALTH",
+    headline: "Your Mac's vitals, at a glance.",
+    description:
+      "A real-time dashboard for CPU load and temperature, memory pressure, GPU usage, battery health, network throughput, and thermal state — plus the running apps and processes behind them.",
+    bullets: [
+      "CPU, GPU, memory, battery, network, and thermal in one view",
+      "Running Applications and Top Processes with one-click Quit",
+      "One-tap Quick Clean the moment things start feeling busy",
+      "Zero third-party monitoring services — 100% on-device",
+    ],
+    screenshot: "/assets/screenshots/system_health.png",
+    badge: "Real-Time Monitor",
+    reverse: true,
+  },
+  {
+    id: "deep-clean",
+    tag: "7-CATEGORY DEEP CLEANUP & DEVELOPER SUITE",
+    headline: "Clean what you don't need across 7 categories.",
+    description:
+      "Inspect and safely eliminate redundant caches, logs, browser data, and developer build artifacts. MacMint 1.0.3 features a single direct 'Scan Mac' engine that scans your whole disk and external volumes, organizing clutter into 7 clear categories with 40+ specialized cleanup targets.",
+    bullets: [
+      "7 Dedicated Categories: User Junk, Developer Files, App Junk, Browser Cache, Editor Cache, System Junk, and VM Data",
+      "Developer & AI Tooling: Xcode, Simulator runtimes, Expo, Playwright, Claude AI CLI, Hugging Face ML, Swift PM, npm & pnpm",
+      "Modern Code Editors: Antigravity, Cursor, VS Code & ShipIt, Sublime Text, JetBrains IDEs, and Zed",
+      "Interactive Review: Compact cards with top-right watermarks, tap-to-review, and 330pt wide non-truncating subcategory sidebar",
     ],
     screenshot: "/assets/screenshots/01_deep_cleanup.png",
-    badge: "Auto-Scanned node_modules",
+    badge: "7 Categories • 40+ Targets",
     video: {
       src: "/assets/videos/deep_clean.mp4",
       title: "Deep Cleanup Demo",
@@ -135,13 +171,14 @@ const features: ShowcaseFeature[] = [
   },
 ];
 
-// All available screenshots for full lightbox gallery navigation
+// All available screenshots for full lightbox gallery navigation, in priority order
 const allGalleryScreenshots = [
-  { src: "/assets/screenshots/01_deep_cleanup.png", title: "Deep Cleanup (node_modules expanded)", badge: "Project Artifacts" },
+  { src: "/assets/screenshots/05_disk_space.png", title: "Disk Space Analysis (Treemap)", badge: "Interactive Map" },
+  { src: "/assets/screenshots/system_health.png", title: "Live System Health Dashboard", badge: "Real-Time Monitor" },
+  { src: "/assets/screenshots/01_deep_cleanup.png", title: "Deep Cleanup", badge: "7 Categories" },
   { src: "/assets/screenshots/02_system_data.png", title: "System Data Reclaim", badge: "Container Hunter" },
   { src: "/assets/screenshots/03_large_files.png", title: "Large & Forgotten Files", badge: "Quick Look" },
   { src: "/assets/screenshots/04_duplicate_files.png", title: "Duplicate Files Finder", badge: "SHA-256" },
-  { src: "/assets/screenshots/05_disk_space.png", title: "Disk Space Analysis (Sunburst Map)", badge: "Interactive Radial" },
   { src: "/assets/screenshots/06_app_uninstaller.png", title: "App Uninstaller & Leftovers", badge: "Zero Leftovers" },
   { src: "/assets/screenshots/07_startup_items.png", title: "Startup Items & LaunchAgents", badge: "Boot Optimization" },
   { src: "/assets/screenshots/08_system_optimization.png", title: "System Optimizations & Maintenance", badge: "One-Click" },
@@ -200,7 +237,7 @@ export const ProductShowcase: React.FC = () => {
 
   return (
     <section className="py-20 md:py-28 bg-surface-light dark:bg-surface-dark transition-colors">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-28">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-28">
         
         {features.map((feat) => (
           <div

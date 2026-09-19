@@ -1,7 +1,6 @@
 import React from "react";
 import {
   CheckCircle2,
-  Bug,
   Sparkles,
   Download,
   ShieldCheck,
@@ -24,9 +23,58 @@ interface VersionHistoryPageProps {
 export const VersionHistoryPage: React.FC<VersionHistoryPageProps> = ({ onNavigate }) => {
   const versions = [
     {
-      version: "1.0.2",
+      version: "1.0.3",
       badge: "Latest and Stable Release",
       badgeType: "latest",
+      date: "September 19, 2026",
+      title: "Comprehensive 7-Category Deep Clean, Direct Whole-Disk Scanning & Next-Gen Editor/Developer Cleaners",
+      summary: "MacMint 1.0.3 introduces massive expansions across all 7 Deep Cleanup categories with 40+ specialized targets (including Antigravity, Cursor, Expo, Playwright, Claude AI CLI, and Hugging Face ML models), direct single-click whole-disk and external volume scanning, compact responsive category cards with top-right watermarks, and a wide subcategory review sidebar with zero text truncation.",
+      downloadAvailable: true,
+      downloadUrl: "/MacMint.dmg",
+      downloadFileName: "MacMint.dmg",
+      features: [
+        {
+          title: "Comprehensive 7-Category Deep Clean Expansion",
+          desc: "Systematically expanded all 7 categories (User Junk, Developer Files, App Junk, Browser Cache, Editor Cache, System Junk, VM Data) with over 40 dedicated cleanup targets while strictly preserving all existing locations."
+        },
+        {
+          title: "Single Direct 'Scan Mac' Engine",
+          desc: "Simplified scanning by replacing multi-step dropdowns with a single, direct 'Scan Mac' button. Automatically scans the entire startup volume and all mounted external volumes in parallel (matching Disk Utility behavior)."
+        },
+        {
+          title: "Next-Gen Code Editor & AI Tooling Caches",
+          desc: "Added dedicated support for Antigravity editor caches (GPUCache, DawnGraphite, DawnWebGPU, Code Cache), Cursor editor, VS Code & ShipIt, Sublime Text, JetBrains IDEs, and Zed editor."
+        },
+        {
+          title: "Modern Developer Ecosystem Cleaners",
+          desc: "Added specialized targets for Expo Go/simulator caches, Playwright browser binaries, AI CLI versions (Claude), Swift Package Manager manifests, Hugging Face ML model weights, npm/pnpm caches, Ruby gems, Cargo crates, Gradle builds, Python pip/uv, and Homebrew bottles."
+        },
+        {
+          title: "macOS System Telemetry & Power Log Reclaim",
+          desc: "Added safe targets for system diagnostic pipelines (/private/var/db/DiagnosticPipeline), diagnostic reports (/Library/Logs/DiagnosticReports), system power logs (/private/var/db/powerlog), and ColorSync system caches."
+        },
+        {
+          title: "Virtual Machine & Container Hunters",
+          desc: "Identifies and safely cleans Docker Desktop VM layers and buildx caches, Colima and Podman container storage, Android Virtual Devices (AVD), VMware Fusion virtual machines (.vmwarevm), UTM, VirtualBox, and Parallels VMs."
+        },
+        {
+          title: "Compact 14-Inch Display Responsive Layout",
+          desc: "Redesigned category cards with a compact 125pt height so all 3 grid rows fit comfortably on 14-inch MacBook screens (such as M1/M2/M3) without vertical scrolling. Tapping anywhere inside the box immediately opens the review screen."
+        },
+        {
+          title: "Top-Right Watermark & Non-Truncating Sidebar",
+          desc: "Moved background watermark icons to the top-right to prevent overlap with badge icons, and widened the review sidebar to 330pt with multi-line text wrapping so long subcategory names are fully visible without ellipsis."
+        },
+        {
+          title: "System Health, Running Applications & Live Process Manager",
+          desc: "Introduced real-time CPU utilization, RAM allocation, memory pressure gauge, and disk I/O monitoring. Added a dedicated Running Applications list and Process Manager with single-click process termination and MacMint self-protection safeguards."
+        }
+      ]
+    },
+    {
+      version: "1.0.2",
+      badge: "Previous Stable Release",
+      badgeType: "stable",
       date: "September 16, 2026",
       title: "macOS 27 Full Disk Access Support, Finder Batch Deletion & Orphaned Xcode / Simulator Cleaners",
       summary: "This update introduces complete compatibility with macOS 27 and macOS 15 Sequoia Full Disk Access detection, reactive permission syncing, Finder batch operations for deleting Xcode simulator files and leftover residues after Xcode uninstall, and extensive developer cache cleaners.",
@@ -70,32 +118,6 @@ export const VersionHistoryPage: React.FC<VersionHistoryPageProps> = ({ onNaviga
           title: "Safe Privileged Removal & SIP Resilience",
           desc: "CleanerGuard allowlist strictly permits developer cleanup targets while firmly protecting CommandLineTools. Root-owned developer folders escalate via native macOS administrator authentication, with recursive fallback ensuring SIP-locked cryptex mounts do not halt the cleaning of unlocked multi-gigabyte cache directories."
         }
-      ],
-      fixes: [
-        {
-          title: "Fixed Xcode Simulator & Leftover File Deletion via Finder Batch Operation",
-          desc: "Resolved issue where root-owned simulator runtimes (/Library/Developer/CoreSimulator) and residual files after Xcode deletion/uninstallation returned EPERM ('Operation not permitted') during terminal rm commands due to Cryptex system protections. Deletion now routes through a unified Finder batch Apple Event operation in a single call, ensuring complete removal of simulator data and Xcode leftovers without repeated prompts or permission failures."
-        },
-        {
-          title: "Strict Privacy Scoping in macOS System Settings > Files & Folders",
-          desc: "Purged all container and group container filesystem probes (~/Library/Containers and ~/Library/Group Containers) so macOS Privacy & Security only ever requests access to Desktop, Documents, and Downloads."
-        },
-        {
-          title: "Hardened Selection Presets in Deep Cleanup",
-          desc: "Refined 'Select all' preset to strictly target verified low-risk items, preventing unrecommended or caution items from being automatically checked."
-        },
-        {
-          title: "Fixed Persistent 'Full Disk Access is off' Banner on macOS 27",
-          desc: "Diagnosed root cause where Support.swift probed deprecated ~/Library/Application Support/com.apple.TCC/TCC.db (which no longer exists in modern macOS, returning ENOENT). Replaced with robust active probes so granted FDA status is immediately recognized."
-        },
-        {
-          title: "Cumulative Scan Metric & Telemetry Tracking",
-          desc: "Fixed an issue in CleanerModel where scanned byte totals and inspected file counts were being overwritten per sub-item instead of accumulated across the scan, restoring accurate real-time scan metrics and telemetry statistics across all cleanup categories."
-        },
-        {
-          title: "Fixed MainActor Concurrency Warnings in CleanerModel",
-          desc: "Ensured notification observers dispatch permission state changes asynchronously on @MainActor, resolving Swift 6 concurrency warnings."
-        }
       ]
     },
     {
@@ -122,20 +144,6 @@ export const VersionHistoryPage: React.FC<VersionHistoryPageProps> = ({ onNaviga
         {
           title: "Refined Dark Mode & Glassmorphism Design",
           desc: "Overhauled interface with rich dark mode tokens, subtle borders, interactive hover states, and smooth spring animations."
-        }
-      ],
-      fixes: [
-        {
-          title: "Fixed Country Flag Rendering",
-          desc: "Corrected regional indicator symbol calculation and country code parsing for global traffic analytics."
-        },
-        {
-          title: "Separated MAS vs. Direct Build Pipelines",
-          desc: "Split App Store sandbox configuration (build-mas.sh) from direct Developer ID distribution (build-app.sh) to prevent entitlement conflicts."
-        },
-        {
-          title: "Fixed File Enumeration Memory Spike",
-          desc: "Wrapped heavy filesystem scanning loops inside autoreleasepool blocks, keeping memory footprints below 85 MB during 500k+ file scans."
         }
       ]
     },
@@ -164,12 +172,6 @@ export const VersionHistoryPage: React.FC<VersionHistoryPageProps> = ({ onNaviga
           title: "Duplicate & Large File Hunters",
           desc: "Quickly locates duplicate files using SHA-256 hashing and categorizes files larger than 100 MB, 500 MB, and 1 GB with QuickLook and Finder reveal."
         }
-      ],
-      fixes: [
-        {
-          title: "APFS Snapshot & Firmlink Safety Verification",
-          desc: "Ensured scan logic respects APFS firmlinks and avoids redundant traversal of synthetic system volumes."
-        }
       ]
     }
   ];
@@ -188,7 +190,7 @@ export const VersionHistoryPage: React.FC<VersionHistoryPageProps> = ({ onNaviga
         </h1>
 
         <p className="mt-4 text-base sm:text-lg text-slate-600 dark:text-slate-400 leading-relaxed font-normal">
-          Explore every feature, platform update, performance enhancement, and bug fix introduced across MacMint releases.
+          Explore every feature, platform update, and performance enhancement introduced across MacMint releases.
         </p>
 
         {/* Quick Jump Pills */}
@@ -276,7 +278,7 @@ export const VersionHistoryPage: React.FC<VersionHistoryPageProps> = ({ onNaviga
                 </div>
 
                 {/* Section: Implemented Features */}
-                <div className="space-y-4 mb-8">
+                <div className="space-y-4">
                   <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-mint-700 dark:text-mint-400">
                     <Sparkles className="w-4 h-4" />
                     <span>Implemented Features & Capabilities</span>
@@ -303,37 +305,6 @@ export const VersionHistoryPage: React.FC<VersionHistoryPageProps> = ({ onNaviga
                     ))}
                   </div>
                 </div>
-
-                {/* Section: Major Bugs Fixed */}
-                {ver.fixes && ver.fixes.length > 0 && (
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-rose-600 dark:text-rose-400">
-                      <Bug className="w-4 h-4" />
-                      <span>Major Bugs Fixed & Platform Stability</span>
-                    </div>
-
-                    <div className="grid grid-cols-1 gap-3">
-                      {ver.fixes.map((fix, fxIdx) => (
-                        <div
-                          key={fxIdx}
-                          className="p-4 rounded-2xl bg-rose-50/50 dark:bg-rose-950/10 border border-rose-200/60 dark:border-rose-900/30 space-y-1"
-                        >
-                          <div className="flex items-start gap-2.5">
-                            <div className="w-2 h-2 rounded-full bg-rose-500 shrink-0 mt-1.5" />
-                            <div>
-                              <h4 className="text-sm font-semibold text-slate-900 dark:text-slate-100">
-                                {fix.title}
-                              </h4>
-                              <p className="text-xs text-slate-600 dark:text-slate-400 mt-1 leading-relaxed font-normal">
-                                {fix.desc}
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
               </div>
             </div>
           );

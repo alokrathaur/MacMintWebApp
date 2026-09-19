@@ -394,7 +394,7 @@ export const ActivatePage: React.FC<ActivatePageProps> = ({ onNavigate }) => {
                     The code <code className="px-1.5 py-0.5 rounded bg-rose-100 dark:bg-rose-900/80 font-mono text-xs font-bold text-rose-800 dark:text-rose-200">{activeToken}</code> is not a valid MacMint Pro license token.
                   </div>
                   <p className="text-xs text-rose-600 dark:text-rose-400 mt-2">
-                    Valid tokens begin with <code className="font-mono font-bold">MINT-PRO-LIFETIME-</code> or <code className="font-mono font-bold">MINT-PRO-YEARLY-</code>. Please check your purchase confirmation email from Dodo Payments.
+                    Valid tokens begin with <code className="font-mono font-bold">MINT-PRO-LIFETIME-</code>. Please check your purchase confirmation email from Dodo Payments.
                   </p>
                 </div>
               </div>
@@ -444,7 +444,7 @@ export const ActivatePage: React.FC<ActivatePageProps> = ({ onNavigate }) => {
                     type="text"
                     value={tokenInput}
                     onChange={(e) => setTokenInput(e.target.value)}
-                    placeholder="e.g. email@gmail.com, pay_0NnKG..., or MINT-PRO-YEARLY-..."
+                    placeholder="e.g. email@gmail.com, pay_0NnKG..., or MINT-PRO-LIFETIME-..."
                     className="w-full px-4 py-3.5 rounded-2xl bg-slate-50 dark:bg-surface-darkCard border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white font-mono text-sm focus:outline-none focus:ring-2 focus:ring-mint-500/50 transition"
                   />
                   <p className="text-xs text-slate-500 dark:text-slate-400 mt-2">
@@ -514,7 +514,6 @@ export const ActivatePage: React.FC<ActivatePageProps> = ({ onNavigate }) => {
               </h4>
             </div>
             <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-              • <strong>Pro Yearly</strong>: Valid for <strong>1 active Mac</strong> at a time.<br />
               • <strong>Pro Lifetime</strong>: Valid for <strong>up to 5 Macs</strong> simultaneously.<br />
               Need to transfer? Deactivate on your old Mac in Settings to free up an activation slot.
             </p>

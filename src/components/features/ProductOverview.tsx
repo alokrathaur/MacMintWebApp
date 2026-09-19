@@ -8,6 +8,7 @@ import {
   Sliders,
   ArrowUpRight,
   ShieldCheck,
+  Activity,
 } from "lucide-react";
 
 interface BentoItem {
@@ -66,20 +67,29 @@ const bentoItems: BentoItem[] = [
     colSpan: "lg:col-span-4",
   },
   {
+    icon: <Activity className="w-6 h-6 text-mint-600 dark:text-mint-400" />,
+    title: "System Health & Process Manager",
+    badge: "New in v1.0.3",
+    description:
+      "Real-time CPU, RAM, and disk telemetry with an interactive process manager. View running applications and background tasks, inspect memory consumption, and safely quit runaway processes with built-in MacMint self-protection.",
+    highlight: "Live Activity & Force Quit",
+    colSpan: "lg:col-span-6",
+  },
+  {
     icon: <Sliders className="w-6 h-6 text-mint-600 dark:text-mint-400" />,
     title: "System Optimizations & Startup Items",
     badge: "Performance",
     description:
       "Instant maintenance scripts to purge inactive RAM, flush DNS, vacuum Apple Mail envelopes, and manage background LaunchAgents and daemons.",
     highlight: "One-Click Maintenance",
-    colSpan: "lg:col-span-12",
+    colSpan: "lg:col-span-6",
   },
 ];
 
 export const ProductOverview: React.FC = () => {
   return (
     <section id="overview" className="py-20 md:py-28 bg-surface-soft dark:bg-surface-dark transition-colors">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">

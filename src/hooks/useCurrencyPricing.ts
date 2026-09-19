@@ -16,8 +16,6 @@ const STORAGE_KEYS = {
 
 export interface LocalizedPricing {
   free: PricingPlan;
-  proMonthly: PricingPlan;
-  proYearly: PricingPlan;
   proLifetime: PricingPlan;
 }
 
@@ -137,22 +135,9 @@ export function useCurrencyPricing() {
         price: currentCurrency.free.price,
         cadence: currentCurrency.free.cadence,
       },
-      proMonthly: {
-        ...base.proMonthly,
-        price: currentCurrency.monthly.price,
-        originalPrice: currentCurrency.monthly.originalPrice,
-        cadence: currentCurrency.monthly.cadence,
-      },
-      proYearly: {
-        ...base.proYearly,
-        price: currentCurrency.yearly.price,
-        originalPrice: currentCurrency.yearly.originalPrice,
-        cadence: currentCurrency.yearly.cadence,
-      },
       proLifetime: {
         ...base.proLifetime,
         price: currentCurrency.lifetime.price,
-        originalPrice: currentCurrency.lifetime.originalPrice,
         cadence: currentCurrency.lifetime.cadence,
       },
     };

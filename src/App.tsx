@@ -88,11 +88,11 @@ export const App: React.FC = () => {
     if (currentPath === "/pricing") {
       return <PricingPage onNavigate={navigate} />;
     }
-    if (currentPath === "/guides") {
+    if (currentPath === "/blog" || currentPath === "/guides") {
       return <GuidesPage onNavigate={navigate} />;
     }
-    if (currentPath.startsWith("/guides/")) {
-      const slug = currentPath.replace("/guides/", "");
+    if (currentPath.startsWith("/blog/") || currentPath.startsWith("/guides/")) {
+      const slug = currentPath.replace("/blog/", "").replace("/guides/", "");
       return <SingleGuidePage slug={slug} onNavigate={navigate} />;
     }
     if (currentPath === "/support") {

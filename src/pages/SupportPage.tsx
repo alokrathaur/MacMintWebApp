@@ -127,7 +127,7 @@ export const SupportPage: React.FC<SupportPageProps> = ({ onNavigate }) => {
 
               <div className="space-y-2.5">
                 <button
-                  onClick={() => onNavigate("/guides/free-up-system-data")}
+                  onClick={() => onNavigate("/blog/free-up-system-data")}
                   className="w-full p-3 text-left rounded-xl bg-surface-soft dark:bg-surface-darkCard border border-slate-200/60 dark:border-slate-800 flex items-center justify-between text-xs font-semibold text-slate-800 dark:text-slate-200 hover:text-mint-600 transition"
                 >
                   <span>Granting Full Disk Access for System Data</span>
@@ -135,7 +135,7 @@ export const SupportPage: React.FC<SupportPageProps> = ({ onNavigate }) => {
                 </button>
 
                 <button
-                  onClick={() => onNavigate("/guides/clean-xcode-storage")}
+                  onClick={() => onNavigate("/blog/clean-xcode-storage")}
                   className="w-full p-3 text-left rounded-xl bg-surface-soft dark:bg-surface-darkCard border border-slate-200/60 dark:border-slate-800 flex items-center justify-between text-xs font-semibold text-slate-800 dark:text-slate-200 hover:text-mint-600 transition"
                 >
                   <span>Safe Xcode DerivedData & Simulator Cleanup</span>
@@ -143,7 +143,7 @@ export const SupportPage: React.FC<SupportPageProps> = ({ onNavigate }) => {
                 </button>
 
                 <button
-                  onClick={() => onNavigate("/guides/clean-mac-cache")}
+                  onClick={() => onNavigate("/blog/clean-mac-cache")}
                   className="w-full p-3 text-left rounded-xl bg-surface-soft dark:bg-surface-darkCard border border-slate-200/60 dark:border-slate-800 flex items-center justify-between text-xs font-semibold text-slate-800 dark:text-slate-200 hover:text-mint-600 transition"
                 >
                   <span>Cleaning User & App Caches Without Crashing Apps</span>
@@ -154,11 +154,11 @@ export const SupportPage: React.FC<SupportPageProps> = ({ onNavigate }) => {
 
             <div className="mt-8 pt-4 border-t border-slate-100 dark:border-slate-800">
               <button
-                onClick={() => onNavigate("/guides")}
+                onClick={() => onNavigate("/blog")}
                 className="inline-flex items-center gap-2 text-xs font-bold text-mint-700 dark:text-mint-400 hover:underline"
               >
                 <BookOpen className="w-3.5 h-3.5" />
-                <span>Explore all 7 macOS Guides</span>
+                <span>Explore all 7 macOS Blogs & Guides</span>
               </button>
             </div>
           </div>

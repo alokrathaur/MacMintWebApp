@@ -13,11 +13,11 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ onNavigate }) => {
         
         <div className="p-10 sm:p-16 rounded-3xl bg-white dark:bg-surface-darkSurface border border-slate-200/80 dark:border-slate-800 shadow-xl shadow-slate-200/40 dark:shadow-none space-y-6">
           
-          <div className="w-14 h-14 mx-auto rounded-2xl overflow-hidden shadow-md border border-mint-300/60 bg-mint-500">
+          <div className="w-14 h-14 mx-auto">
             <img
               src="/assets/logo.png"
               alt="MacMint"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain"
               onError={(e) => {
                 (e.target as HTMLImageElement).src = "/assets/macmint_logo.png";
               }}

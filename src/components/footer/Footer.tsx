@@ -18,19 +18,19 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
 
   return (
     <footer className="border-t border-slate-200/80 dark:border-slate-800/80 bg-white dark:bg-surface-dark transition-colors">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
         
-        {/* 4-Column Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8 pb-14 border-b border-slate-100 dark:border-slate-800">
-          
+        {/* 6-Column Grid — all site navigation lives here since the header carries no nav links */}
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-10 lg:gap-8 pb-14 border-b border-slate-100 dark:border-slate-800">
+
           {/* Column 1: Brand & Bio (Spans 2 columns on desktop) */}
-          <div className="lg:col-span-2 space-y-4">
+          <div className="md:col-span-3 lg:col-span-2 space-y-4">
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-xl overflow-hidden border border-mint-300/60 shadow-sm bg-mint-500">
+              <div className="w-8 h-8">
                 <img
                   src="/assets/logo.png"
                   alt="MacMint Logo"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain"
                   onError={(e) => {
                     (e.target as HTMLImageElement).src = "/assets/macmint_logo.png";
                   }}
@@ -58,12 +58,52 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             </div>
           </div>
 
-          {/* Column 2: Product */}
+          {/* Column 2: Explore (site navigation — the header carries no nav links) */}
           <div className="space-y-3">
             <h4 className="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white">
-              Product
+              Explore
             </h4>
             <ul className="space-y-2 text-sm text-slate-600 dark:text-slate-400">
+              <li>
+                <a
+                  href="/"
+                  onClick={(e) => handleLinkClick(e, "/")}
+                  className="hover:text-mint-600 dark:hover:text-mint-400 transition"
+                >
+                  Overview
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/#demo-player"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onNavigate("/");
+                    setTimeout(() => {
+                      document.getElementById("demo-player")?.scrollIntoView({ behavior: "smooth", block: "start" });
+                      window.dispatchEvent(new CustomEvent("play-demo-video"));
+                    }, 150);
+                  }}
+                  className="hover:text-mint-600 dark:hover:text-mint-400 transition"
+                >
+                  Video Demos
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/#smart-space"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onNavigate("/");
+                    setTimeout(() => {
+                      document.getElementById("smart-space")?.scrollIntoView({ behavior: "smooth", block: "start" });
+                    }, 150);
+                  }}
+                  className="hover:text-mint-600 dark:hover:text-mint-400 transition"
+                >
+                  Smart Space
+                </a>
+              </li>
               <li>
                 <a
                   href="/features"
@@ -73,6 +113,33 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   Features & Tools
                 </a>
               </li>
+              <li>
+                <a
+                  href="/stats"
+                  onClick={(e) => handleLinkClick(e, "/stats")}
+                  className="hover:text-mint-600 dark:hover:text-mint-400 transition"
+                >
+                  Live Stats
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/about"
+                  onClick={(e) => handleLinkClick(e, "/about")}
+                  className="hover:text-mint-600 dark:hover:text-mint-400 transition"
+                >
+                  About MacMint
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Column 3: Product */}
+          <div className="space-y-3">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white">
+              Product
+            </h4>
+            <ul className="space-y-2 text-sm text-slate-600 dark:text-slate-400">
               <li>
                 <a
                   href="/pricing"
@@ -107,7 +174,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   className="hover:text-mint-600 dark:hover:text-mint-400 transition flex items-center gap-1.5"
                 >
                   <span>Version History</span>
-                  <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-mint-500/10 text-mint-600 dark:text-mint-400 border border-mint-500/20 font-mono">v1.0.2</span>
+                  <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-mint-500/10 text-mint-600 dark:text-mint-400 border border-mint-500/20 font-mono">v1.0.3</span>
                 </a>
               </li>
               <li>
@@ -119,38 +186,29 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   Activate License
                 </a>
               </li>
-              <li>
-                <a
-                  href="/about"
-                  onClick={(e) => handleLinkClick(e, "/about")}
-                  className="hover:text-mint-600 dark:hover:text-mint-400 transition"
-                >
-                  About MacMint
-                </a>
-              </li>
             </ul>
           </div>
 
           {/* Column 3: Storage Guides */}
           <div className="space-y-3">
             <h4 className="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white">
-              Guides
+              Blogs
             </h4>
             <ul className="space-y-2 text-sm text-slate-600 dark:text-slate-400">
               <li>
                 <a
-                  href="/guides"
-                  onClick={(e) => handleLinkClick(e, "/guides")}
+                  href="/blog"
+                  onClick={(e) => handleLinkClick(e, "/blog")}
                   className="hover:text-mint-600 dark:hover:text-mint-400 transition font-semibold text-slate-900 dark:text-white flex items-center gap-1"
                 >
-                  <span>All Guides & Tutorials</span>
+                  <span>Blogs</span>
                   <ArrowUpRight className="w-3.5 h-3.5 text-mint-500" />
                 </a>
               </li>
               <li>
                 <a
-                  href="/guides/check-mac-storage"
-                  onClick={(e) => handleLinkClick(e, "/guides/check-mac-storage")}
+                  href="/blog/check-mac-storage"
+                  onClick={(e) => handleLinkClick(e, "/blog/check-mac-storage")}
                   className="hover:text-mint-600 dark:hover:text-mint-400 transition"
                 >
                   Check Mac Storage
@@ -158,8 +216,8 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               </li>
               <li>
                 <a
-                  href="/guides/clean-mac-cache"
-                  onClick={(e) => handleLinkClick(e, "/guides/clean-mac-cache")}
+                  href="/blog/clean-mac-cache"
+                  onClick={(e) => handleLinkClick(e, "/blog/clean-mac-cache")}
                   className="hover:text-mint-600 dark:hover:text-mint-400 transition"
                 >
                   Clean Mac Cache
@@ -167,8 +225,8 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               </li>
               <li>
                 <a
-                  href="/guides/find-large-files"
-                  onClick={(e) => handleLinkClick(e, "/guides/find-large-files")}
+                  href="/blog/find-large-files"
+                  onClick={(e) => handleLinkClick(e, "/blog/find-large-files")}
                   className="hover:text-mint-600 dark:hover:text-mint-400 transition"
                 >
                   Find Large Files
@@ -176,8 +234,8 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               </li>
               <li>
                 <a
-                  href="/guides/remove-duplicate-files"
-                  onClick={(e) => handleLinkClick(e, "/guides/remove-duplicate-files")}
+                  href="/blog/remove-duplicate-files"
+                  onClick={(e) => handleLinkClick(e, "/blog/remove-duplicate-files")}
                   className="hover:text-mint-600 dark:hover:text-mint-400 transition"
                 >
                   Remove Duplicate Files
@@ -185,8 +243,8 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               </li>
               <li>
                 <a
-                  href="/guides/uninstall-mac-apps"
-                  onClick={(e) => handleLinkClick(e, "/guides/uninstall-mac-apps")}
+                  href="/blog/uninstall-mac-apps"
+                  onClick={(e) => handleLinkClick(e, "/blog/uninstall-mac-apps")}
                   className="hover:text-mint-600 dark:hover:text-mint-400 transition"
                 >
                   Uninstall Mac Apps
@@ -194,8 +252,8 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               </li>
               <li>
                 <a
-                  href="/guides/clean-xcode-storage"
-                  onClick={(e) => handleLinkClick(e, "/guides/clean-xcode-storage")}
+                  href="/blog/clean-xcode-storage"
+                  onClick={(e) => handleLinkClick(e, "/blog/clean-xcode-storage")}
                   className="hover:text-mint-600 dark:hover:text-mint-400 transition"
                 >
                   Xcode Cleanup
@@ -203,8 +261,8 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               </li>
               <li>
                 <a
-                  href="/guides/free-up-system-data"
-                  onClick={(e) => handleLinkClick(e, "/guides/free-up-system-data")}
+                  href="/blog/free-up-system-data"
+                  onClick={(e) => handleLinkClick(e, "/blog/free-up-system-data")}
                   className="hover:text-mint-600 dark:hover:text-mint-400 transition"
                 >
                   Free Up System Data
@@ -294,7 +352,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               onClick={(e) => handleLinkClick(e, "/version-history")}
               className="hover:text-mint-600 dark:hover:text-mint-400 transition font-medium"
             >
-              Version History (v1.0.2)
+              Version History (v1.0.3)
             </a>
             <span>•</span>
             <span>Made for macOS 14 and later.</span>

@@ -16,11 +16,11 @@ export const SingleGuidePage: React.FC<SingleGuidePageProps> = ({ slug, onNaviga
         <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Guide not found</h2>
         <p className="text-sm text-slate-500 mt-2">The requested guide article does not exist or has been moved.</p>
         <button
-          onClick={() => onNavigate("/guides")}
+          onClick={() => onNavigate("/blog")}
           className="mt-6 inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-mint-600 text-white text-sm font-semibold"
         >
           <ArrowLeft className="w-4 h-4" />
-          <span>Back to all guides</span>
+          <span>Back to all blogs</span>
         </button>
       </div>
     );
@@ -34,13 +34,13 @@ export const SingleGuidePage: React.FC<SingleGuidePageProps> = ({ slug, onNaviga
         <div className="mb-8">
           <button
             onClick={() => {
-              onNavigate("/guides");
+              onNavigate("/blog");
               window.scrollTo({ top: 0, behavior: "smooth" });
             }}
             className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 dark:text-slate-400 hover:text-mint-600 dark:hover:text-mint-400 transition"
           >
             <ArrowLeft className="w-4 h-4" />
-            <span>All Storage & Optimization Guides</span>
+            <span>All Blogs & Storage Guides</span>
           </button>
         </div>
 
@@ -165,7 +165,7 @@ export const SingleGuidePage: React.FC<SingleGuidePageProps> = ({ slug, onNaviga
                   <button
                     key={relSlug}
                     onClick={() => {
-                      onNavigate(`/guides/${relSlug}`);
+                      onNavigate(`/blog/${relSlug}`);
                       window.scrollTo({ top: 0, behavior: "smooth" });
                     }}
                     className="p-4 text-left rounded-xl border border-slate-200/80 dark:border-slate-800 bg-white dark:bg-surface-darkSurface hover:border-mint-400 dark:hover:border-mint-700 transition-all flex flex-col justify-between group"

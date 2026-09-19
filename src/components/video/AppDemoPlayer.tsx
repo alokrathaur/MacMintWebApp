@@ -326,7 +326,7 @@ export const AppDemoPlayer: React.FC<AppDemoPlayerProps> = ({
 
   return (
     <section className="py-12 md:py-16 bg-surface-light dark:bg-surface-dark transition-colors border-t border-slate-200/60 dark:border-slate-800/60">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-mint-50 dark:bg-surface-darkCard border border-mint-200 dark:border-mint-800/60 text-mint-700 dark:text-mint-300 text-xs font-semibold uppercase tracking-wider mb-3">
@@ -503,7 +503,7 @@ export const AppDemoPlayer: React.FC<AppDemoPlayerProps> = ({
                   onChange={handleSeek}
                   className="w-full h-1.5 bg-slate-700/80 hover:h-2 rounded-lg appearance-none cursor-pointer accent-mint-400 transition-all"
                   style={{
-                    background: `linear-gradient(to right, #23B99C ${progressPercent}%, rgba(51, 65, 85, 0.8) ${progressPercent}%)`,
+                    background: `linear-gradient(to right, #3B92F5 ${progressPercent}%, rgba(51, 65, 85, 0.8) ${progressPercent}%)`,
                   }}
                 />
               </div>

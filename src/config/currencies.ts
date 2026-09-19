@@ -10,21 +10,8 @@ export interface CurrencyConfig {
     price: string;
     cadence: string;
   };
-  monthly: {
-    price: string;
-    originalPrice: string;
-    cadence: string;
-  };
-  yearly: {
-    price: string;               // Monthly equivalent shown on card, e.g. "₹166", "$2.08"
-    originalPrice: string;       // Monthly original strikethrough, e.g. "₹333", "$4.16"
-    cadence: string;             // e.g. "/ month (billed ₹1,999 annually)"
-    billedAnnual: string;        // Total billed amount, e.g. "₹1,999", "$24.99"
-    billedAnnualOriginal: string;// Total original annual, e.g. "₹3,999", "$49.99"
-  };
   lifetime: {
     price: string;
-    originalPrice: string;
     cadence: string;
   };
 }
@@ -40,21 +27,8 @@ export const CURRENCIES: Record<CurrencyCode, CurrencyConfig> = {
       price: "₹0",
       cadence: "no credit card required",
     },
-    monthly: {
-      price: "₹298.34",
-      originalPrice: "₹596.68",
-      cadence: "/ month (1 Mac)",
-    },
-    yearly: {
-      price: "₹207.79",
-      originalPrice: "₹415.67",
-      cadence: "/ month (billed ₹2,493.50 annually)",
-      billedAnnual: "₹2,493.50",
-      billedAnnualOriginal: "₹4,988.00",
-    },
     lifetime: {
-      price: "₹4,988.00",
-      originalPrice: "₹9,976.00",
+      price: "₹249",
       cadence: "one-time payment (5 Macs)",
     },
   },
@@ -69,21 +43,8 @@ export const CURRENCIES: Record<CurrencyCode, CurrencyConfig> = {
       price: "$0",
       cadence: "no credit card required",
     },
-    monthly: {
-      price: "$2.99",
-      originalPrice: "$5.99",
-      cadence: "/ month (1 Mac)",
-    },
-    yearly: {
-      price: "$2.08",
-      originalPrice: "$4.16",
-      cadence: "/ month (billed $24.99 annually)",
-      billedAnnual: "$24.99",
-      billedAnnualOriginal: "$49.99",
-    },
     lifetime: {
-      price: "$49.99",
-      originalPrice: "$99.99",
+      price: "$3",
       cadence: "one-time payment (5 Macs)",
     },
   },
@@ -98,21 +59,8 @@ export const CURRENCIES: Record<CurrencyCode, CurrencyConfig> = {
       price: "€0",
       cadence: "no credit card required",
     },
-    monthly: {
-      price: "€2.79",
-      originalPrice: "€5.49",
-      cadence: "/ month (1 Mac)",
-    },
-    yearly: {
-      price: "€1.92",
-      originalPrice: "€3.84",
-      cadence: "/ month (billed €22.99 annually)",
-      billedAnnual: "€22.99",
-      billedAnnualOriginal: "€45.99",
-    },
     lifetime: {
-      price: "€45.99",
-      originalPrice: "€89.99",
+      price: "€2.79",
       cadence: "one-time payment (5 Macs)",
     },
   },
@@ -127,21 +75,8 @@ export const CURRENCIES: Record<CurrencyCode, CurrencyConfig> = {
       price: "£0",
       cadence: "no credit card required",
     },
-    monthly: {
-      price: "£2.49",
-      originalPrice: "£4.99",
-      cadence: "/ month (1 Mac)",
-    },
-    yearly: {
-      price: "£1.66",
-      originalPrice: "£3.33",
-      cadence: "/ month (billed £19.99 annually)",
-      billedAnnual: "£19.99",
-      billedAnnualOriginal: "£39.99",
-    },
     lifetime: {
-      price: "£39.99",
-      originalPrice: "£79.99",
+      price: "£2.39",
       cadence: "one-time payment (5 Macs)",
     },
   },
@@ -156,21 +91,8 @@ export const CURRENCIES: Record<CurrencyCode, CurrencyConfig> = {
       price: "CA$0",
       cadence: "no credit card required",
     },
-    monthly: {
-      price: "CA$3.99",
-      originalPrice: "CA$7.99",
-      cadence: "/ month (1 Mac)",
-    },
-    yearly: {
-      price: "CA$2.75",
-      originalPrice: "CA$5.50",
-      cadence: "/ month (billed CA$32.99 annually)",
-      billedAnnual: "CA$32.99",
-      billedAnnualOriginal: "CA$65.99",
-    },
     lifetime: {
-      price: "CA$64.99",
-      originalPrice: "CA$129.99",
+      price: "CA$3.99",
       cadence: "one-time payment (5 Macs)",
     },
   },
@@ -185,21 +107,8 @@ export const CURRENCIES: Record<CurrencyCode, CurrencyConfig> = {
       price: "A$0",
       cadence: "no credit card required",
     },
-    monthly: {
-      price: "A$4.49",
-      originalPrice: "A$8.99",
-      cadence: "/ month (1 Mac)",
-    },
-    yearly: {
-      price: "A$3.08",
-      originalPrice: "A$6.16",
-      cadence: "/ month (billed A$36.99 annually)",
-      billedAnnual: "A$36.99",
-      billedAnnualOriginal: "A$73.99",
-    },
     lifetime: {
-      price: "A$74.99",
-      originalPrice: "A$149.99",
+      price: "A$4.49",
       cadence: "one-time payment (5 Macs)",
     },
   },
@@ -214,21 +123,8 @@ export const CURRENCIES: Record<CurrencyCode, CurrencyConfig> = {
       price: "¥0",
       cadence: "no credit card required",
     },
-    monthly: {
-      price: "¥450",
-      originalPrice: "¥900",
-      cadence: "/ month (1 Mac)",
-    },
-    yearly: {
-      price: "¥316",
-      originalPrice: "¥632",
-      cadence: "/ month (billed ¥3,800 annually)",
-      billedAnnual: "¥3,800",
-      billedAnnualOriginal: "¥7,600",
-    },
     lifetime: {
-      price: "¥7,500",
-      originalPrice: "¥15,000",
+      price: "¥449",
       cadence: "one-time payment (5 Macs)",
     },
   },
