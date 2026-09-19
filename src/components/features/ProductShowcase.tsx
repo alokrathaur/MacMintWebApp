@@ -31,9 +31,10 @@ const features: ShowcaseFeature[] = [
     tag: "DISK SPACE ANALYSIS",
     headline: "See your entire disk as one interactive map.",
     description:
-      "Switch between a color-coded Treemap and a multi-ring Sunburst to instantly spot which folders are eating your storage — then drill down without ever opening Finder.",
+      "Switch between a color-coded Treemap and a multi-ring Sunburst to instantly spot which folders and massive files are eating your storage — including VMware virtual disks (.vmwarevm, .vmdk), Docker containers, and media libraries — then drill down without ever opening Finder.",
     bullets: [
       "Treemap and Sunburst views — switch instantly",
+      "Scans massive virtual machine disks: VMware Fusion (.vmwarevm, .vmdk), Docker layers, UTM, and Parallels",
       "Live folder sizes down to the file, with one-click drill-down",
       "One-click Rescan keeps the map in sync with your disk",
       "Largest Files across the whole volume in one sortable list",
@@ -71,6 +72,7 @@ const features: ShowcaseFeature[] = [
       "Inspect and safely eliminate redundant caches, logs, browser data, and developer build artifacts. MacMint 1.0.3 features a single direct 'Scan Mac' engine that scans your whole disk and external volumes, organizing clutter into 7 clear categories with 40+ specialized cleanup targets.",
     bullets: [
       "7 Dedicated Categories: User Junk, Developer Files, App Junk, Browser Cache, Editor Cache, System Junk, and VM Data",
+      "VMware & Virtual Disks: Scans VMware Fusion (.vmwarevm, .vmdk), Docker VM layers, Android AVD, UTM, and VirtualBox",
       "Developer & AI Tooling: Xcode, Simulator runtimes, Expo, Playwright, Claude AI CLI, Hugging Face ML, Swift PM, npm & pnpm",
       "Modern Code Editors: Antigravity, Cursor, VS Code & ShipIt, Sublime Text, JetBrains IDEs, and Zed",
       "Interactive Review: Compact cards with top-right watermarks, tap-to-review, and 330pt wide non-truncating subcategory sidebar",

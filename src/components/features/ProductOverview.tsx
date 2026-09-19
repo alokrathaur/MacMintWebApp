@@ -26,16 +26,16 @@ const bentoItems: BentoItem[] = [
     title: "Storage Intelligence & Sunburst Map",
     badge: "Flagship",
     description:
-      "Interactive radial visualizer and deep directory scanner that exposes hidden gigabytes across applications, system directories, and user archives.",
+      "Interactive radial visualizer and deep directory scanner that exposes hidden gigabytes across applications, system directories, VMware virtual disks (.vmdk), and user archives.",
     highlight: "Multi-Ring Radial Exploration",
     colSpan: "lg:col-span-8",
   },
   {
     icon: <Code2 className="w-6 h-6 text-mint-600 dark:text-mint-400" />,
-    title: "Developer Tools & node_modules",
+    title: "Developer Tools & Virtual Disks",
     badge: "Built for Devs",
     description:
-      "One-click discovery for Xcode DerivedData, simulator runtimes, npm/yarn node_modules, Cargo caches, and Swift Package Manager build artifacts.",
+      "One-click discovery for Xcode DerivedData, VMware Fusion (.vmwarevm) virtual disks, simulator runtimes, npm/yarn node_modules, Cargo caches, and Swift Package Manager build artifacts.",
     highlight: "Auto-Scanned Project Artifacts",
     colSpan: "lg:col-span-4",
   },

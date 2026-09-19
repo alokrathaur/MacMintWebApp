@@ -65,6 +65,7 @@ export const SITE_CONFIG = {
         "All features unlocked for up to 5 Macs",
         "Lifetime access to all current and future features",
         "Full developer toolkit & node_modules automation",
+        "VMware Fusion (.vmwarevm, .vmdk) & VM disk scan",
         "Complete App Uninstaller with leftover hunter",
         "Cryptographic Duplicate File Finder",
         "System Data Reclaim for container caches",
