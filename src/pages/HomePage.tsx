@@ -26,22 +26,20 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
 
   return (
     <div className="space-y-4">
-      {/* 01 & 02: HERO & TRUST STRIP */}
+      {/* 01 & 02: HERO & TRUST STRIP (Includes video play) */}
       <Hero onNavigate={onNavigate} />
 
-      {/* 03: PRODUCT OVERVIEW (Bento Grid) */}
+      {/* 03: REAL PRODUCT SCREENSHOTS (Starts with: "See your entire disk as one interactive map.") */}
+      <ProductShowcase />
+
+      {/* 04: PRODUCT OVERVIEW (Bento Grid) */}
       <ProductOverview />
 
-      {/* 03.5: DIRECT APP DEMO VIDEOS (Live recordings of 4 features) */}
+      {/* 04.5: DIRECT APP DEMO VIDEOS (Live recordings of 4 features) */}
       {/* Hidden for now (display:none) — code kept in place, not removed */}
       <div className="hidden">
         <AppDemoPlayer />
       </div>
-
-      {/* 04: REAL PRODUCT SCREENSHOTS (Disk Space, System Health, Deep Cleanup, etc.) */}
-      {/* Given priority placement right after the overview — real screenshots build */}
-      {/* credibility before the deeper interactive demo and pricing sections below. */}
-      <ProductShowcase />
 
       {/* 05 & 06: SMART SPACE & INTERACTIVE SUNBURST (Flagship Storage Feature) */}
       <section className="py-20 md:py-28 bg-surface-light dark:bg-surface-dark transition-colors border-t border-slate-200/60 dark:border-slate-800/60">

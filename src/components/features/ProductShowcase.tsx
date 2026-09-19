@@ -15,6 +15,7 @@ interface ShowcaseFeature {
   description: string;
   bullets: string[];
   screenshot: string;
+  sunburstScreenshot?: string;
   badge: string;
   reverse?: boolean;
   video?: {
@@ -38,6 +39,7 @@ const features: ShowcaseFeature[] = [
       "Largest Files across the whole volume in one sortable list",
     ],
     screenshot: "/assets/screenshots/05_disk_space.png",
+    sunburstScreenshot: "/assets/screenshots/02_disk_space_sunburst.png",
     badge: "Treemap + Sunburst",
     video: {
       src: "/assets/videos/disk_space.mp4",
@@ -173,6 +175,7 @@ const features: ShowcaseFeature[] = [
 
 // All available screenshots for full lightbox gallery navigation, in priority order
 const allGalleryScreenshots = [
+  { src: "/assets/screenshots/02_disk_space_sunburst.png", title: "Disk Space Analysis (Sunburst Map)", badge: "Radial View" },
   { src: "/assets/screenshots/05_disk_space.png", title: "Disk Space Analysis (Treemap)", badge: "Interactive Map" },
   { src: "/assets/screenshots/system_health.png", title: "Live System Health Dashboard", badge: "Real-Time Monitor" },
   { src: "/assets/screenshots/01_deep_cleanup.png", title: "Deep Cleanup", badge: "7 Categories" },
@@ -187,6 +190,8 @@ const allGalleryScreenshots = [
 ];
 
 export const ProductShowcase: React.FC = () => {
+  // Disk space view switcher state (Sunburst vs Treemap)
+  const [diskMapTab, setDiskMapTab] = useState<"sunburst" | "treemap">("sunburst");
   // Lightbox modal state
   const [activeLightboxIndex, setActiveLightboxIndex] = useState<number | null>(null);
   // Video modal state
@@ -236,13 +241,14 @@ export const ProductShowcase: React.FC = () => {
   }, [activeLightboxIndex, activeVideoModal]);
 
   return (
-    <section className="py-20 md:py-28 bg-surface-light dark:bg-surface-dark transition-colors">
+    <section id="showcase" className="py-20 md:py-28 bg-surface-light dark:bg-surface-dark transition-colors">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-28">
         
         {features.map((feat) => (
           <div
             key={feat.id}
-            className={`grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center ${
+            id={feat.id}
+            className={`grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center scroll-mt-24 ${
               feat.reverse ? "lg:grid-flow-dense" : ""
             }`}
           >
@@ -281,14 +287,58 @@ export const ProductShowcase: React.FC = () => {
                 feat.reverse ? "lg:col-start-1" : ""
               }`}
             >
+              {/* View Switcher Tabs for Disk Space (Sunburst vs Treemap) */}
+              {feat.sunburstScreenshot && (
+                <div className="flex items-center gap-1.5 p-1 rounded-xl bg-slate-100 dark:bg-surface-darkCard border border-slate-200/80 dark:border-slate-800 shadow-sm w-fit mb-3">
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setDiskMapTab("sunburst");
+                    }}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+                      diskMapTab === "sunburst"
+                        ? "bg-mint-600 text-white shadow-sm"
+                        : "text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white"
+                    }`}
+                  >
+                    Sunburst Map
+                  </button>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setDiskMapTab("treemap");
+                    }}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+                      diskMapTab === "treemap"
+                        ? "bg-mint-600 text-white shadow-sm"
+                        : "text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white"
+                    }`}
+                  >
+                    Treemap View
+                  </button>
+                </div>
+              )}
+
               <div
-                onClick={() => openLightbox(feat.screenshot)}
+                onClick={() =>
+                  openLightbox(
+                    feat.id === "disk-space" && diskMapTab === "sunburst" && feat.sunburstScreenshot
+                      ? feat.sunburstScreenshot
+                      : feat.screenshot
+                  )
+                }
                 className="relative group cursor-zoom-in rounded-2xl md:rounded-3xl p-1.5 md:p-2 bg-gradient-to-b from-slate-200/70 via-slate-100 to-slate-200/70 dark:from-slate-800 dark:via-surface-darkSurface dark:to-slate-800 shadow-2xl shadow-slate-200/70 dark:shadow-none border border-slate-200/80 dark:border-slate-800 transition-all duration-300 hover:shadow-mint-700/15 hover:border-mint-400 dark:hover:border-mint-600"
               >
                 {/* Real crisp native MacMint screenshot */}
                 <div className="overflow-hidden rounded-xl md:rounded-2xl bg-surface-dark relative">
                   <img
-                    src={feat.screenshot}
+                    src={
+                      feat.id === "disk-space" && diskMapTab === "sunburst" && feat.sunburstScreenshot
+                        ? feat.sunburstScreenshot
+                        : feat.screenshot
+                    }
                     alt={feat.headline}
                     className="w-full h-auto object-cover transform transition-transform duration-500 group-hover:scale-[1.015]"
                     loading="lazy"
@@ -305,7 +355,7 @@ export const ProductShowcase: React.FC = () => {
 
                 {/* Floating Badge */}
                 <div className="absolute top-4 right-4 z-10 px-3 py-1 rounded-full bg-white/90 dark:bg-surface-darkSurface/90 border border-slate-200/80 dark:border-slate-700 shadow-md backdrop-blur-md text-xs font-semibold text-slate-800 dark:text-slate-200">
-                  {feat.badge}
+                  {feat.id === "disk-space" ? (diskMapTab === "sunburst" ? "Sunburst Map" : "Treemap View") : feat.badge}
                 </div>
               </div>
             </div>
