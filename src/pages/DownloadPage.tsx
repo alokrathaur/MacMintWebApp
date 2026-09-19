@@ -64,14 +64,6 @@ export const DownloadPage: React.FC = () => {
               <Download className="w-5 h-5" />
               <span>Download MacMint (.dmg)</span>
             </a>
-            <a
-              href={SITE_CONFIG.directPkgUrl}
-              download="MacMint.pkg"
-              className="inline-flex items-center justify-center gap-2.5 px-6 py-4 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-surface-darkCard dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-semibold text-base border border-slate-200 dark:border-slate-700 transition-all active:scale-[0.98]"
-            >
-              <Download className="w-5 h-5 text-slate-500" />
-              <span>Download Package (.pkg)</span>
-            </a>
           </div>
 
           <div className="mt-3 flex items-center justify-center gap-2 text-xs text-slate-500 dark:text-slate-400">
