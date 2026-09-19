@@ -29,7 +29,7 @@ export const CURRENCIES: Record<CurrencyCode, CurrencyConfig> = {
     },
     lifetime: {
       price: "₹249",
-      cadence: "one-time payment (1 Mac)",
+      cadence: "one-time payment",
     },
   },
 
@@ -45,7 +45,7 @@ export const CURRENCIES: Record<CurrencyCode, CurrencyConfig> = {
     },
     lifetime: {
       price: "$3",
-      cadence: "one-time payment (1 Mac)",
+      cadence: "one-time payment",
     },
   },
 
@@ -61,7 +61,7 @@ export const CURRENCIES: Record<CurrencyCode, CurrencyConfig> = {
     },
     lifetime: {
       price: "€2.79",
-      cadence: "one-time payment (1 Mac)",
+      cadence: "one-time payment",
     },
   },
 
@@ -77,7 +77,7 @@ export const CURRENCIES: Record<CurrencyCode, CurrencyConfig> = {
     },
     lifetime: {
       price: "£2.39",
-      cadence: "one-time payment (1 Mac)",
+      cadence: "one-time payment",
     },
   },
 
@@ -93,7 +93,7 @@ export const CURRENCIES: Record<CurrencyCode, CurrencyConfig> = {
     },
     lifetime: {
       price: "CA$3.99",
-      cadence: "one-time payment (1 Mac)",
+      cadence: "one-time payment",
     },
   },
 
@@ -109,7 +109,7 @@ export const CURRENCIES: Record<CurrencyCode, CurrencyConfig> = {
     },
     lifetime: {
       price: "A$4.49",
-      cadence: "one-time payment (1 Mac)",
+      cadence: "one-time payment",
     },
   },
 
@@ -125,7 +125,7 @@ export const CURRENCIES: Record<CurrencyCode, CurrencyConfig> = {
     },
     lifetime: {
       price: "¥449",
-      cadence: "one-time payment (1 Mac)",
+      cadence: "one-time payment",
     },
   },
 };

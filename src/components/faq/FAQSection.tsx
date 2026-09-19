@@ -75,7 +75,7 @@ export const faqItems: FAQItem[] = [
   {
     question: "What is included in the Lifetime license?",
     answer:
-      "The Lifetime license is a one-time payment of $3 that provides lifetime access to all current and future MacMint features for 1 Mac, with zero recurring subscriptions.",
+      "The Lifetime license is a one-time payment of $3 that provides lifetime access to all current and future MacMint features, with zero recurring subscriptions.",
   },
 ];
 

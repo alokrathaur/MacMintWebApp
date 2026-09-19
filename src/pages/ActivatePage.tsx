@@ -226,11 +226,11 @@ export const ActivatePage: React.FC<ActivatePageProps> = ({ onNavigate }) => {
   );
 
   const planName = isLifetime
-    ? "MacMint Pro Lifetime (1 Mac)"
+    ? "MacMint Pro Lifetime"
     : isYearly
-      ? "MacMint Pro Yearly (1 Mac)"
+      ? "MacMint Pro Yearly"
       : isMonthly
-        ? "MacMint Pro Monthly (1 Mac)"
+        ? "MacMint Pro Monthly"
         : isValidFormat
           ? "MacMint Pro License"
           : "Invalid License Token";
@@ -514,8 +514,8 @@ export const ActivatePage: React.FC<ActivatePageProps> = ({ onNavigate }) => {
               </h4>
             </div>
             <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-              • <strong>Pro Lifetime</strong>: Valid for <strong>1 Mac</strong>.<br />
-              Need to transfer? Deactivate on your old Mac in Settings to free up an activation slot.
+              • <strong>Pro Lifetime</strong>: One-time payment with lifetime access.<br />
+              Need to transfer? Deactivate in Settings on your previous Mac anytime.
             </p>
           </div>
 
