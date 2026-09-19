@@ -273,17 +273,6 @@ export const ProductShowcase: React.FC = () => {
                 ))}
               </ul>
 
-              {feat.video && (
-                <div className="pt-2">
-                  <button
-                    onClick={() => setActiveVideoModal(feat.video!)}
-                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 dark:bg-mint-500 text-white text-xs sm:text-sm font-semibold hover:bg-slate-800 dark:hover:bg-mint-400 transition-all shadow-md shadow-mint-500/10 hover:scale-[1.02] cursor-pointer"
-                  >
-                    <Play className="w-3.5 h-3.5 fill-current" />
-                    <span>Watch Live Demo ({feat.video.duration})</span>
-                  </button>
-                </div>
-              )}
             </div>
 
             {/* Clickable Screenshot Display Column */}
@@ -318,20 +307,6 @@ export const ProductShowcase: React.FC = () => {
                 <div className="absolute top-4 right-4 z-10 px-3 py-1 rounded-full bg-white/90 dark:bg-surface-darkSurface/90 border border-slate-200/80 dark:border-slate-700 shadow-md backdrop-blur-md text-xs font-semibold text-slate-800 dark:text-slate-200">
                   {feat.badge}
                 </div>
-
-                {/* Optional Play Demo Overlay Pill */}
-                {feat.video && (
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setActiveVideoModal(feat.video!);
-                    }}
-                    className="absolute bottom-4 left-4 z-10 px-3 py-1.5 rounded-xl bg-slate-900/90 hover:bg-mint-600 text-white backdrop-blur-md text-xs font-semibold flex items-center gap-2 transition-all shadow-lg border border-white/20 hover:scale-105 cursor-pointer"
-                  >
-                    <Play className="w-3.5 h-3.5 fill-white" />
-                    <span>Watch Demo ({feat.video.duration})</span>
-                  </button>
-                )}
               </div>
             </div>
 
