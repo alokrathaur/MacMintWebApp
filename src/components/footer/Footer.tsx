@@ -26,11 +26,11 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           {/* Column 1: Brand & Bio (Spans 2 columns on desktop) */}
           <div className="md:col-span-3 lg:col-span-2 space-y-4">
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-xl overflow-hidden border border-mint-300/60 dark:border-mint-700/60 shadow-sm bg-mint-500">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center">
                 <img
                   src="/assets/logo.png"
                   alt="MacMint Logo"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain"
                   onError={(e) => {
                     (e.target as HTMLImageElement).src = "/assets/macmint_logo.png";
                   }}
