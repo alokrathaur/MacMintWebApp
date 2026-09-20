@@ -56,6 +56,30 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 <XIcon className="w-4 h-4" />
               </a>
             </div>
+
+            <div className="pt-2">
+              <a
+                href="https://tools.launchllama.co?utm_source=badge&utm_medium=referral"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block hover:opacity-90 transition-opacity"
+              >
+                <img
+                  src="https://tools.launchllama.co/featured-badge-white.jpg?v=5"
+                  alt="Featured on Launch Llama Tools"
+                  width={200}
+                  height={52}
+                  className="block dark:hidden"
+                />
+                <img
+                  src="https://tools.launchllama.co/featured-badge.png?v=2"
+                  alt="Featured on Launch Llama Tools"
+                  width={200}
+                  height={52}
+                  className="hidden dark:block"
+                />
+              </a>
+            </div>
           </div>
 
           {/* Column 2: Explore (site navigation — the header carries no nav links) */}
