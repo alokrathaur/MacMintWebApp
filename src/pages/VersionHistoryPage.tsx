@@ -23,9 +23,42 @@ interface VersionHistoryPageProps {
 export const VersionHistoryPage: React.FC<VersionHistoryPageProps> = ({ onNavigate }) => {
   const versions = [
     {
-      version: "1.0.3",
+      version: "1.0.4",
       badge: "Latest and Stable Release",
       badgeType: "latest",
+      date: "September 24, 2026",
+      title: "Universal Node.js Dependencies (node_modules) Cleaner & All-Drive Workspace Scanner",
+      summary: "MacMint 1.0.4 introduces dedicated scanning and safe multi-path deletion for heavy node_modules packages across all project workspaces, ~/Documents, ~/Desktop, and secondary/external disk drives, with instant directory pruning and fail-safe CleanerGuard protection.",
+      downloadAvailable: true,
+      downloadUrl: "/MacMint.dmg",
+      downloadFileName: "MacMint.dmg",
+      features: [
+        {
+          title: "Universal Node.js Dependencies (node_modules) Cleaner",
+          desc: "Dedicated cleaner discovering bloated node_modules directories across all project workspaces, including ~/Documents, ~/Desktop, ~/Developer, ~/Projects, ~/Workspace, ~/Code, ~/Downloads, and custom user folders."
+        },
+        {
+          title: "Instant Subdirectory Pruning (1-Second Deep Scans)",
+          desc: "Employs intelligent directory pruning that halts recursive descent immediately upon identifying a top-level node_modules folder, avoiding tens of thousands of sub-package file traversals and completing entire workspace scans in approximately 1 second."
+        },
+        {
+          title: "All-Drive & External Storage Traversal",
+          desc: "Scans secondary APFS volumes, external USB/Thunderbolt SSDs, SD cards, and shared developer environments (/Users/Shared) with automatic exclusion of system volume metadata."
+        },
+        {
+          title: "Enhanced CleanerGuard Whitelist Security",
+          desc: "Safety engine allows deletion of designated project build targets (node_modules, .build, .next, .turbo, __pycache__) across user workspaces while strictly protecting personal files (.docx, .pdf), source code, and root directories."
+        },
+        {
+          title: "Individual Path Checkboxes & Fast Action Controls",
+          desc: "Every discovered node_modules location features interactive multi-select checkboxes, file count and disk usage display, one-click immediate deletion, Reveal in Finder shortcut, and bulk Clean execution."
+        }
+      ]
+    },
+    {
+      version: "1.0.3",
+      badge: "Previous Stable Release",
+      badgeType: "stable",
       date: "September 19, 2026",
       title: "Comprehensive 7-Category Deep Clean, Direct Whole-Disk Scanning & Next-Gen Editor/Developer Cleaners",
       summary: "MacMint 1.0.3 introduces massive expansions across all 7 Deep Cleanup categories with 40+ specialized targets (including Antigravity, Cursor, Expo, Playwright, Claude AI CLI, and Hugging Face ML models), direct single-click whole-disk and external volume scanning, compact responsive category cards with top-right watermarks, and a wide subcategory review sidebar with zero text truncation.",
